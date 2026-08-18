@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { seo } from './data/index';
+import PageHeader from './sections/PageHeader.astro';
+import Historia from './sections/Historia.astro';
+import Impacto from './sections/Impacto.astro';
+import MisionVision from './sections/MisionVision.astro';
+import Enfoque from './sections/Enfoque.astro';
+import PorQueElegirnos from './sections/PorQueElegirnos.astro';
+import Equipo from './sections/Equipo.astro';
+import Aliados from './sections/Aliados.astro';
+import ContactCta from './sections/ContactCta.astro';
+import './styles/index.css';
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <PageHeader />
+  <Historia />
+  <Impacto />
+  <MisionVision />
+  <Enfoque />
+  <PorQueElegirnos />
+  <Equipo />
+  <Aliados />
+  <ContactCta />
+</BaseLayout>

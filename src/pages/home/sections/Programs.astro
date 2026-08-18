@@ -1,0 +1,42 @@
+---
+import { programs } from '../data/index';
+
+const icons: Record<string, string> = {
+  seedling: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>`,
+  sun: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+  hands: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>`,
+  heart: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+};
+---
+<section class="section programs" aria-labelledby="programs-heading">
+  <div class="container programs__inner">
+    <div class="programs__header reveal">
+      <h2 id="programs-heading">Un programa para cada etapa</h2>
+      <p class="programs__subtitle">
+        Cuatro programas para cada etapa de la vida, con atención interdisciplinaria.
+      </p>
+    </div>
+
+    <ul class="prog-cards" role="list">
+      {programs.map((prog, i) => (
+        <li class={`prog-card reveal reveal-delay-${i + 1}`}>
+          <a href={prog.href} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
+            <span class="prog-card__icon-wrap" aria-hidden="true">
+              <Fragment set:html={icons[prog.icon] ?? ''} />
+            </span>
+            <h3 class="prog-card__name">{prog.title}</h3>
+            <p class="prog-card__desc">{prog.desc}</p>
+            <span class="prog-card__more">
+              Ver programa
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="programs__cta reveal">
+      <a href="/programas" class="btn btn-outline">Ver todos los programas</a>
+    </div>
+  </div>
+</section>

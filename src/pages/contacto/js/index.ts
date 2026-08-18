@@ -1,0 +1,63 @@
+const form = document.getElementById('contactForm') as HTMLFormElement;
+const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+const status = document.getElementById('form-status') as HTMLElement;
+
+function validateField(id: string, errorId: string, message: string): boolean {
+  const field = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+  const error = document.getElementById(errorId) as HTMLElement;
+  if (!field.value.trim() || (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value))) {
+    field.classList.add('error');
+    error.textContent = message;
+    return false;
+  }
+  field.classList.remove('error');
+  error.textContent = '';
+  return true;
+}
+
+const blurMessages: Record<string, string> = {
+  nombre:  'Por favor ingresa tu nombre completo.',
+  email:   'Por favor ingresa un correo electrónico válido.',
+  motivo:  'Por favor selecciona un motivo de contacto.',
+  mensaje: 'Por favor escribe tu mensaje.',
+};
+
+['nombre', 'email', 'motivo', 'mensaje'].forEach((id) => {
+  const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+  if (!el) return;
+
+  el.addEventListener('blur', () => {
+    validateField(id, `${id}-error`, blurMessages[id]);
+  });
+
+  el.addEventListener('input', () => {
+    if (el.classList.contains('error') && el.value.trim()) {
+      el.classList.remove('error');
+      const errEl = document.getElementById(`${id}-error`);
+      if (errEl) errEl.textContent = '';
+    }
+  });
+});
+
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const isValid = ['nombre', 'email', 'motivo', 'mensaje']
+    .map(id => validateField(id, `${id}-error`, blurMessages[id]))
+    .every(Boolean);
+
+  if (!isValid) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+
+  // TODO: Integrar EmailJS cuando la FHS provea las credenciales
+  // emailjs.sendForm('SERVICE_ID', 'TEMPLATE_ID', form, 'PUBLIC_KEY')
+  await new Promise(r => setTimeout(r, 1200));
+
+  status.className = 'form-status success';
+  status.textContent = '¡Mensaje enviado! Te responderemos pronto.';
+  form.reset();
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Enviar mensaje';
+});

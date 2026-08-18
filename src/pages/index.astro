@@ -1,0 +1,49 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { seo } from './home/data/index';
+import Hero from './home/sections/Hero.astro';
+import About from './home/sections/About.astro';
+import Stats from './home/sections/Stats.astro';
+import Programs from './home/sections/Programs.astro';
+import Testimonials from './home/sections/Testimonials.astro';
+import PadrinoCta from './home/sections/PadrinoCta.astro';
+import ContactQuick from './home/sections/ContactQuick.astro';
+import './home/styles/index.css';
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "Fundación Horizontes de Sabiduría",
+    "alternateName": "FHS",
+    "description": "Fundación sin ánimo de lucro en Bogotá que acompaña a personas con discapacidad cognitiva e intelectual mediante programas de inclusión educativa y social.",
+    "url": "https://fundacionhorizontes.org",
+    "logo": "https://fundacionhorizontes.org/favicon.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bogotá",
+      "addressRegion": "Bogotá D.C.",
+      "addressCountry": "CO"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish"
+    }
+  }
+  </script>
+
+  <Hero />
+  <About />
+  <Stats />
+  <Programs />
+  <Testimonials />
+  <PadrinoCta />
+  <ContactQuick />
+</BaseLayout>
+
+<script>
+  import './home/js/index';
+</script>

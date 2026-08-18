@@ -1,0 +1,68 @@
+export const seo = {
+  title: 'Fundación Horizontes de Sabiduría | Inclusión educativa y social en Bogotá',
+  description: 'Somos una fundación en Bogotá que acompaña a niños, jóvenes y adultos con discapacidad cognitiva e intelectual. Programas de inclusión, terapias y Plan Padrino.',
+};
+
+export const programs = [
+  {
+    title: 'Programa de Niñez',
+    desc: 'Acompañamos a niños en su camino hacia la inclusión escolar y el desarrollo de habilidades fundamentales.',
+    href: '/programas/ninez',
+    icon: 'seedling',
+    color: 'var(--color-primary)',
+  },
+  {
+    title: 'Programa de Jóvenes',
+    desc: 'Fortalecemos habilidades para la vida, la autonomía y la participación social de adolescentes y jóvenes.',
+    href: '/programas/jovenes',
+    icon: 'sun',
+    color: 'var(--color-accent)',
+  },
+  {
+    title: 'Programa de Adultos',
+    desc: 'Promovemos la autonomía funcional, el bienestar emocional y la inclusión comunitaria de adultos.',
+    href: '/programas/adultos',
+    icon: 'hands',
+    color: 'var(--color-primary)',
+  },
+  {
+    title: 'Plan Padrino',
+    desc: 'Apadrina un sueño: apoya económicamente a una familia con un niño en proceso de inclusión educativa.',
+    href: '/programas/plan-padrino',
+    icon: 'heart',
+    color: 'var(--color-accent)',
+  },
+];
+
+export const stats = [
+  { value: 'XX', label: 'Familias acompañadas', unit: '' },
+  { value: '5',  label: 'Programas activos',    unit: '' },
+  { value: 'XX', label: 'Talleres realizados',  unit: '' },
+  { value: 'XX', label: 'Años de experiencia',  unit: '' },
+];
+
+export const testimonials = [
+  {
+    quote: 'Gracias a la fundación, mi hijo encontró un espacio donde puede aprender a su ritmo, con amor y respeto. Ver cómo crece cada semana nos llena de esperanza.',
+    name: 'María Elena Rodríguez',
+    role: 'Mamá de Juan Pablo, 10 años',
+  },
+  {
+    quote: 'El Programa de Jóvenes cambió la vida de mi hija. Hoy tiene habilidades que pensábamos imposibles, y sobre todo, tiene confianza en sí misma.',
+    name: 'Carlos Hernández',
+    role: 'Papá de Valentina, 17 años',
+  },
+  {
+    quote: 'Como padrino, ver el impacto real de mi apoyo en una familia es emocionante. La fundación es transparente, comprometida y hace un trabajo extraordinario.',
+    name: 'Andrés Morales',
+    role: 'Padrino del programa',
+  },
+];
+
+export const pillars = [
+  { label: 'Naturaleza', desc: 'Conexión con la vida' },
+  { label: 'Educación', desc: 'Formación integral' },
+  { label: 'Sabiduría', desc: 'Conocimiento con propósito' },
+  { label: 'Comunidad', desc: 'Crecimiento colectivo' },
+  { label: 'Esperanza', desc: 'Futuro con sentido' },
+];

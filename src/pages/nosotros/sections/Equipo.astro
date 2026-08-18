@@ -1,0 +1,27 @@
+---
+---
+<section class="section equipo-section" id="equipo" aria-labelledby="equipo-heading">
+  <div class="container equipo-inner">
+    <div class="equipo-header reveal">
+      <h2 id="equipo-heading">Nuestro equipo</h2>
+      <p class="equipo-note">
+        Próximamente presentaremos al equipo interdisciplinario de la FHS.
+      </p>
+    </div>
+
+    <div class="equipo-strip reveal reveal-delay-1" aria-label="Miembros del equipo (pendientes)">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div class="team-member">
+          <div class="team-member__avatar" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <p class="team-member__name">Nombre Apellido</p>
+          <p class="team-member__role">Cargo · Profesión</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

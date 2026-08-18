@@ -1,0 +1,298 @@
+---
+const navLinks = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Programas', href: '/programas' },
+  { label: 'Plan Padrino', href: '/programas/plan-padrino' },
+  { label: 'Donaciones', href: '/donaciones' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contacto', href: '/contacto' },
+];
+
+const programLinks = [
+  { label: 'Programa Niñez', href: '/programas/ninez' },
+  { label: 'Programa Jóvenes', href: '/programas/jovenes' },
+  { label: 'Programa Adultos', href: '/programas/adultos' },
+  { label: 'Servicios Profesionales', href: '/programas/servicios' },
+  { label: 'Plan Padrino', href: '/programas/plan-padrino' },
+];
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <!-- Brand column -->
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="Inicio">
+        <svg width="48" height="48" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="22" cy="22" r="21" stroke="#B56E45" stroke-width="2" fill="none"/>
+          <path d="M12 26 L22 28 L32 26 L32 20 L22 22 L12 20 Z" fill="#9DBFA8" opacity="0.85"/>
+          <line x1="22" y1="20" x2="22" y2="28" stroke="#7BA283" stroke-width="1"/>
+          <rect x="20.5" y="18" width="3" height="6" rx="1.5" fill="#9DBFA8"/>
+          <ellipse cx="22" cy="14" rx="7" ry="6" fill="#9DBFA8"/>
+          <path d="M22 17.5 C22 17.5 19 15 19 13.5 C19 12.1 20.1 11 21.5 11 C22 11 22.5 11.3 22 11.7 C21.5 11.3 22 11 22.5 11 C23.9 11 25 12.1 25 13.5 C25 15 22 17.5 22 17.5Z" fill="white" opacity="0.9"/>
+        </svg>
+        <div>
+          <p class="footer__logo-name">Horizontes de Sabiduría</p>
+          <p class="footer__logo-tagline">Fundación</p>
+        </div>
+      </a>
+      <p class="footer__desc">
+        Transformando vidas a través de la educación, el amor y la inclusión en Bogotá.
+      </p>
+      <!-- Social links placeholder -->
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Instagram de la Fundación Horizontes de Sabiduría">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" class="footer__social-link" aria-label="Facebook de la Fundación Horizontes de Sabiduría">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="footer__nav" aria-label="Navegación del pie de página">
+      <p class="footer__nav-title">Navegación</p>
+      <ul role="list">
+        {navLinks.map(link => (
+          <li><a href={link.href} class="footer__nav-link">{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Programs -->
+    <nav class="footer__nav" aria-label="Programas">
+      <p class="footer__nav-title">Programas</p>
+      <ul role="list">
+        {programLinks.map(link => (
+          <li><a href={link.href} class="footer__nav-link">{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Contact -->
+    <div class="footer__contact">
+      <p class="footer__nav-title">Contacto</p>
+      <address>
+        <p class="footer__contact-item">
+          <span aria-hidden="true">📍</span> Bogotá D.C., Colombia
+          <em class="footer__placeholder">(dirección por confirmar)</em>
+        </p>
+        <p class="footer__contact-item">
+          <span aria-hidden="true">📞</span> <em class="footer__placeholder">Teléfono por confirmar</em>
+        </p>
+        <p class="footer__contact-item">
+          <span aria-hidden="true">📧</span> <em class="footer__placeholder">Correo por confirmar</em>
+        </p>
+      </address>
+      <a href="/contacto" class="btn btn-outline btn-sm footer__contact-btn">Escríbenos</a>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p class="footer__legal">
+        Fundación Horizontes de Sabiduría — Entidad sin ánimo de lucro — Bogotá, Colombia
+      </p>
+      <p class="footer__copyright">
+        &copy; 2025 Fundación Horizontes de Sabiduría. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer {
+  background-color: var(--color-ink);
+  color: oklch(1 0 0 / 0.85);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: var(--space-12);
+  padding-block: var(--space-16);
+}
+
+/* Brand */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  margin-bottom: var(--space-6);
+}
+
+.footer__logo-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  line-height: 1.2;
+  max-width: none;
+}
+
+.footer__logo-tagline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: var(--color-primary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  max-width: none;
+}
+
+.footer__desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: oklch(1 0 0 / 0.65);
+  margin-bottom: var(--space-6);
+  max-width: 28ch;
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background-color: oklch(1 0 0 / 0.08);
+  color: oklch(1 0 0 / 0.7);
+  transition: background-color 200ms, color 200ms;
+}
+
+.footer__social-link:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Nav columns */
+.footer__nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.footer__nav-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: oklch(1 0 0 / 0.45);
+  max-width: none;
+}
+
+.footer__nav-link {
+  font-size: 0.9rem;
+  color: oklch(1 0 0 / 0.7);
+  text-decoration: none;
+  transition: color 200ms;
+}
+
+.footer__nav-link:hover {
+  color: var(--color-primary-light);
+}
+
+/* Contact */
+.footer__contact address {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.footer__contact-item {
+  font-size: 0.875rem;
+  color: oklch(1 0 0 / 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: none;
+}
+
+.footer__placeholder {
+  font-style: italic;
+  font-size: 0.8rem;
+  color: oklch(1 0 0 / 0.4);
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+}
+
+.footer__contact-btn {
+  border-color: oklch(1 0 0 / 0.3);
+  color: oklch(1 0 0 / 0.85);
+}
+
+.footer__contact-btn:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-ink);
+}
+
+/* Bottom bar */
+.footer__bottom {
+  border-top: 1px solid oklch(1 0 0 / 0.1);
+}
+
+.footer__bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.footer__legal,
+.footer__copyright {
+  font-size: 0.8rem;
+  color: oklch(1 0 0 / 0.4);
+  max-width: none;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 639px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .footer__bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+}
+</style>

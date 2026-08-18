@@ -1,0 +1,105 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  crumbs: Crumb[];
+  inverted?: boolean;
+}
+
+const { crumbs, inverted = false } = Astro.props;
+---
+
+<nav class:list={['breadcrumbs', { 'breadcrumbs--inverted': inverted }]} aria-label="Ruta de navegación">
+  <ol class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li
+      class="breadcrumbs__item"
+      itemprop="itemListElement"
+      itemscope
+      itemtype="https://schema.org/ListItem"
+    >
+      <a href="/" class="breadcrumbs__link" itemprop="item">
+        <span itemprop="name">Inicio</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    {crumbs.map((crumb, i) => (
+      <li
+        class="breadcrumbs__item"
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem"
+      >
+        <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+        {crumb.href ? (
+          <a href={crumb.href} class="breadcrumbs__link" itemprop="item">
+            <span itemprop="name">{crumb.label}</span>
+          </a>
+        ) : (
+          <span class="breadcrumbs__current" aria-current="page" itemprop="name">
+            {crumb.label}
+          </span>
+        )}
+        <meta itemprop="position" content={String(i + 2)} />
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+.breadcrumbs {
+  padding-block: var(--space-4);
+}
+
+.breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  list-style: none;
+}
+
+.breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.breadcrumbs__link {
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  transition: color 200ms;
+}
+
+.breadcrumbs__link:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumbs__sep {
+  color: var(--color-ink-muted);
+  font-size: 0.875rem;
+  opacity: 0.5;
+}
+
+.breadcrumbs__current {
+  font-size: 0.875rem;
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.breadcrumbs--inverted .breadcrumbs__link {
+  color: oklch(1 0 0 / 0.6);
+}
+.breadcrumbs--inverted .breadcrumbs__link:hover {
+  color: white;
+}
+.breadcrumbs--inverted .breadcrumbs__sep {
+  color: oklch(1 0 0 / 0.4);
+}
+.breadcrumbs--inverted .breadcrumbs__current {
+  color: oklch(1 0 0 / 0.85);
+}
+</style>

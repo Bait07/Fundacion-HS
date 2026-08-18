@@ -1,0 +1,390 @@
+---
+const navLinks = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Programas', href: '/programas' },
+  { label: 'Plan Padrino', href: '/programas/plan-padrino' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contacto', href: '/contacto' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <!-- Logo -->
+    <a href="/" class="navbar__logo" aria-label="Fundación Horizontes de Sabiduría — Inicio">
+      <div class="navbar__logo-mark" aria-hidden="true">
+        <!-- Placeholder logo circular con árbol + libro + corazón -->
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <circle cx="22" cy="22" r="21" stroke="#B56E45" stroke-width="2" fill="none"/>
+          <!-- Libro abierto -->
+          <path d="M12 26 L22 28 L32 26 L32 20 L22 22 L12 20 Z" fill="#7BA283" opacity="0.85"/>
+          <line x1="22" y1="20" x2="22" y2="28" stroke="#5a7a5e" stroke-width="1"/>
+          <!-- Tronco del árbol -->
+          <rect x="20.5" y="18" width="3" height="6" rx="1.5" fill="#7BA283"/>
+          <!-- Copa del árbol -->
+          <ellipse cx="22" cy="14" rx="7" ry="6" fill="#7BA283"/>
+          <!-- Corazón en el centro -->
+          <path d="M22 17.5 C22 17.5 19 15 19 13.5 C19 12.1 20.1 11 21.5 11 C22 11 22.5 11.3 22 11.7 C21.5 11.3 22 11 22.5 11 C23.9 11 25 12.1 25 13.5 C25 15 22 17.5 22 17.5Z" fill="white" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="navbar__logo-text">
+        <span class="navbar__logo-name">Horizontes</span>
+        <span class="navbar__logo-sub">de Sabiduría</span>
+      </div>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Navegación principal">
+      <ul class="navbar__list" role="list">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class={`navbar__link ${currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) ? 'navbar__link--active' : ''}`}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- CTA Donar -->
+    <a href="/donaciones" class="btn btn-accent navbar__cta">Donar</a>
+
+    <!-- Hamburger -->
+    <button
+      class="navbar__hamburger"
+      id="menuToggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <span class="hamburger__bar"></span>
+      <span class="hamburger__bar"></span>
+      <span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav aria-label="Menú móvil">
+    <ul class="mobile-menu__list" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`mobile-menu__link ${currentPath === link.href ? 'mobile-menu__link--active' : ''}`}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a href="/donaciones" class="btn btn-accent mobile-menu__cta">Donar ahora</a>
+  </nav>
+</div>
+
+<!-- Backdrop -->
+<div class="mobile-backdrop" id="mobileBackdrop" aria-hidden="true"></div>
+
+<style>
+/* ─── Navbar ───────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  background-color: oklch(0.92 0.022 95 / 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(0.86 0.032 90 / 0.6);
+  transition: box-shadow 300ms var(--ease-out);
+}
+
+.navbar.scrolled {
+  box-shadow: var(--shadow-nav);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  height: 68px;
+}
+
+/* Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__logo-mark {
+  flex-shrink: 0;
+}
+
+.navbar__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.navbar__logo-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.navbar__logo-sub {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Desktop nav */
+.navbar__nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.navbar__link {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: color 200ms var(--ease-out), background-color 200ms var(--ease-out);
+  letter-spacing: 0.01em;
+}
+
+.navbar__link:hover {
+  color: var(--color-primary);
+  background-color: oklch(0.67 0.065 155 / 0.08);
+}
+
+.navbar__link--active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.navbar__cta {
+  flex-shrink: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+/* Hamburger */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.hamburger__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-ink);
+  border-radius: 2px;
+  transition: transform 300ms var(--ease-out), opacity 200ms var(--ease-out);
+}
+
+.navbar__hamburger[aria-expanded="true"] .hamburger__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar__hamburger[aria-expanded="true"] .hamburger__bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.navbar__hamburger[aria-expanded="true"] .hamburger__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ─── Mobile menu ──────────────────────────────────────────────────── */
+.mobile-menu {
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-bg);
+  z-index: calc(var(--z-sticky) - 1);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 350ms var(--ease-out);
+  overflow-y: auto;
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.mobile-menu__link {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--color-ink);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: color 200ms, background-color 200ms;
+}
+
+.mobile-menu__link:hover,
+.mobile-menu__link--active {
+  color: var(--color-primary);
+  background-color: oklch(0.67 0.065 155 / 0.08);
+}
+
+.mobile-menu__cta {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Backdrop */
+.mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 68px 0 0;
+  background: oklch(0.26 0.035 145 / 0.4);
+  z-index: calc(var(--z-sticky) - 2);
+  backdrop-filter: blur(2px);
+}
+
+.mobile-backdrop.open {
+  display: block;
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .navbar__nav,
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__logo-sub {
+    display: none;
+  }
+
+  /* iOS Safari: backdrop-filter en position:fixed causa bug de compositing GPU
+     cuando hay múltiples transiciones transform activas — se usa fondo sólido */
+  .navbar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: oklch(0.92 0.022 95 / 0.98);
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu,
+  .mobile-backdrop {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .hamburger__bar,
+  .navbar {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+const navbar = document.getElementById('navbar');
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileBackdrop = document.getElementById('mobileBackdrop');
+
+// Scroll shadow
+window.addEventListener('scroll', () => {
+  navbar?.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// Mobile menu toggle
+function openMenu() {
+  menuToggle?.setAttribute('aria-expanded', 'true');
+  menuToggle?.setAttribute('aria-label', 'Cerrar menú');
+  mobileMenu?.classList.add('open');
+  mobileMenu?.setAttribute('aria-hidden', 'false');
+  mobileBackdrop?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  menuToggle?.setAttribute('aria-expanded', 'false');
+  menuToggle?.setAttribute('aria-label', 'Abrir menú');
+  mobileMenu?.classList.remove('open');
+  mobileMenu?.setAttribute('aria-hidden', 'true');
+  mobileBackdrop?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+menuToggle?.addEventListener('click', () => {
+  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+  isOpen ? closeMenu() : openMenu();
+});
+
+mobileBackdrop?.addEventListener('click', closeMenu);
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+// Close on nav link click
+mobileMenu?.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', closeMenu);
+});
+</script>

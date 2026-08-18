@@ -1,0 +1,656 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const seo = {
+  title: 'Nuestros Programas | Inclusión y Desarrollo para Personas con Discapacidad — FHS Bogotá',
+  description: 'Programas especializados para niños, jóvenes y adultos con discapacidad cognitiva en Bogotá: talleres de vida independiente, inclusión escolar, terapias y Plan Padrino.',
+};
+
+const programs = [
+  {
+    id: 'ninez',
+    href: '/programas/ninez',
+    title: 'Programa de Niñez',
+    subtitle: 'Primeros Pasos hacia la Inclusión Escolar',
+    desc: 'Fortalecemos en niños y niñas las habilidades básicas para el acercamiento, la adaptación y la inclusión en el entorno escolar y social.',
+    overlayColor: 'oklch(0.67 0.065 155 / 0.22)',
+    bgImg: 'https://picsum.photos/seed/children-classroom-colombia/800/560',
+    tags: ['Inclusión escolar', 'Autonomía básica', 'Socialización', 'Lenguaje'],
+    navLabel: 'Niñez',
+  },
+  {
+    id: 'jovenes',
+    href: '/programas/jovenes',
+    title: 'Programa de Adolescentes y Jóvenes',
+    subtitle: 'Habilidades para la Vida y la Inclusión Social',
+    desc: 'Fortalecemos habilidades personales, sociales y funcionales que favorecen la autonomía, la participación social y el proyecto de vida.',
+    overlayColor: 'oklch(0.61 0.090 47 / 0.22)',
+    bgImg: 'https://picsum.photos/seed/youth-workshop-bogota/800/560',
+    tags: ['Habilidades para la vida', 'Independencia', 'Formación ocupacional'],
+    navLabel: 'Jóvenes',
+  },
+  {
+    id: 'adultos',
+    href: '/programas/adultos',
+    title: 'Programa para Adultos',
+    subtitle: 'Autonomía, Participación y Calidad de Vida',
+    desc: 'Promovemos la autonomía funcional, la participación social y el bienestar integral de adultos con discapacidad cognitiva e intelectual.',
+    overlayColor: 'oklch(0.67 0.065 155 / 0.22)',
+    bgImg: 'https://picsum.photos/seed/adults-activities-foundation/800/560',
+    tags: ['Vida independiente', 'Bienestar emocional', 'Inclusión comunitaria'],
+    navLabel: 'Adultos',
+  },
+  {
+    id: 'servicios',
+    href: '/programas/servicios',
+    title: 'Servicios Profesionales',
+    subtitle: 'Apoyo Integral para la Inclusión',
+    desc: 'Atención interdisciplinaria orientada al fortalecimiento del desarrollo integral y la inclusión educativa y social.',
+    overlayColor: 'oklch(0.26 0.035 145 / 0.22)',
+    bgImg: 'https://picsum.photos/seed/therapy-session-colombia/800/560',
+    tags: ['Psicología', 'Fonoaudiología', 'Terapia Ocupacional'],
+    navLabel: 'Servicios',
+  },
+  {
+    id: 'plan-padrino',
+    href: '/programas/plan-padrino',
+    title: 'Plan Padrino',
+    subtitle: 'Apadrina un Sueño, Transforma una Vida',
+    desc: 'Una estrategia solidaria para brindar apoyo económico a niños con discapacidad cognitiva, facilitando su acceso a la educación inclusiva de calidad.',
+    overlayColor: 'oklch(0.61 0.090 47 / 0.26)',
+    bgImg: 'https://picsum.photos/seed/sponsor-child-education/800/560',
+    tags: ['Educación inclusiva', 'Apoyo económico', 'Solidaridad'],
+    navLabel: 'Plan Padrino',
+    featured: true,
+  },
+];
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+
+  <!-- ── Page Header ── -->
+  <section class="page-header bg-primary" aria-labelledby="page-title">
+    <span class="page-header__bg-num" aria-hidden="true">5</span>
+    <div class="container">
+      <Breadcrumbs crumbs={[{ label: 'Programas' }]} />
+      <div class="page-header__body">
+        <div class="page-header__text">
+          <h1 id="page-title" class="reveal">Nuestros programas</h1>
+          <p class="page-header__subtitle reveal reveal-delay-1">
+            Cinco programas diseñados para acompañar cada etapa de la vida con especialización, calidez e interdisciplinariedad.
+          </p>
+        </div>
+        <div class="page-header__count reveal reveal-delay-2" aria-hidden="true">
+          <span class="page-header__count-num">5</span>
+          <span class="page-header__count-label">programas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quick Nav ── -->
+  <nav class="qnav" aria-label="Ir a programa">
+    <div class="container">
+      <ul class="qnav__list" role="list">
+        {programs.map(prog => (
+          <li>
+            <a href={`#${prog.id}`} class="qnav__pill" data-target={prog.id}>
+              {prog.navLabel}
+              {prog.featured && <span class="qnav__star" aria-hidden="true">★</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Programs ── -->
+  <section class="section programs-section" aria-label="Lista de programas">
+    <div class="container programs-list">
+      {programs.map((prog, i) => (
+        <article
+          id={prog.id}
+          class={`prog-row ${prog.featured ? 'prog-row--featured' : ''} ${i % 2 !== 0 ? 'prog-row--reversed' : ''}`}
+        >
+
+          <!-- Visual side -->
+          <div class="prog-row__visual reveal reveal-visual">
+            <div class="prog-row__img-wrap">
+              <img
+                src={prog.bgImg}
+                alt={`${prog.title} — ${prog.subtitle}`}
+                width="800"
+                height="560"
+                loading="lazy"
+                class="prog-row__img"
+              />
+              <div
+                class="prog-row__overlay"
+                style={`--prog-overlay: ${prog.overlayColor};`}
+                aria-hidden="true"
+              ></div>
+            </div>
+            {prog.featured && (
+              <div class="prog-row__badge" aria-label="Programa destacado">
+                <span>Programa estrella</span>
+                <div class="prog-row__badge-ring" aria-hidden="true"></div>
+              </div>
+            )}
+          </div>
+
+          <!-- Copy side -->
+          <div class="prog-row__copy">
+            <p class="prog-row__subtitle reveal">{prog.subtitle}</p>
+            <h2 class="prog-row__title reveal reveal-delay-1">{prog.title}</h2>
+            <p class="prog-row__desc reveal reveal-delay-2">{prog.desc}</p>
+            <ul class="prog-row__tags reveal reveal-delay-3" role="list" aria-label="Áreas de trabajo">
+              {prog.tags.map(tag => (
+                <li class="prog-row__tag">{tag}</li>
+              ))}
+            </ul>
+            <a href={prog.href} class="btn btn-primary prog-row__cta reveal reveal-delay-4">
+              Ver programa completo
+              <span class="prog-row__arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="section cta-bottom" aria-labelledby="cta-heading">
+    <div class="container cta-bottom__inner">
+      <h2 id="cta-heading" class="reveal">Apoya nuestros programas</h2>
+      <p class="reveal reveal-delay-1">
+        Tu donación permite que más familias accedan a programas de inclusión que transforman vidas.
+      </p>
+      <div class="cta-bottom__actions reveal reveal-delay-2">
+        <a href="/donaciones" class="btn btn-accent">Hacer una donación</a>
+        <a href="/programas/plan-padrino" class="btn btn-outline">Ser padrino</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+
+/* ── Page header ───────────────────────────────────────────────── */
+.page-header {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.page-header__bg-num {
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.18em;
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 22vw, 18rem);
+  font-weight: 800;
+  line-height: 1;
+  color: oklch(1 0 0 / 0.08);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
+.page-header h1 {
+  color: var(--color-white);
+  margin-top: var(--space-5);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.page-header h1::before {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 3px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  margin-bottom: var(--space-5);
+}
+
+.page-header__body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.page-header__text { flex: 1; min-width: 0; }
+
+.page-header__subtitle {
+  color: oklch(1 0 0 / 0.82);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.65;
+  margin-top: var(--space-4);
+  max-width: 56ch;
+}
+
+.page-header__count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.page-header__count-num {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: oklch(1 0 0 / 0.18);
+}
+
+.page-header__count-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: oklch(1 0 0 / 0.45);
+}
+
+/* ── Quick nav ─────────────────────────────────────────────────── */
+.qnav {
+  position: sticky;
+  top: 68px;
+  z-index: 15;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid oklch(0.26 0.035 145 / 0.1);
+  box-shadow: 0 2px 12px oklch(0.26 0.035 145 / 0.06);
+  padding-block: var(--space-3);
+}
+
+.qnav .container {
+  /* allow horizontal scroll without showing scrollbar */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.qnav .container::-webkit-scrollbar { display: none; }
+
+.qnav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  min-width: max-content;
+}
+
+.qnav__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+  background-color: transparent;
+  border: 1px solid oklch(0.26 0.035 145 / 0.15);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 220ms ease,
+              color 220ms ease,
+              border-color 220ms ease,
+              transform 160ms ease-out;
+}
+
+.qnav__pill:hover {
+  background-color: oklch(0.67 0.065 155 / 0.1);
+  color: var(--color-primary);
+  border-color: oklch(0.67 0.065 155 / 0.3);
+}
+
+.qnav__pill--active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.qnav__pill:active {
+  transform: scale(0.96);
+}
+
+.qnav__star {
+  font-size: 0.65rem;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+/* ── Programs list ─────────────────────────────────────────────── */
+.programs-section { padding-block-start: clamp(3rem, 6vw, 5rem); }
+
+.programs-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5rem, 10vw, 8rem);
+}
+
+.prog-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: center;
+  scroll-margin-top: 128px; /* sticky navbar 68px + qnav ~44px + buffer */
+}
+
+.prog-row--reversed .prog-row__visual { order: 2; }
+.prog-row--reversed .prog-row__copy   { order: 1; }
+
+/* ── Image visual ─────────────────────────────────────────────── */
+.prog-row__visual {
+  position: relative;
+}
+
+/* Override global .reveal for visual: scale entry instead of translateY */
+.prog-row__visual.reveal {
+  opacity: 0;
+  transform: scale(0.96) translateY(24px);
+  transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prog-row__visual.reveal.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.prog-row__img-wrap {
+  position: relative;
+  overflow: hidden;          /* clips zoom */
+  border-radius: var(--radius-lg);
+  /* tinted shadow matching ink color */
+  box-shadow: 0 8px 32px oklch(0.26 0.035 145 / 0.12),
+              0 2px 8px oklch(0.26 0.035 145 / 0.08);
+  transition: box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prog-row:hover .prog-row__img-wrap {
+  box-shadow: 0 16px 48px oklch(0.26 0.035 145 / 0.18),
+              0 4px 12px oklch(0.26 0.035 145 / 0.1);
+}
+
+.prog-row__img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prog-row:hover .prog-row__img {
+  transform: scale(1.06);
+}
+
+/* Color overlay — enters on hover */
+.prog-row__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--prog-overlay);
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+
+.prog-row:hover .prog-row__overlay {
+  opacity: 1;
+}
+
+/* ── Featured badge ─────────────────────────────────────────────── */
+.prog-row__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 1;
+}
+
+.prog-row__badge-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid var(--color-accent);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .prog-row__badge-ring {
+    animation: badge-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s infinite;
+  }
+}
+
+@keyframes badge-ring {
+  0%   { opacity: 0.7; transform: scale(1); }
+  80%  { opacity: 0;   transform: scale(1.55); }
+  100% { opacity: 0;   transform: scale(1.55); }
+}
+
+/* ── Copy side ──────────────────────────────────────────────────── */
+.prog-row__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.prog-row__subtitle {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--color-accent);
+  max-width: none;
+}
+
+.prog-row__title {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  color: var(--color-ink);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.prog-row__desc {
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  color: var(--color-ink-muted);
+}
+
+/* ── Tags ───────────────────────────────────────────────────────── */
+.prog-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.prog-row__tag {
+  background-color: oklch(0.67 0.065 155 / 0.1);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid oklch(0.67 0.065 155 / 0.18);
+  cursor: default;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.prog-row__tag:hover {
+  background-color: oklch(0.67 0.065 155 / 0.2);
+  border-color: oklch(0.67 0.065 155 / 0.35);
+}
+
+/* ── CTA button arrow ───────────────────────────────────────────── */
+.prog-row__cta {
+  align-self: flex-start;
+}
+
+.prog-row__arrow {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prog-row__cta:hover .prog-row__arrow {
+  transform: translateX(4px);
+}
+
+/* ── CTA bottom ─────────────────────────────────────────────────── */
+.cta-bottom {
+  background-color: var(--color-ink);
+}
+
+.cta-bottom__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.cta-bottom__inner h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--color-white);
+}
+
+.cta-bottom__inner p {
+  color: oklch(1 0 0 / 0.72);
+  font-size: 1.0625rem;
+  max-width: 50ch;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.cta-bottom__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+.cta-bottom__actions .btn-outline {
+  border-color: oklch(1 0 0 / 0.4);
+  color: oklch(1 0 0 / 0.85);
+}
+.cta-bottom__actions .btn-outline:hover {
+  background-color: var(--color-white);
+  color: var(--color-ink);
+}
+
+/* ── Featured row visual accent ─────────────────────────────────── */
+.prog-row--featured .prog-row__title {
+  color: var(--color-accent);
+}
+
+.prog-row--featured .prog-row__subtitle {
+  color: oklch(0.61 0.090 47 / 0.7);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .prog-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .prog-row--reversed .prog-row__visual,
+  .prog-row--reversed .prog-row__copy {
+    order: 0;
+  }
+  .prog-row__img { height: 280px; }
+  .page-header__count { display: none; }
+}
+
+@media (max-width: 639px) {
+  .prog-row__img { height: 240px; }
+  .prog-row__cta { width: 100%; justify-content: center; }
+}
+
+/* ── Reduced motion overrides ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .prog-row__visual.reveal {
+    transform: none;
+    transition: opacity 300ms ease;
+  }
+  .prog-row__visual.reveal.visible {
+    transform: none;
+  }
+  .prog-row:hover .prog-row__img,
+  .prog-row__img {
+    transform: none;
+    transition: none;
+  }
+  .prog-row__arrow,
+  .prog-row__overlay,
+  .prog-row__img-wrap,
+  .qnav__pill {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+// ── Quick-nav active state via IntersectionObserver ─────────────
+const qnavPills = document.querySelectorAll<HTMLAnchorElement>('.qnav__pill');
+const rows = document.querySelectorAll<HTMLElement>('.prog-row[id]');
+
+if (rows.length > 0 && qnavPills.length > 0) {
+  const setActive = (id: string) => {
+    qnavPills.forEach(pill => {
+      const isActive = pill.dataset.target === id;
+      pill.classList.toggle('qnav__pill--active', isActive);
+    });
+  };
+
+  // Activate first item by default
+  if (qnavPills[0]) {
+    const firstId = qnavPills[0].dataset.target;
+    if (firstId) setActive(firstId);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id);
+      }
+    });
+  }, {
+    rootMargin: '-100px 0px -45% 0px',
+    threshold: 0,
+  });
+
+  rows.forEach(row => io.observe(row));
+}
+
+// ── Keyboard: skip nav on pill click (smooth scroll handled by html { scroll-behavior: smooth }) ──
+// No extra JS needed — html has scroll-behavior: smooth globally.
+</script>

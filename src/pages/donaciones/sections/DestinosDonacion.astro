@@ -1,0 +1,26 @@
+---
+import { destinos } from '../data/index';
+---
+<section class="section bg-surface" aria-labelledby="destino-heading">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:var(--space-12)">
+      <h2 id="destino-heading">A qué va tu donación</h2>
+      <p style="color:var(--color-ink-muted);margin-top:var(--space-3);max-width:55ch;margin-inline:auto;text-align:center">
+        Cada peso donado se usa de forma responsable y transparente para maximizar el impacto en las personas y familias que atendemos.
+      </p>
+    </div>
+    <div class="destinos-grid">
+      {destinos.map((d, i) => (
+        <div class={`destino-item reveal reveal-delay-${i + 1}`}>
+          <div class="destino-item__header">
+            <span class="destino-item__pct">{d.pct}%</span>
+            <span class="destino-item__label">{d.label}</span>
+          </div>
+          <div class="destino-bar" role="progressbar" aria-valuenow={d.pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${d.pct}% para ${d.label}`}>
+            <div class="destino-bar__fill" style={`width: ${d.pct}%`}></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

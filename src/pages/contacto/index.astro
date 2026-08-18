@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { seo } from './data/index';
+import PageHeader from './sections/PageHeader.astro';
+import ContactMain from './sections/ContactMain.astro';
+import './styles/index.css';
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <PageHeader />
+  <ContactMain />
+</BaseLayout>
+
+<script>
+  import './js/index';
+</script>

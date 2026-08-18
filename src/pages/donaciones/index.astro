@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { seo } from './data/index';
+import PageHeader from './sections/PageHeader.astro';
+import ComoDonar from './sections/ComoDonar.astro';
+import DestinosDonacion from './sections/DestinosDonacion.astro';
+import Transparencia from './sections/Transparencia.astro';
+import PadrinoCta from './sections/PadrinoCta.astro';
+import './styles/index.css';
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <PageHeader />
+  <ComoDonar />
+  <DestinosDonacion />
+  <Transparencia />
+  <PadrinoCta />
+</BaseLayout>
+
+<script>
+  import './js/index';
+</script>

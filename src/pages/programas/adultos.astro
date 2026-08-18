@@ -1,0 +1,212 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const seo = {
+  title: 'Programa Adultos — Autonomía y Calidad de Vida | FHS Bogotá',
+  description: 'Promovemos la autonomía funcional, el bienestar emocional y la inclusión comunitaria de adultos con discapacidad cognitiva e intelectual en Bogotá.',
+};
+
+const talleres = [
+  { nombre: '"Mi Hogar, Mi Responsabilidad"', desc: 'Fortalece habilidades para la organización y responsabilidades del hogar.' },
+  { nombre: '"Sabores de Independencia"', desc: 'Promueve preparación básica de alimentos y hábitos saludables.' },
+  { nombre: '"Manos que Transforman"', desc: 'Desarrolla habilidades productivas y ocupacionales.' },
+  { nombre: '"Participando en Mi Comunidad"', desc: 'Favorece la inclusión social y participación comunitaria.' },
+  { nombre: '"Construyendo Mi Historia"', desc: 'Fortalece autoestima, identidad y proyecto de vida.' },
+];
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <section class="prog-header bg-primary" aria-labelledby="prog-title">
+    <div class="container">
+      <Breadcrumbs crumbs={[{ label: 'Programas', href: '/programas' }, { label: 'Adultos' }]} />
+      <div class="prog-header__inner">
+        <div>
+          <p class="prog-header__eyebrow">Programa para Adultos</p>
+          <h1 id="prog-title" class="reveal">Autonomía, Participación y Calidad de Vida</h1>
+          <p class="prog-header__desc reveal reveal-delay-1">
+            Promover la autonomía funcional, la participación social y el bienestar integral de adultos con discapacidad cognitiva e intelectual en Bogotá.
+          </p>
+          <div class="prog-header__actions reveal reveal-delay-2">
+            <a href="/contacto?motivo=informacion-programas" class="btn btn-accent">Solicitar información</a>
+            <a href="/programas" class="btn btn-outline">Ver todos los programas</a>
+          </div>
+        </div>
+        <div class="prog-header__img-wrap reveal">
+          <img
+            src="https://picsum.photos/seed/adults-community-activities/480/380"
+            alt="Adultos con discapacidad cognitiva participando en actividades de autonomía en la Fundación Horizontes de Sabiduría"
+            width="480" height="380"
+            loading="eager"
+            class="prog-header__img"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="areas-heading">
+    <div class="container areas-inner">
+      <h2 id="areas-heading" class="reveal">Áreas de trabajo</h2>
+      <ul class="areas-grid reveal reveal-delay-1" role="list">
+        {['Vida independiente', 'Participación social', 'Actividades ocupacionales', 'Bienestar emocional', 'Inclusión comunitaria'].map(a => (
+          <li class="area-pill">{a}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section talleres-section" aria-labelledby="talleres-heading">
+    <div class="container">
+      <h2 id="talleres-heading" class="reveal" style="text-align:center;margin-bottom:var(--space-10)">Talleres del programa</h2>
+      <div class="talleres-grid">
+        {talleres.map((t, i) => (
+          <article class={`taller-card reveal reveal-delay-${i + 1}`}>
+            <h3 class="taller-card__title">{t.nombre}</h3>
+            <p class="taller-card__desc">{t.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-prog" aria-labelledby="cta-heading">
+    <div class="container cta-prog__inner">
+      <h2 id="cta-heading" class="reveal">¿Conoces a un adulto que puede beneficiarse?</h2>
+      <div class="reveal reveal-delay-1">
+        <a href="/contacto?motivo=informacion-programas" class="btn btn-primary">Consultar disponibilidad</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* ── Header ─────────────────────────────────────────────────────── */
+.prog-header { padding-block: clamp(3rem, 6vw, 5rem); }
+
+.prog-header__eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: oklch(1 0 0 / 0.65);
+  margin-bottom: var(--space-3);
+  max-width: none;
+}
+
+.prog-header__inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(3rem, 5vw, 5rem);
+  align-items: center;
+  margin-top: var(--space-4);
+}
+
+.prog-header h1 {
+  color: var(--color-white);
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.prog-header h1::before {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 3px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  margin-bottom: var(--space-5);
+}
+
+.prog-header__desc {
+  color: oklch(1 0 0 / 0.82);
+  font-size: clamp(1rem, 1.5vw, 1.0625rem);
+  line-height: 1.75;
+  margin-top: var(--space-4);
+  max-width: 55ch;
+}
+
+.prog-header__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-6); }
+
+.prog-header__actions .btn-outline {
+  border-color: oklch(1 0 0 / 0.4);
+  color: oklch(1 0 0 / 0.85);
+}
+.prog-header__actions .btn-outline:hover {
+  background-color: var(--color-white);
+  color: var(--color-ink);
+}
+
+.prog-header__img-wrap {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px oklch(0.26 0.035 145 / 0.12);
+  transition: box-shadow 400ms var(--ease-expo);
+}
+.prog-header__img-wrap:hover { box-shadow: 0 16px 48px oklch(0.26 0.035 145 / 0.18); }
+
+.prog-header__img { width: 100%; height: 320px; object-fit: cover; transition: transform 600ms var(--ease-expo); }
+.prog-header__img-wrap:hover .prog-header__img { transform: scale(1.06); }
+
+/* ── Áreas ───────────────────────────────────────────────────────── */
+.areas-inner { display: flex; flex-direction: column; gap: var(--space-6); }
+.areas-grid { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.area-pill {
+  background-color: oklch(0.67 0.065 155 / 0.1);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid oklch(0.67 0.065 155 / 0.18);
+}
+
+/* ── Talleres ────────────────────────────────────────────────────── */
+.talleres-section { border-top: 1px solid oklch(0.26 0.035 145 / 0.10); }
+.talleres-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid oklch(0.26 0.035 145 / 0.12);
+  border-left: 1px solid oklch(0.26 0.035 145 / 0.12);
+  counter-reset: taller-num;
+}
+
+.taller-card {
+  padding: var(--space-6) var(--space-5);
+  border-bottom: 1px solid oklch(0.26 0.035 145 / 0.12);
+  border-right: 1px solid oklch(0.26 0.035 145 / 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  counter-increment: taller-num;
+  transition: background-color 200ms;
+}
+.taller-card::before {
+  content: counter(taller-num, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  display: block;
+}
+.taller-card:hover { background-color: oklch(0.67 0.065 155 / 0.05); }
+
+.taller-card__title { font-size: 0.9375rem; color: var(--color-ink); font-style: italic; font-weight: 600; }
+.taller-card__desc { font-size: 0.875rem; color: var(--color-ink-muted); line-height: 1.6; }
+
+/* ── CTA ─────────────────────────────────────────────────────────── */
+.cta-prog { text-align: center; background-color: var(--color-ink); }
+.cta-prog__inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-5); }
+.cta-prog__inner h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); max-width: 50ch; text-align: center; color: var(--color-white); }
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .prog-header__inner { grid-template-columns: 1fr; }
+  .prog-header__img { height: 260px; }
+  .talleres-grid { grid-template-columns: 1fr; }
+}
+</style>

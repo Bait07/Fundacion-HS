@@ -1,0 +1,56 @@
+---
+import { impacto } from '../data/index';
+---
+<section class="section-sm impacto-section" aria-label="Datos de impacto">
+  <div class="container">
+    <ol class="impacto-grid" aria-label="Indicadores de la fundación">
+      {impacto.map((item, i) => (
+        <li class={`impacto-item reveal reveal-delay-${i + 1}`}>
+          <span class="impacto-num">
+            <span
+              class="impacto-counter"
+              data-counter
+              data-target={item.value}
+              data-suffix={item.suffix}
+              aria-label={`${item.value}${item.suffix} ${item.label}`}
+            >0{item.suffix}</span>
+          </span>
+          <span class="impacto-label">{item.label}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<script>
+  function animateCounter(el: HTMLElement) {
+    const target = parseInt(el.dataset.target ?? '0');
+    const suffix = el.dataset.suffix ?? '';
+    const duration = 1400;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
+
+  document
+    .querySelectorAll<HTMLElement>('[data-counter]')
+    .forEach((el) => observer.observe(el));
+</script>

@@ -1,0 +1,29 @@
+---
+import { stats } from '../data/index';
+
+const statIcons = [
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+];
+---
+<section class="section stats" aria-labelledby="stats-heading">
+  <div class="container">
+    <h2 id="stats-heading" class="stats__heading reveal">Nuestro alcance</h2>
+    <div class="stats__strip">
+      {stats.map((stat, i) => (
+        <div class={`stats__item reveal reveal-delay-${i + 1}`}>
+          <span class="stats__icon">
+            <Fragment set:html={statIcons[i]} />
+          </span>
+          <span class="stats__value">{stat.value}</span>
+          <span class="stats__label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+    <p class="stats__note reveal reveal-delay-4">
+      La fundación está en sus primeros pasos — estos números crecerán con tu apoyo.
+    </p>
+  </div>
+</section>

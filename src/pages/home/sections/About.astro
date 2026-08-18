@@ -1,0 +1,40 @@
+---
+import { pillars } from '../data/index';
+---
+<section class="section about" aria-labelledby="about-heading">
+  <div class="container about__inner">
+    <div class="about__visual reveal" aria-hidden="true">
+      <div class="about__img-wrap">
+        <img
+          src="https://picsum.photos/seed/workshop-family-colombia/600/700"
+          alt="Niño con discapacidad cognitiva participando en taller de la Fundación Horizontes de Sabiduría en Bogotá"
+          width="600"
+          height="700"
+          loading="lazy"
+          class="about__img"
+        />
+      </div>
+    </div>
+
+    <div class="about__copy">
+      <h2 id="about-heading" class="reveal">Somos Horizontes de Sabiduría</h2>
+      <p class="about__text reveal reveal-delay-1">
+        En la Fundación Horizontes de Sabiduría creemos que cada persona, sin importar su condición, tiene el derecho de aprender, crecer y participar plenamente en su comunidad.
+      </p>
+      <p class="about__text reveal reveal-delay-2">
+        Trabajamos en Bogotá con niños, jóvenes y adultos con discapacidad cognitiva e intelectual, acompañándolos con programas especializados, atención interdisciplinaria y el compromiso de transformar vidas desde el respeto y la esperanza.
+      </p>
+
+      <ul class="about__pillars" role="list">
+        {pillars.map((p, i) => (
+          <li class={`about__pillar reveal reveal-delay-${i + 1}`}>
+            <span class="about__pillar-label">{p.label}</span>
+            <span class="about__pillar-desc">{p.desc}</span>
+          </li>
+        ))}
+      </ul>
+
+      <a href="/nosotros" class="btn btn-outline reveal reveal-delay-4">Conocer nuestra historia</a>
+    </div>
+  </div>
+</section>

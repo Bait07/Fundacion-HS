@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Horizontes de Sabiduría — antes / después de paleta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* --- ANTES (tal cual tu global.css actual) --- */
+    --old-bg: oklch(0.92 0.022 95);
+    --old-primary: oklch(0.67 0.065 155);
+    --old-ink: oklch(0.26 0.035 145);
+
+    /* --- DESPUÉS (paleta nueva, ver tokens-nuevo.css) --- */
+    --color-bg: oklch(0.97 0.015 85);
+    --color-surface: oklch(0.95 0.022 140);
+    --color-primary: oklch(0.55 0.155 154);
+    --color-primary-light: oklch(0.72 0.16 148);
+    --color-secondary: oklch(0.55 0.15 170);
+    --color-accent: oklch(0.57 0.135 50);
+    --color-lime: oklch(0.81 0.196 123);
+    --color-peach: oklch(0.90 0.05 55);
+    --color-ink: oklch(0.22 0.04 150);
+    --color-ink-muted: oklch(0.45 0.03 150);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Lato', sans-serif; background: #ececec; }
+  h1,h2,h3,.display { font-family: 'Montserrat', sans-serif; }
+  header.note { background: #111; color: #fff; padding: 14px 24px; font-size: 14px; text-align: center; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #ececec; }
+  .col { padding: 0; }
+  .col-label {
+    text-align: center; padding: 10px; font-weight: 700; font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
+  }
+  .col.before .col-label { background: #444; color: #ddd; }
+  .col.after .col-label { background: var(--color-primary); color: #fff; }
+
+  /* Hero mockup */
+  .hero { padding: 60px 36px 80px; position: relative; overflow: hidden; }
+  .hero.before {
+    background: linear-gradient(rgba(60,70,55,.55), rgba(60,70,55,.55)),
+                repeating-linear-gradient(135deg, #6b7a63 0 40px, #5c6b55 40px 80px);
+    color: #fff;
+  }
+  .hero.after {
+    background: linear-gradient(160deg, var(--color-secondary) 0%, var(--color-primary) 60%, #0a5c38 100%);
+    color: #fff;
+  }
+  .hero h1 { font-size: 34px; line-height: 1.2; margin: 0 0 16px; font-weight: 800; max-width: 420px; }
+  .hero p { max-width: 420px; margin: 0 0 22px; opacity: .92; }
+  .btn { display: inline-block; border-radius: 999px; padding: 12px 24px; font-weight: 700; text-decoration: none; margin-right: 10px; font-size: 14px; }
+  .before .btn-primary { background: var(--old-primary); color: var(--old-ink); }
+  .before .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,.5); color: #fff; }
+  .after .btn-primary { background: #fff; color: var(--color-primary); }
+  .after .btn-outline { background: transparent; border: 2px solid #fff; color: #fff; }
+
+  /* Content section mockup */
+  .content { padding: 40px 36px; }
+  .before .content { background: var(--old-bg); color: var(--old-ink); }
+  .after .content { background: var(--color-bg); color: var(--color-ink); }
+  .content h2 { font-size: 24px; margin: 0 0 14px; }
+  .content p { color: inherit; opacity: .85; line-height: 1.6; margin: 0 0 20px; font-size: 14px; }
+
+  .cards { display: flex; gap: 14px; }
+  .card { flex: 1; border-radius: 16px; padding: 18px; font-size: 13px; }
+  .before .card { background: #fff; border: 1px solid #ddd6c4; color: var(--old-ink); }
+  .after .card:nth-child(1) { background: var(--color-surface); }
+  .after .card:nth-child(2) { background: var(--color-peach); }
+  .after .card:nth-child(3) { background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+  .after .card { color: var(--color-ink); }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; margin-bottom: 8px;
+  }
+  .before .tag { background: var(--old-primary); color: #fff; }
+  .after .tag.lime { background: var(--color-lime); color: #234; }
+  .after .tag.secondary { background: var(--color-secondary); color: #fff; }
+  .after .tag.accent { background: var(--color-accent); color: #fff; }
+
+  /* Palette swatches */
+  .swatches { padding: 40px 36px; background: #fff; }
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 14px; max-width: 1100px; margin: 24px auto 0; }
+  .swatch { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+  .swatch .fill { height: 70px; }
+  .swatch .label { padding: 8px 10px; font-size: 12px; background: #fff; }
+  .swatch .label code { display: block; color: #888; font-size: 11px; margin-top: 2px; }
+
+  footer { text-align: center; padding: 24px; font-size: 12px; color: #999; }
+</style>
+</head>
+<body>
+
+<header class="note">Comparación de paleta — Fundación Horizontes de Sabiduría · colores extraídos directamente de tu logo</header>
+
+<div class="compare">
+  <div class="col before">
+    <div class="col-label">Antes (paleta actual)</div>
+    <div class="hero before">
+      <h1>Un horizonte para cada persona. Acompañamos el camino.</h1>
+      <p>Acompañamos a niños, jóvenes y adultos con discapacidad cognitiva en Bogotá a descubrir sus horizontes.</p>
+      <a class="btn btn-primary">Conoce nuestros programas</a>
+      <a class="btn btn-outline">Quiero donar</a>
+    </div>
+    <div class="content">
+      <h2>Somos Horizontes de Sabiduría</h2>
+      <p>En la Fundación creemos que cada persona, sin importar su condición, tiene el derecho de aprender, crecer y participar plenamente en su comunidad.</p>
+      <div class="cards">
+        <div class="card"><span class="tag">Educación</span><br>Acompañamiento pedagógico</div>
+        <div class="card"><span class="tag">Familia</span><br>Redes de apoyo</div>
+        <div class="card"><span class="tag">Comunidad</span><br>Inclusión social</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col after">
+    <div class="col-label">Después (paleta del logo)</div>
+    <div class="hero after">
+      <h1>Un horizonte para cada persona. Acompañamos el camino.</h1>
+      <p>Acompañamos a niños, jóvenes y adultos con discapacidad cognitiva en Bogotá a descubrir sus horizontes.</p>
+      <a class="btn btn-primary">Conoce nuestros programas</a>
+      <a class="btn btn-outline">Quiero donar</a>
+    </div>
+    <div class="content">
+      <h2>Somos Horizontes de Sabiduría</h2>
+      <p>En la Fundación creemos que cada persona, sin importar su condición, tiene el derecho de aprender, crecer y participar plenamente en su comunidad.</p>
+      <div class="cards">
+        <div class="card"><span class="tag lime">Educación</span><br>Acompañamiento pedagógico</div>
+        <div class="card"><span class="tag accent">Familia</span><br>Redes de apoyo</div>
+        <div class="card"><span class="tag secondary">Comunidad</span><br>Inclusión social</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="swatches">
+  <h2 style="text-align:center;">Paleta nueva — muestras con su valor real</h2>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="fill" style="background:var(--color-primary)"></div><div class="label">Primario<code>#00884a</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-primary-light)"></div><div class="label">Primario claro<code>#51bf68</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-secondary)"></div><div class="label">Secundario<code>#008568</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-accent)"></div><div class="label">Acento<code>#b45b1f</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-lime)"></div><div class="label">Lima (detalle)<code>#aad410</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-peach)"></div><div class="label">Durazno<code>#f9d6bf</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-bg)"></div><div class="label">Fondo<code>#faf5ea</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-surface)"></div><div class="label">Superficie<code>#e7f2e4</code></div></div>
+    <div class="swatch"><div class="fill" style="background:var(--color-ink)"></div><div class="label">Texto<code>#0b2010</code></div></div>
+  </div>
+</div>
+
+<footer>El bloque "antes" reconstruye tu paleta y estructura actual solo para comparar color — no es una copia exacta de tu maquetación real.</footer>
+
+</body>
+</html>

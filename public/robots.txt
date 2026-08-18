@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fundacionhorizontes.org/sitemap-index.xml

@@ -1,0 +1,33 @@
+---
+import { testimonials } from '../data/index';
+---
+<section class="section testimonials" aria-labelledby="testimonials-heading">
+  <div class="container testimonials__inner">
+    <div class="testimonials__header reveal">
+      <h2 id="testimonials-heading">Horizontes que hemos construido juntos</h2>
+      <p class="testimonials__note">
+        Texto placeholder — la fundación completará con testimonios reales de familias.
+      </p>
+    </div>
+
+    <div class="testimonials__grid">
+      {testimonials.map((t, i) => (
+        <blockquote class={`testimonial reveal reveal-delay-${i + 1}`}>
+          <svg class="testimonial__quote-mark" width="32" height="24" viewBox="0 0 32 24" fill="none" aria-hidden="true">
+            <path d="M0 24V14.4C0 9.6 1.6 5.6 4.8 2.4L8 0l2.4 2.4C8.8 4 7.6 6 7.2 8.4H12V24H0zm20 0V14.4c0-4.8 1.6-8.8 4.8-12L28 0l2.4 2.4C28.8 4 27.6 6 27.2 8.4H32V24H20z" fill="currentColor"/>
+          </svg>
+          <p class="testimonial__text">{t.quote}</p>
+          <footer class="testimonial__footer">
+            <div class="testimonial__avatar" aria-hidden="true">
+              {t.name.charAt(0)}
+            </div>
+            <div>
+              <cite class="testimonial__name">{t.name}</cite>
+              <span class="testimonial__role">{t.role}</span>
+            </div>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>

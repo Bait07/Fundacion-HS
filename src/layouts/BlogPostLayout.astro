@@ -1,0 +1,418 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const { frontmatter } = Astro.props;
+
+const formattedDate = frontmatter.date
+  ? new Date(frontmatter.date).toLocaleDateString('es-CO', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+  : '';
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <!-- Hero del artículo -->
+  <header class="post-hero">
+    <div class="post-hero__bg" aria-hidden="true">
+      {frontmatter.image && (
+        <img
+          src={frontmatter.image}
+          alt=""
+          width="1200"
+          height="630"
+          loading="eager"
+          class="post-hero__img"
+        />
+      )}
+      <div class="post-hero__overlay"></div>
+    </div>
+    <div class="container post-hero__content">
+      <Breadcrumbs
+        crumbs={[
+          { label: 'Blog', href: '/blog' },
+          { label: frontmatter.title },
+        ]}
+        inverted
+      />
+      <div class="post-hero__meta reveal">
+        {frontmatter.category && (
+          <span class="post-hero__cat">{frontmatter.category}</span>
+        )}
+        {frontmatter.readTime && (
+          <span class="post-hero__read">{frontmatter.readTime} de lectura</span>
+        )}
+      </div>
+      <h1 class="post-hero__title reveal reveal-delay-1">{frontmatter.title}</h1>
+      {frontmatter.description && (
+        <p class="post-hero__desc reveal reveal-delay-2">{frontmatter.description}</p>
+      )}
+      {formattedDate && (
+        <time datetime={frontmatter.date} class="post-hero__date reveal reveal-delay-3">
+          {formattedDate}
+        </time>
+      )}
+    </div>
+  </header>
+
+  <!-- Cuerpo del artículo -->
+  <div class="post-layout">
+    <article class="post-body prose reveal">
+      <slot />
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="post-sidebar">
+      <!-- Tags -->
+      {frontmatter.tags && frontmatter.tags.length > 0 && (
+        <div class="sidebar-block reveal">
+          <h3 class="sidebar-block__title">Temas</h3>
+          <div class="sidebar-block__tags">
+            {frontmatter.tags.map((tag: string) => (
+              <span class="sidebar-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- CTA Sticky -->
+      <div class="sidebar-cta reveal reveal-delay-1">
+        <p class="sidebar-cta__eyebrow">¿Quieres apoyar nuestra misión?</p>
+        <p class="sidebar-cta__text">
+          Cada aporte hace posible que más familias en Bogotá accedan a educación inclusiva de calidad.
+        </p>
+        <a href="/donaciones" class="btn btn-accent sidebar-cta__btn">
+          Apoyar a la fundación
+        </a>
+        <a href="/contacto" class="btn btn-outline sidebar-cta__btn">
+          Escribirnos
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- CTA final -->
+  <section class="section post-cta" aria-labelledby="post-cta-heading">
+    <div class="container post-cta__inner">
+      <h2 id="post-cta-heading" class="reveal">¿Tienes preguntas sobre nuestros programas?</h2>
+      <p class="post-cta__desc reveal reveal-delay-1">
+        Nuestro equipo está disponible para acompañarte y orientarte sobre las opciones de apoyo para tu familia.
+      </p>
+      <div class="post-cta__actions reveal reveal-delay-2">
+        <a href="/contacto" class="btn btn-primary">Contactar a la fundación</a>
+        <a href="/programas" class="btn btn-outline">Ver programas</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* ── Hero ─────────────────────────────────────────────────────────── */
+.post-hero {
+  position: relative;
+  min-height: clamp(340px, 50vw, 560px);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.post-hero__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.post-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    oklch(0.26 0.035 145 / 0.3) 0%,
+    oklch(0.26 0.035 145 / 0.85) 60%,
+    oklch(0.26 0.035 145 / 0.95) 100%
+  );
+}
+
+.post-hero:not(:has(.post-hero__img)) .post-hero__bg {
+  background-color: var(--color-ink);
+}
+
+.post-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: clamp(5rem, 10vw, 8rem);
+}
+
+.post-hero__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.post-hero__cat {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: oklch(0.88 0.09 47);
+  background-color: oklch(0.61 0.090 47 / 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid oklch(0.61 0.090 47 / 0.4);
+}
+
+.post-hero__read {
+  font-size: 0.875rem;
+  color: oklch(1 0 0 / 0.65);
+}
+
+.post-hero__title {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  line-height: 1.15;
+  color: var(--color-white);
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.post-hero__desc {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: oklch(1 0 0 / 0.8);
+  max-width: 58ch;
+  line-height: 1.6;
+}
+
+.post-hero__date {
+  font-size: 0.875rem;
+  color: oklch(1 0 0 / 0.55);
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+/* ── Layout artículo + sidebar ─────────────────────────────────────── */
+.post-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: clamp(2.5rem, 5vw, 4rem) var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .post-layout {
+    grid-template-columns: 1fr 300px;
+    align-items: start;
+  }
+}
+
+/* ── Prose ─────────────────────────────────────────────────────────── */
+.prose {
+  color: var(--color-ink);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  max-width: 68ch;
+}
+
+.prose :global(h2) {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2.5vw, 1.625rem);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+  line-height: 1.25;
+}
+
+.prose :global(h3) {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+.prose :global(p) { margin-bottom: var(--space-5); }
+
+.prose :global(ul),
+.prose :global(ol) {
+  margin-bottom: var(--space-5);
+  padding-left: var(--space-6);
+}
+
+.prose :global(li) { margin-bottom: var(--space-2); }
+.prose :global(li::marker) { color: var(--color-primary); }
+.prose :global(strong) { font-weight: 700; color: var(--color-ink); }
+
+.prose :global(a) {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: oklch(0.67 0.065 155 / 0.35);
+  text-underline-offset: 3px;
+  transition: color 200ms, text-decoration-color 200ms;
+}
+.prose :global(a:hover) {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
+
+.prose :global(blockquote) {
+  border-left: 3px solid var(--color-primary);
+  margin-left: 0;
+  padding: var(--space-4) var(--space-6);
+  background-color: oklch(0.67 0.065 155 / 0.06);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-style: italic;
+  color: var(--color-ink-muted);
+  margin-bottom: var(--space-5);
+}
+
+.prose :global(code) {
+  font-family: monospace;
+  font-size: 0.875em;
+  background-color: oklch(0.67 0.065 155 / 0.1);
+  color: var(--color-primary);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.prose :global(hr) {
+  border: none;
+  border-top: 1px solid oklch(0.26 0.035 145 / 0.12);
+  margin-block: var(--space-10);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────── */
+.post-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .post-sidebar {
+    position: sticky;
+    top: calc(68px + var(--space-8));
+  }
+}
+
+.sidebar-block {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.sidebar-block__title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-block__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.sidebar-tag {
+  font-size: 0.8125rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-primary);
+  background-color: oklch(0.67 0.065 155 / 0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid oklch(0.67 0.065 155 / 0.18);
+}
+
+.sidebar-cta {
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sidebar-cta__eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-accent);
+  margin-bottom: 0;
+}
+
+.sidebar-cta__text {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: oklch(1 0 0 / 0.75);
+  margin-bottom: 0;
+}
+
+.sidebar-cta__btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.sidebar-cta .btn-outline {
+  border-color: oklch(1 0 0 / 0.25);
+  color: oklch(1 0 0 / 0.85);
+}
+.sidebar-cta .btn-outline:hover {
+  background-color: oklch(1 0 0 / 0.08);
+  border-color: oklch(1 0 0 / 0.45);
+}
+
+/* ── CTA final ───────────────────────────────────────────────────── */
+.post-cta {
+  padding-block: clamp(3rem, 6vw, 5rem);
+  background-color: var(--color-ink);
+}
+
+.post-cta__inner { text-align: center; }
+
+.post-cta__inner h2 {
+  color: var(--color-white);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.post-cta__desc {
+  color: oklch(1 0 0 / 0.72);
+  font-size: 1.0625rem;
+  max-width: 52ch;
+  margin-inline: auto;
+  margin-top: var(--space-4);
+}
+
+.post-cta__actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+.post-cta__actions .btn-outline {
+  border-color: oklch(1 0 0 / 0.4);
+  color: oklch(1 0 0 / 0.85);
+}
+.post-cta__actions .btn-outline:hover {
+  background-color: var(--color-white);
+  color: var(--color-ink);
+}
+</style>

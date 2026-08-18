@@ -1,0 +1,53 @@
+/* =========================================================================
+   Horizontes de Sabiduría — nueva paleta de tokens
+   Reemplaza el bloque :root de tu global.css por este.
+   Mismos nombres de variable que ya usas (cero refactor en el resto del
+   código) + 4 variables nuevas opcionales para darte más rango de color.
+
+   De dónde salió cada color: los extraje directamente de tu logo
+   (muestreo de píxeles reales, no "a ojo") para que la web se sienta
+   como una extensión del logo, no como algo aparte.
+   ========================================================================= */
+
+:root {
+  /* --- Fondo: antes oklch(0.92 0.022 95) → beige apagado tipo "sobre viejo".
+     Ahora: mucho más claro y con un tinte cálido sutil, no gris. --- */
+  --color-bg: oklch(0.97 0.015 85);
+  --color-surface: oklch(0.95 0.022 140); /* leve tinte menta/hoja para tarjetas y secciones alternas */
+
+  /* --- Verde primario: antes oklch(0.67 0.065 155), chroma 0.065 = casi
+     gris. Ahora tomado del verde medio de las hojas del logo (#42BE75),
+     oscurecido lo justo para cumplir contraste AA con texto blanco. --- */
+  --color-primary: oklch(0.55 0.155 154);       /* #00884a — botones CTA */
+  --color-primary-light: oklch(0.72 0.16 148);  /* #51bf68 — hover, fondos de badge (con texto oscuro, no blanco) */
+
+  /* --- Nuevo: verde-esmeralda de las hojas laterales del logo, como
+     segundo color de marca (variedad sin salirse de la familia verde) --- */
+  --color-secondary: oklch(0.55 0.15 170);      /* #008568 */
+
+  /* --- Acento cálido: antes oklch(0.61 0.090 47), correcto en tono pero
+     apagado. Ahora con más chroma, tomando referencia del tronco del logo
+     pero más vivo (terracota, no marrón triste). --- */
+  --color-accent: oklch(0.57 0.135 50);         /* #b45b1f */
+
+  /* --- Nuevo: lima vibrante de las hojas superiores del logo. Úsalo en
+     dosis pequeñas: tags, subrayados, iconos, detalles — no como fondo
+     grande (muy poco contraste con blanco). --- */
+  --color-lime: oklch(0.81 0.196 123);          /* #aad410 */
+
+  /* --- Nuevo: durazno del corazón del logo. Ideal para fondos de sección
+     alternos, en vez del beige apagado que tenías. --- */
+  --color-peach: oklch(0.90 0.05 55);           /* #f9d6bf */
+
+  /* --- Texto: se mantienen oscuros (está bien que el texto NO sea vívido,
+     eso es lo que lo hace legible). Pequeño ajuste de matiz para que
+     acompañen el verde nuevo en vez del verde viejo. --- */
+  --color-ink: oklch(0.22 0.04 150);            /* #0b2010 */
+  --color-ink-muted: oklch(0.45 0.03 150);      /* #4a5a4d */
+
+  --color-white: oklch(1 0 0);
+
+  /* El resto de tu sistema (fuentes, radios, sombras, z-index) queda igual,
+     no lo toqué: --font-display, --font-body, --space-*, --radius-*,
+     --shadow-*, --ease-*, --z-* siguen como los tenías. */
+}
