@@ -22,11 +22,15 @@
 .hero__overlay {
   position: absolute;
   inset: 0;
+  /* Overlay basado en --color-ink (tinte verde bosque de la paleta nueva)
+     en vez de negro/khaki puro, para sentirse parte de la misma familia
+     de color que el resto del sitio. Mismas paradas/opacidades que antes;
+     solo se recalibró el color base. */
   background: linear-gradient(
     135deg,
-    oklch(0.26 0.035 145 / 0.82) 0%,
-    oklch(0.26 0.035 145 / 0.60) 50%,
-    oklch(0.67 0.065 155 / 0.45) 100%
+    oklch(0.22 0.04 150 / 0.82) 0%,
+    oklch(0.22 0.04 150 / 0.60) 50%,
+    oklch(0.55 0.155 154 / 0.45) 100%
   );
 }
 

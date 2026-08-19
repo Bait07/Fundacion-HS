@@ -5,15 +5,52 @@
 
 /* ─── Design Tokens — FHS ────────────────────────────────────────────── */
 :root {
-  /* Palette (OKLCH — paleta comprometida de la FHS) */
-  --color-bg:            oklch(0.92 0.022 95);   /* #EDE6D8 crema */
-  --color-surface:       oklch(0.86 0.032 90);   /* #D9C7A6 arena cálida */
-  --color-primary:       oklch(0.67 0.065 155);  /* #7BA283 verde bosque */
-  --color-primary-light: oklch(0.75 0.055 155);  /* #9DBFA8 verde suave */
-  --color-accent:        oklch(0.61 0.090 47);   /* #B56E45 terracota */
-  --color-ink:           oklch(0.26 0.035 145);  /* #2C3E2D verde oscuro */
-  --color-ink-muted:     oklch(0.42 0.028 145);  /* texto secundario */
-  --color-white:         oklch(1 0 0);
+  /* Palette (OKLCH — paleta comprometida de la FHS, muestreada del logo) */
+
+  /* Fondo: blanco cálido con tinte sutil (antes beige apagado tipo "sobre viejo") */
+  --color-bg: #faf5ea; /* fallback */
+  --color-bg: oklch(0.97 0.015 85);
+
+  /* Superficie: leve tinte menta/hoja para tarjetas y secciones alternas */
+  --color-surface: #e7f2e4; /* fallback */
+  --color-surface: oklch(0.95 0.022 140);
+
+  /* Verde primario: verde medio de las hojas del logo, oscurecido lo justo
+     para cumplir contraste AA con texto blanco encima */
+  --color-primary: #00884a; /* fallback */
+  --color-primary: oklch(0.55 0.155 154);
+
+  /* Hover / fondos de badge — usar siempre con texto oscuro (--color-ink) */
+  --color-primary-light: #51bf68; /* fallback */
+  --color-primary-light: oklch(0.72 0.16 148);
+
+  /* Verde-esmeralda de las hojas laterales del logo — segundo color de marca */
+  --color-secondary: #008568; /* fallback */
+  --color-secondary: oklch(0.55 0.15 170);
+
+  /* Acento cálido: terracota vívido tomado del tronco del logo */
+  --color-accent: #b45b1f; /* fallback */
+  --color-accent: oklch(0.57 0.135 50);
+
+  /* Lima vibrante de las hojas superiores — solo en dosis pequeñas
+     (subrayados, íconos, puntos de lista), no como fondo grande */
+  --color-lime: #aad410; /* fallback */
+  --color-lime: oklch(0.81 0.196 123);
+
+  /* Durazno del corazón del logo — alternativa cálida a --color-surface */
+  --color-peach: #f9d6bf; /* fallback */
+  --color-peach: oklch(0.90 0.05 55);
+
+  /* Texto: se mantiene oscuro, con matiz verde bosque para acompañar el
+     verde nuevo (antes acompañaba al verde viejo) */
+  --color-ink: #0b2010; /* fallback */
+  --color-ink: oklch(0.22 0.04 150);
+
+  --color-ink-muted: #4a5a4d; /* fallback */
+  --color-ink-muted: oklch(0.45 0.03 150);
+
+  --color-white: #ffffff; /* fallback */
+  --color-white: oklch(1 0 0);
 
   /* Typography */
   --font-display:   'Montserrat Variable', sans-serif;
@@ -161,13 +198,13 @@ img, svg {
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--color-ink);
+  color: var(--color-white);
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-light);
   color: var(--color-ink);
-  box-shadow: 0 4px 16px oklch(0.67 0.065 155 / 0.3);
+  box-shadow: 0 4px 16px oklch(0.55 0.155 154 / 0.3);
 }
 
 .btn-accent {
@@ -176,9 +213,9 @@ img, svg {
 }
 
 .btn-accent:hover {
-  background-color: oklch(0.56 0.085 47);
+  background-color: oklch(0.50 0.135 50);
   color: var(--color-white);
-  box-shadow: 0 4px 16px oklch(0.61 0.090 47 / 0.35);
+  box-shadow: 0 4px 16px oklch(0.57 0.135 50 / 0.35);
 }
 
 .btn-outline {
@@ -189,7 +226,7 @@ img, svg {
 
 .btn-outline:hover {
   background-color: var(--color-primary);
-  color: var(--color-ink);
+  color: var(--color-white);
 }
 
 .btn-ghost {
