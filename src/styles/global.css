@@ -7,9 +7,9 @@
 :root {
   /* Palette (OKLCH — paleta comprometida de la FHS, muestreada del logo) */
 
-  /* Fondo: blanco cálido con tinte sutil (antes beige apagado tipo "sobre viejo") */
-  --color-bg: #faf5ea; /* fallback */
-  --color-bg: oklch(0.97 0.015 85);
+  /* Fondo: blanco puro, a pedido del usuario (antes crema #faf5ea) */
+  --color-bg: #ffffff; /* fallback */
+  --color-bg: oklch(1 0 0);
 
   /* Superficie: leve tinte menta/hoja para tarjetas y secciones alternas */
   --color-surface: #e7f2e4; /* fallback */

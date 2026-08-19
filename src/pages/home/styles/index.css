@@ -165,6 +165,7 @@
    invadir demasiado el texto del hero. */
 .quick-access {
   position: relative;
+  z-index: 2; /* el hero lo tapaba en la práctica pese al orden del DOM; forzado explícito */
   padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
