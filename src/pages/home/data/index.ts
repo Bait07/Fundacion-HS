@@ -1,6 +1,6 @@
 export const seo = {
   title: 'Fundación Horizontes de Sabiduría | Inclusión educativa y social en Bogotá',
-  description: 'Somos una fundación en Bogotá que acompaña a niños, jóvenes y adultos con discapacidad cognitiva e intelectual. Programas de inclusión, terapias y Plan Padrino.',
+  description: 'Somos una fundación en Bogotá que acompaña a niños, jóvenes y adultos con discapacidad cognitiva e intelectual. Programas de inclusión, terapias y Plan Padrino. ¡Conoce cómo puedes ayudar!',
 };
 
 export const programs = [
