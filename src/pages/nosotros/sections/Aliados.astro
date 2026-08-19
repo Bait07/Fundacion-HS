@@ -1,4 +1,8 @@
 ---
+// 5 insignias placeholder: la FHS aún no cuenta con aliados/reconocimientos
+// reales confirmados (ver PROGRESO.md, pendiente "Aliados y logos"). No
+// inventar nombres ni logos de organizaciones reales.
+const ALIADOS_PLACEHOLDER_COUNT = 5;
 ---
 <section class="section aliados-section" id="aliados" aria-labelledby="aliados-heading">
   <div class="container aliados-inner">
@@ -6,10 +10,19 @@
     <p class="aliados-note reveal reveal-delay-1">
       Próximamente presentaremos a los aliados estratégicos de la FHS.
     </p>
-    <div class="aliados-row reveal reveal-delay-2" aria-hidden="true">
-      {Array.from({ length: 5 }).map(() => (
-        <div class="aliado-pill"></div>
-      ))}
+    <div
+      class="aliados-carousel reveal reveal-delay-2"
+      tabindex="0"
+      role="group"
+      aria-label="Aliados y reconocimientos — sección próximamente disponible"
+    >
+      <div class="aliados-track" aria-hidden="true">
+        {Array.from({ length: ALIADOS_PLACEHOLDER_COUNT }).map(() => (
+          <div class="aliado-badge">
+            <span class="material-symbols-outlined aliado-badge__icon">handshake</span>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>

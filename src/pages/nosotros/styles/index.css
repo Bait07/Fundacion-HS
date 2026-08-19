@@ -365,20 +365,51 @@
   font-style: italic;
   color: var(--color-ink-muted);
 }
-.aliados-row {
+/* Carrusel horizontal nativo (scroll-snap, sin librería). El contenedor
+   scrolleable es el mismo elemento que recibe tabindex, para que el
+   comportamiento nativo del navegador (flechas ← → scrollean la región
+   enfocada) funcione sin JS. El track interno queda aria-hidden porque las
+   insignias son placeholders idénticos sin información individual: el
+   aria-label del contenedor ya comunica el estado "próximamente". */
+.aliados-carousel {
+  width: 100%;
+  max-width: 100%;
+  margin-top: var(--space-2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-sm);
+}
+.aliados-carousel:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.aliados-track {
   display: flex;
   gap: var(--space-5);
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  margin-top: var(--space-2);
+  width: max-content;
+  min-width: 100%;
+  padding: var(--space-2) var(--space-2) var(--space-6);
 }
-.aliado-pill {
-  width: 120px;
-  height: 44px;
+.aliado-badge {
+  flex: none;
+  width: 96px;
+  height: 96px;
   border-radius: var(--radius-full);
   background-color: oklch(0.67 0.065 155 / 0.06);
   border: 1px solid oklch(0.67 0.065 155 / 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  box-shadow: 0 50px 30px -42px rgba(0, 0, 0, 0.1);
+}
+.aliado-badge__icon {
+  font-size: 32px;
+  color: oklch(0.67 0.065 155 / 0.45);
 }
 
 /* ── CTA ─────────────────────────────────────────────────────────────────── */
@@ -481,11 +512,16 @@
   .equipo-strip {
     gap: var(--space-8);
   }
-  .aliados-row {
+  .aliados-track {
     gap: var(--space-4);
+    justify-content: flex-start;
   }
-  .aliado-pill {
-    width: 90px;
+  .aliado-badge {
+    width: 76px;
+    height: 76px;
+  }
+  .aliado-badge__icon {
+    font-size: 26px;
   }
   .impacto-grid {
     grid-template-columns: repeat(2, 1fr);
