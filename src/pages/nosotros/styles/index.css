@@ -421,6 +421,15 @@
 .aliados-section   { background-color: var(--color-bg); }
 .contact-cta       { background-color: var(--color-ink); }
 
+/* Offset anchor-scroll targets so the fixed navbar doesn't cover the heading
+   when navigating from the Nosotros mega-menu (e.g. /nosotros#historia) */
+.historia-section,
+.mv-section,
+#equipo,
+.aliados-section {
+  scroll-margin-top: 84px;
+}
+
 /* Hairlines entre secciones del mismo fondo */
 .razones-section,
 .equipo-section,

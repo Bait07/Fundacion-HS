@@ -1,14 +1,50 @@
 ---
 const navLinks = [
   { label: 'Inicio', href: '/' },
-  { label: 'Nosotros', href: '/nosotros' },
-  { label: 'Programas', href: '/programas' },
+  {
+    label: 'Nosotros',
+    href: '/nosotros',
+    mega: {
+      id: 'nosotros',
+      intro: {
+        title: 'Nosotros',
+        desc: 'Quiénes somos y por qué existimos.',
+      },
+      items: [
+        { label: 'Nuestra historia', href: '/nosotros#historia', desc: 'De dónde viene la fundación y hacia dónde va.' },
+        { label: 'Misión y visión', href: '/nosotros#mision-vision', desc: 'Lo que nos guía y el horizonte que perseguimos.' },
+        { label: 'Nuestro equipo', href: '/nosotros#equipo', desc: 'El equipo interdisciplinario detrás de la FHS.' },
+        { label: 'Nuestros aliados', href: '/nosotros#aliados', desc: 'Organizaciones que caminan junto a nosotros.' },
+      ],
+    },
+  },
+  {
+    label: 'Programas',
+    href: '/programas',
+    mega: {
+      id: 'programas',
+      intro: {
+        title: 'Programas',
+        desc: 'Cinco programas para acompañar cada etapa de la vida.',
+      },
+      items: [
+        { label: 'Niñez', href: '/programas/ninez', desc: 'Primeros Pasos hacia la Inclusión Escolar.' },
+        { label: 'Adolescentes y Jóvenes', href: '/programas/jovenes', desc: 'Habilidades para la Vida y la Inclusión Social.' },
+        { label: 'Adultos', href: '/programas/adultos', desc: 'Autonomía, Participación y Calidad de Vida.' },
+        { label: 'Servicios Profesionales', href: '/programas/servicios', desc: 'Apoyo Integral para la Inclusión.' },
+        { label: 'Plan Padrino', href: '/programas/plan-padrino', desc: 'Apadrina un Sueño, Transforma una Vida.' },
+      ],
+    },
+  },
   { label: 'Plan Padrino', href: '/programas/plan-padrino' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contacto', href: '/contacto' },
 ];
 
 const currentPath = Astro.url.pathname;
+
+const isLinkActive = (href: string) =>
+  currentPath === href || (href !== '/' && currentPath.startsWith(href));
 ---
 
 <header class="navbar" id="navbar">
@@ -39,16 +75,62 @@ const currentPath = Astro.url.pathname;
     <!-- Desktop nav -->
     <nav class="navbar__nav" aria-label="Navegación principal">
       <ul class="navbar__list" role="list">
-        {navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class={`navbar__link ${currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) ? 'navbar__link--active' : ''}`}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
+        {navLinks.map((link) => {
+          const active = isLinkActive(link.href);
+
+          if (link.mega) {
+            const triggerId = `megaTrigger-${link.mega.id}`;
+            const panelId = `megaPanel-${link.mega.id}`;
+
+            return (
+              <li class="navbar__item navbar__item--mega">
+                <button
+                  type="button"
+                  class={`navbar__link navbar__trigger ${active ? 'navbar__link--active' : ''}`}
+                  id={triggerId}
+                  aria-expanded="false"
+                  aria-controls={panelId}
+                  aria-label={`Abrir menú ${link.label}`}
+                  data-mega-trigger
+                  data-label={link.label}
+                >
+                  {link.label}
+                  <svg class="navbar__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+
+                <div class="mega-menu" id={panelId} role="region" aria-labelledby={triggerId} data-mega-panel hidden>
+                  <div class="container mega-menu__inner">
+                    <a href={link.href} class="mega-menu__intro">
+                      <span class="mega-menu__intro-title">{link.mega.intro.title}</span>
+                      <span class="mega-menu__intro-desc">{link.mega.intro.desc}</span>
+                      <span class="mega-menu__intro-cta" aria-hidden="true">Ver todo →</span>
+                    </a>
+                    <ul class="mega-menu__list" role="list">
+                      {link.mega.items.map((item) => (
+                        <li>
+                          <a href={item.href} class="mega-menu__link">
+                            <span class="mega-menu__link-title">{item.label}</span>
+                            <span class="mega-menu__link-desc">{item.desc}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            );
+          }
+
+          return (
+            <li>
+              <a href={link.href} class={`navbar__link ${active ? 'navbar__link--active' : ''}`}>
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
 
@@ -74,16 +156,57 @@ const currentPath = Astro.url.pathname;
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <nav aria-label="Menú móvil">
     <ul class="mobile-menu__list" role="list">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class={`mobile-menu__link ${currentPath === link.href ? 'mobile-menu__link--active' : ''}`}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
+      {navLinks.map((link) => {
+        const active = isLinkActive(link.href);
+
+        if (link.mega) {
+          const triggerId = `mobileSubTrigger-${link.mega.id}`;
+          const subId = `mobileSub-${link.mega.id}`;
+
+          return (
+            <li class="mobile-menu__item--accordion">
+              <button
+                type="button"
+                class="mobile-menu__link mobile-menu__accordion-trigger"
+                id={triggerId}
+                aria-expanded="false"
+                aria-controls={subId}
+                aria-label={`Abrir submenú ${link.label}`}
+                data-accordion-trigger
+                data-label={link.label}
+              >
+                {link.label}
+                <svg class="mobile-menu__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+                  <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <ul class="mobile-menu__submenu" id={subId} hidden>
+                <li>
+                  <a href={link.href} class="mobile-menu__sublink mobile-menu__sublink--intro">
+                    Ver todo {link.label}
+                  </a>
+                </li>
+                {link.mega.items.map((item) => (
+                  <li>
+                    <a href={item.href} class="mobile-menu__sublink">{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          );
+        }
+
+        return (
+          <li>
+            <a
+              href={link.href}
+              class={`mobile-menu__link ${active ? 'mobile-menu__link--active' : ''}`}
+            >
+              {link.label}
+            </a>
+          </li>
+        );
+      })}
     </ul>
     <a href="/donaciones" class="btn btn-accent mobile-menu__cta">Donar ahora</a>
   </nav>
@@ -168,6 +291,10 @@ const currentPath = Astro.url.pathname;
   list-style: none;
 }
 
+.navbar__item--mega {
+  position: relative;
+}
+
 .navbar__link {
   font-family: var(--font-display);
   font-weight: 500;
@@ -188,6 +315,130 @@ const currentPath = Astro.url.pathname;
 .navbar__link--active {
   color: var(--color-primary);
   font-weight: 600;
+}
+
+/* Mega-menu trigger (button styled to match plain links) */
+.navbar__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.navbar__chevron {
+  flex-shrink: 0;
+  color: currentColor;
+  opacity: 0.7;
+  transition: transform 200ms var(--ease-out);
+}
+
+.navbar__trigger[aria-expanded="true"] .navbar__chevron {
+  transform: rotate(180deg);
+}
+
+.navbar__trigger[aria-expanded="true"] {
+  color: var(--color-primary);
+  background-color: oklch(0.67 0.065 155 / 0.08);
+}
+
+/* Mega-menu panel */
+.mega-menu {
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+  z-index: calc(var(--z-sticky) - 1);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid oklch(0.86 0.032 90 / 0.6);
+  box-shadow: var(--shadow-nav);
+}
+
+.mega-menu[hidden] {
+  display: none;
+}
+
+.mega-menu__inner {
+  padding-block: var(--space-8);
+  display: grid;
+  grid-template-columns: minmax(200px, 0.85fr) 2fr;
+  gap: var(--space-10);
+}
+
+.mega-menu__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  text-decoration: none;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border-right: 1px solid oklch(0.26 0.035 145 / 0.1);
+  transition: background-color 200ms var(--ease-out);
+}
+
+.mega-menu__intro:hover {
+  background-color: oklch(0.67 0.065 155 / 0.07);
+}
+
+.mega-menu__intro-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.mega-menu__intro-desc {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+  max-width: 28ch;
+}
+
+.mega-menu__intro-cta {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--color-primary);
+}
+
+.mega-menu__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+.mega-menu__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color 200ms var(--ease-out);
+}
+
+.mega-menu__link:hover,
+.mega-menu__link:focus-visible {
+  background-color: oklch(0.67 0.065 155 / 0.08);
+}
+
+.mega-menu__link-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-ink);
+}
+
+.mega-menu__link-desc {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-ink-muted);
 }
 
 .navbar__cta {
@@ -265,7 +516,11 @@ const currentPath = Astro.url.pathname;
 }
 
 .mobile-menu__link {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 1.25rem;
@@ -273,6 +528,10 @@ const currentPath = Astro.url.pathname;
   padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
   text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
   transition: color 200ms, background-color 200ms;
 }
 
@@ -280,6 +539,51 @@ const currentPath = Astro.url.pathname;
 .mobile-menu__link--active {
   color: var(--color-primary);
   background-color: oklch(0.67 0.065 155 / 0.08);
+}
+
+.mobile-menu__chevron {
+  flex-shrink: 0;
+  color: currentColor;
+  opacity: 0.6;
+  transition: transform 200ms var(--ease-out);
+}
+
+.mobile-menu__accordion-trigger[aria-expanded="true"] .mobile-menu__chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-menu__submenu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: var(--space-2) 0 var(--space-3) var(--space-4);
+}
+
+.mobile-menu__submenu[hidden] {
+  display: none;
+}
+
+.mobile-menu__sublink {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  color: var(--color-ink-muted);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: color 200ms, background-color 200ms;
+}
+
+.mobile-menu__sublink:hover {
+  color: var(--color-primary);
+  background-color: oklch(0.67 0.065 155 / 0.08);
+}
+
+.mobile-menu__sublink--intro {
+  font-weight: 600;
+  color: var(--color-primary);
 }
 
 .mobile-menu__cta {
@@ -332,10 +636,33 @@ const currentPath = Astro.url.pathname;
   }
 }
 
+/* Mega-menu is desktop-only; the mobile accordion covers <1024px */
+@media (max-width: 1023px) {
+  .mega-menu {
+    display: none !important;
+  }
+}
+
+/* Narrower desktop viewports: single-column mega-menu links */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .mega-menu__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .mega-menu__intro {
+    border-right: none;
+    border-bottom: 1px solid oklch(0.26 0.035 145 / 0.1);
+    padding-bottom: var(--space-4);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu,
   .hamburger__bar,
-  .navbar {
+  .navbar,
+  .navbar__chevron,
+  .mobile-menu__chevron {
     transition: none;
   }
 }
@@ -352,7 +679,101 @@ window.addEventListener('scroll', () => {
   navbar?.classList.toggle('scrolled', window.scrollY > 10);
 }, { passive: true });
 
-// Mobile menu toggle
+// ─── Desktop mega-menus ──────────────────────────────────────────────
+const megaTriggers = Array.from(
+  document.querySelectorAll<HTMLButtonElement>('[data-mega-trigger]')
+);
+
+function getPanel(trigger: HTMLElement): HTMLElement | null {
+  const id = trigger.getAttribute('aria-controls');
+  return id ? document.getElementById(id) : null;
+}
+
+function openMegaMenu(trigger: HTMLButtonElement) {
+  const panel = getPanel(trigger);
+  const label = trigger.dataset.label ?? '';
+  trigger.setAttribute('aria-expanded', 'true');
+  trigger.setAttribute('aria-label', `Cerrar menú ${label}`);
+  panel?.removeAttribute('hidden');
+}
+
+function closeMegaMenu(trigger: HTMLButtonElement) {
+  const panel = getPanel(trigger);
+  const label = trigger.dataset.label ?? '';
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.setAttribute('aria-label', `Abrir menú ${label}`);
+  panel?.setAttribute('hidden', '');
+}
+
+function closeAllMegaMenus(except?: HTMLButtonElement) {
+  megaTriggers.forEach((t) => {
+    if (t !== except && t.getAttribute('aria-expanded') === 'true') closeMegaMenu(t);
+  });
+}
+
+megaTriggers.forEach((trigger) => {
+  trigger.addEventListener('click', () => {
+    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    closeAllMegaMenus(trigger);
+    if (isOpen) {
+      closeMegaMenu(trigger);
+    } else {
+      openMegaMenu(trigger);
+    }
+  });
+});
+
+// Close a mega-menu when focus moves outside its trigger+panel group
+document.addEventListener('focusin', (e) => {
+  const target = e.target as Node;
+  megaTriggers.forEach((trigger) => {
+    if (trigger.getAttribute('aria-expanded') !== 'true') return;
+    const panel = getPanel(trigger);
+    const withinGroup = trigger.contains(target) || (panel?.contains(target) ?? false);
+    if (!withinGroup) closeMegaMenu(trigger);
+  });
+});
+
+// Close a mega-menu on outside click (mouse users)
+document.addEventListener('click', (e) => {
+  const target = e.target as Node;
+  megaTriggers.forEach((trigger) => {
+    if (trigger.getAttribute('aria-expanded') !== 'true') return;
+    const panel = getPanel(trigger);
+    const withinGroup = trigger.contains(target) || (panel?.contains(target) ?? false);
+    if (!withinGroup) closeMegaMenu(trigger);
+  });
+});
+
+// ─── Mobile accordion (Programas / Nosotros submenus) ────────────────
+const accordionTriggers = Array.from(
+  document.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger]')
+);
+
+function openAccordion(trigger: HTMLButtonElement) {
+  const panel = getPanel(trigger);
+  const label = trigger.dataset.label ?? '';
+  trigger.setAttribute('aria-expanded', 'true');
+  trigger.setAttribute('aria-label', `Cerrar submenú ${label}`);
+  panel?.removeAttribute('hidden');
+}
+
+function closeAccordion(trigger: HTMLButtonElement) {
+  const panel = getPanel(trigger);
+  const label = trigger.dataset.label ?? '';
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.setAttribute('aria-label', `Abrir submenú ${label}`);
+  panel?.setAttribute('hidden', '');
+}
+
+accordionTriggers.forEach((trigger) => {
+  trigger.addEventListener('click', () => {
+    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeAccordion(trigger) : openAccordion(trigger);
+  });
+});
+
+// ─── Mobile menu toggle (hamburger) ───────────────────────────────────
 function openMenu() {
   menuToggle?.setAttribute('aria-expanded', 'true');
   menuToggle?.setAttribute('aria-label', 'Cerrar menú');
@@ -369,6 +790,10 @@ function closeMenu() {
   mobileMenu?.setAttribute('aria-hidden', 'true');
   mobileBackdrop?.classList.remove('open');
   document.body.style.overflow = '';
+  // Collapse any open accordion submenus so the menu reopens fresh
+  accordionTriggers.forEach((t) => {
+    if (t.getAttribute('aria-expanded') === 'true') closeAccordion(t);
+  });
 }
 
 menuToggle?.addEventListener('click', () => {
@@ -378,9 +803,25 @@ menuToggle?.addEventListener('click', () => {
 
 mobileBackdrop?.addEventListener('click', closeMenu);
 
-// Close on Escape
+// Close on Escape — priority: open mega-menu > open accordion > mobile menu
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeMenu();
+  if (e.key !== 'Escape') return;
+
+  const openMega = megaTriggers.find((t) => t.getAttribute('aria-expanded') === 'true');
+  if (openMega) {
+    closeMegaMenu(openMega);
+    openMega.focus();
+    return;
+  }
+
+  const openAcc = accordionTriggers.find((t) => t.getAttribute('aria-expanded') === 'true');
+  if (openAcc) {
+    closeAccordion(openAcc);
+    openAcc.focus();
+    return;
+  }
+
+  closeMenu();
 });
 
 // Close on nav link click
