@@ -108,6 +108,7 @@
 - [ ] Dominio definitivo (actualizar `astro.config.mjs`)
 - [ ] Integrantes del equipo (nombre, cargo, foto)
 - [ ] Aliados y logos
+- [ ] Ilustración/mascota real para la sección de Programas (hoy hay un SVG lineal placeholder en `Programs.astro`, ver comentario `<!-- PLACEHOLDER -->` en el archivo)
 
 ---
 

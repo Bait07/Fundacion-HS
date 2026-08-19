@@ -17,23 +17,51 @@ const icons: Record<string, string> = {
       </p>
     </div>
 
-    <ul class="prog-cards" role="list">
-      {programs.map((prog, i) => (
-        <li class={`prog-card anim-delay-${i + 1}`} data-anim="fadeInLeft">
-          <a href={prog.href} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
-            <span class="prog-card__icon-wrap" aria-hidden="true">
-              <Fragment set:html={icons[prog.icon] ?? ''} />
-            </span>
-            <h3 class="prog-card__name">{prog.title}</h3>
-            <p class="prog-card__desc">{prog.desc}</p>
-            <span class="prog-card__more">
-              Ver programa
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div class="programs__body">
+      <!--
+        PLACEHOLDER: mascota/ilustración de personaje o comunidad.
+        No hay generador de imágenes ni brief de marca en este stack para
+        encargar el arte final — este SVG lineal simple (mismo espíritu
+        "orgánico, no geométrico" de DESIGN.md) es un placeholder honesto,
+        igual que el placeholder de logo en Navbar.astro. Reemplazar por
+        ilustración real cuando la FHS la provea (ver PROGRESO.md).
+      -->
+      <div class="programs__mascot" aria-hidden="true">
+        <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <!-- árbol -->
+          <path d="M150 210v-70" stroke="var(--color-primary)" stroke-width="1.75" stroke-linecap="round"/>
+          <path d="M150 170c-14-4-22-16-20-30 10 2 18 10 20 22 2-12 12-19 24-19 2 15-8 27-24 27z" stroke="var(--color-primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M150 150c-10-3-16-12-15-22 8 2 14 9 15 18" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- persona sencilla, brazos abiertos -->
+          <circle cx="70" cy="90" r="16" stroke="var(--color-accent)" stroke-width="1.75"/>
+          <path d="M70 106v58" stroke="var(--color-accent)" stroke-width="1.75" stroke-linecap="round"/>
+          <path d="M70 122c-16-6-24-2-30 10M70 122c16-6 24-2 30 10" stroke="var(--color-accent)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M70 164 55 210M70 164l15 46" stroke="var(--color-accent)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- corazón pequeño flotando -->
+          <path d="M108 60c-3-4-9-4-11 0-2 3-1 6 2 9l9 9 9-9c3-3 4-6 2-9-2-4-8-4-11 0z" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- suelo -->
+          <path d="M20 210h160" stroke="var(--color-ink-muted)" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+        </svg>
+      </div>
+
+      <ul class="prog-cards" role="list">
+        {programs.map((prog, i) => (
+          <li class={`prog-card anim-delay-${i + 1}`} data-anim="fadeInLeft">
+            <a href={prog.href} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
+              <span class="prog-card__icon-wrap" aria-hidden="true">
+                <Fragment set:html={icons[prog.icon] ?? ''} />
+              </span>
+              <h3 class="prog-card__name">{prog.title}</h3>
+              <p class="prog-card__desc">{prog.desc}</p>
+              <span class="prog-card__more">
+                Conoce más
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
 
     <div class="programs__cta reveal">
       <a href="/programas" class="btn btn-outline">Ver todos los programas</a>
