@@ -59,7 +59,18 @@ if (!NO_MOTION && !IS_MOBILE) {
   const lastEl = heroEls[heroEls.length - 1]?.[0];
   if (lastEl) {
     lastEl.addEventListener('animationend', () => {
-      heroEls.forEach(([el]) => { el.style.animation = 'none'; });
+      // Clearing `animation` drops the element back to the normal cascade,
+      // and the base rule for .hero__title/.hero__subtitle/.hero__actions
+      // (home/styles/index.css) is `opacity: 0` — the fadeInDown keyframe's
+      // `both` fill-mode was the ONLY thing holding opacity at 1. Without
+      // explicitly restoring opacity/transform here, the text would vanish
+      // the instant this handler runs. See task-3-report.md for the traced
+      // cascade sequence.
+      heroEls.forEach(([el]) => {
+        el.style.animation = 'none';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
       heroReady = true;
     }, { once: true });
   }
