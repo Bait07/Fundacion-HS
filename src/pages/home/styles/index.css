@@ -503,8 +503,14 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.8125rem;
+  /* Fixed --color-ink fill (not the per-card --card-accent): white-on-accent
+     fails AA at this text size for both accent colors in rotation
+     (--color-primary ~4.44:1, --color-accent lower still — both under the
+     4.5:1 minimum for 13px semibold). --color-ink is already the codebase's
+     established solid-fill CTA background (Footer, Navbar, .cta-prog, etc.)
+     and gives white text ~17:1 contrast here, comfortably passing AA/AAA. */
   color: white;
-  background-color: var(--card-accent, var(--color-primary));
+  background-color: var(--color-ink);
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -817,6 +823,14 @@
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-3);
   }
+
+  .programs__body {
+    grid-template-columns: 1fr;
+  }
+
+  .programs__mascot {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -843,14 +857,6 @@
   .hero__actions {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .programs__body {
-    grid-template-columns: 1fr;
-  }
-
-  .programs__mascot {
-    display: none;
   }
 
   .prog-cards {
