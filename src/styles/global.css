@@ -28,9 +28,10 @@
   --color-secondary: #008568; /* fallback */
   --color-secondary: oklch(0.55 0.15 170);
 
-  /* Acento cálido: terracota vívido tomado del tronco del logo */
-  --color-accent: #b45b1f; /* fallback */
-  --color-accent: oklch(0.57 0.135 50);
+  /* Acento: verde bosque profundo muestreado de la base/colina del árbol
+     del logo (antes terracota, que no existe en el logo real) */
+  --color-accent: #025c04; /* fallback */
+  --color-accent: oklch(0.41 0.138 143);
 
   /* Lima vibrante de las hojas superiores — solo en dosis pequeñas
      (subrayados, íconos, puntos de lista), no como fondo grande */
@@ -213,9 +214,9 @@ img, svg {
 }
 
 .btn-accent:hover {
-  background-color: oklch(0.50 0.135 50);
+  background-color: oklch(0.34 0.138 143);
   color: var(--color-white);
-  box-shadow: 0 4px 16px oklch(0.57 0.135 50 / 0.35);
+  box-shadow: 0 4px 16px oklch(0.41 0.138 143 / 0.35);
 }
 
 .btn-outline {

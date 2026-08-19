@@ -101,7 +101,7 @@
 }
 
 .form-input.error { border-color: var(--color-accent); }
-.form-input.error:focus { box-shadow: 0 0 0 3px oklch(0.61 0.090 47 / 0.15); }
+.form-input.error:focus { box-shadow: 0 0 0 3px oklch(0.41 0.138 143 / 0.15); }
 
 .form-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%232C3E2D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
 
@@ -118,7 +118,7 @@
 }
 
 .form-status.success { background-color: oklch(0.67 0.065 155 / 0.1); color: oklch(0.4 0.07 145); border: 1px solid var(--color-primary); display: block; }
-.form-status.error { background-color: oklch(0.61 0.090 47 / 0.08); color: var(--color-accent); border: 1px solid var(--color-accent); display: block; }
+.form-status.error { background-color: oklch(0.41 0.138 143 / 0.08); color: var(--color-accent); border: 1px solid var(--color-accent); display: block; }
 
 .form-submit { grid-column: 1 / -1; justify-self: start; }
 
