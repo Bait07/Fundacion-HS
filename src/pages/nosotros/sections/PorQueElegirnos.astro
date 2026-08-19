@@ -23,11 +23,12 @@ const iconPaths: string[] = [
       <p>Lo que nos distingue como acompañantes de familias en Bogotá.</p>
     </div>
 
-    <ol class="razones-cards" aria-label="Razones para elegirnos">
+    <ol class="razones-list" aria-label="Razones para elegirnos">
       {razones.map((razon, i) => (
-        <li class={`razon-card reveal reveal-delay-${(i % 3) + 1}`}>
+        <li class={`razon-row reveal reveal-delay-${(i % 3) + 1}`}>
+          <span class="razon-row__badge" aria-hidden="true">#{i + 1}</span>
           <svg
-            class="razon-card__icon"
+            class="razon-row__icon"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -37,8 +38,10 @@ const iconPaths: string[] = [
             aria-hidden="true"
             set:html={iconPaths[i]}
           />
-          <h3 class="razon-card__title">{razon.title}</h3>
-          <p class="razon-card__desc">{razon.desc}</p>
+          <div class="razon-row__copy">
+            <h3 class="razon-row__title">{razon.title}</h3>
+            <p class="razon-row__desc">{razon.desc}</p>
+          </div>
         </li>
       ))}
     </ol>
