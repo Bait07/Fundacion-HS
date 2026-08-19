@@ -53,6 +53,11 @@ const { title, description, image, type } = Astro.props;
       }
 
       // Scroll reveal — IntersectionObserver
+      // Observa `.reveal` (patrón general del sitio) y `[data-anim]`
+      // (Task 3: entrada mínima del hero vía fadeInDown; Task 5 construirá
+      // sobre este mismo atributo el sistema completo de 5 keyframes —
+      // fadeInDown/fadeInUp/fadeInLeft/slideInUp/zoomIn — y debe seguir
+      // usando este único observer, no crear uno paralelo).
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -65,7 +70,7 @@ const { title, description, image, type } = Astro.props;
         { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
       );
 
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      document.querySelectorAll('.reveal, [data-anim]').forEach((el) => observer.observe(el));
     </script>
   </body>
 </html>

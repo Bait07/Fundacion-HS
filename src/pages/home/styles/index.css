@@ -4,6 +4,16 @@
   min-height: clamp(560px, 70vh, 780px);
   display: flex;
   align-items: center;
+  /* Gradiente de marca (Task 3, req. 1) como capa base detrás de la foto:
+     se ve mientras la imagen carga y si esta llega a fallar, y compone
+     con `.hero__overlay` (ya recalibrado en Task 1 sobre --color-ink) sin
+     reemplazar la foto, que sigue siendo la capa dominante encima. */
+  background: linear-gradient(
+    160deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 60%,
+    var(--color-ink) 100%
+  );
 }
 
 .hero__bg {
@@ -685,12 +695,14 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* !important: garantiza que gane sobre `.hero__text.visible .hero__title`
+     (más específico) sin depender del orden de aparición en el archivo. */
   .hero__title,
   .hero__subtitle,
   .hero__actions {
-    animation: none;
-    opacity: 1;
-    transform: none;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .hero__deco {
@@ -743,22 +755,42 @@
   }
 }
 
-/* ═══ HERO ENTRANCE ══════════════════════════════════════════════════════ */
-@keyframes hero-enter {
-  from { opacity: 0; transform: translateY(32px); }
+/* ═══ HERO ENTRANCE (Task 3) ═════════════════════════════════════════════
+   Disparada por el IntersectionObserver compartido de BaseLayout.astro
+   (mismo mecanismo que usa `.reveal` → `.visible` en todo el sitio), no
+   por un `setTimeout` fijo. `.hero__text` es el único nodo observado; al
+   ganar `.visible` cada hijo anima con su propio delay para conservar el
+   efecto de cascada que tenía la versión anterior.
+
+   NOTA PARA TASK 5: esto es una implementación MÍNIMA de `fadeInDown`,
+   sin sistema `data-anim` genérico. Reutiliza el mismo observer de
+   BaseLayout (agrega `.visible`, no crea uno nuevo). Cuando Task 5
+   construya las 5 keyframes (fadeInDown/fadeInUp/fadeInLeft/slideInUp/
+   zoomIn) sobre `data-anim`, debe consolidar este bloque en ese sistema
+   —renombrando/objetivo `.hero__text` a `data-anim="fadeInDown"`— y
+   retirar esta regla dedicada en vez de mantener dos mecanismos en
+   paralelo. */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero__title {
-  animation: hero-enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-}
-
-.hero__subtitle {
-  animation: hero-enter 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
-}
-
+.hero__title,
+.hero__subtitle,
 .hero__actions {
-  animation: hero-enter 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+  opacity: 0;
+}
+
+.hero__text.visible .hero__title {
+  animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hero__text.visible .hero__subtitle {
+  animation: fadeInDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+}
+
+.hero__text.visible .hero__actions {
+  animation: fadeInDown 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
 }
 
 /* ═══ SECTION-SPECIFIC REVEAL OVERRIDES ═════════════════════════════════ */
@@ -797,12 +829,20 @@
 
 /* ═══ REDUCED MOTION OVERRIDES ═══════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
-  .hero__title,
-  .hero__subtitle,
-  .hero__actions {
-    animation: none;
-    opacity: 1;
-    transform: none;
+  /* !important: `.hero__text.visible .hero__title` (3 clases) es MÁS
+     específico que `.hero__text .hero__title` (2 clases) de acá abajo, y
+     el observer de BaseLayout agrega `.visible` sin mirar
+     prefers-reduced-motion — así que sin !important esta regla perdería
+     el cascade contra la de "HERO ENTRANCE" y solo quedaría cubierta por
+     el catch-all `*,*::before,*::after{animation-duration:0.01ms!important}`
+     de src/styles/global.css (que anula el barrido pero no el delay antes
+     de él). Con !important acá, se anula del todo, sin depender de eso. */
+  .hero__text .hero__title,
+  .hero__text .hero__subtitle,
+  .hero__text .hero__actions {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .prog-card__link,

@@ -46,15 +46,23 @@ if (!NO_MOTION && !IS_MOBILE) {
     .map(([sel, px]) => [document.querySelector<HTMLElement>(sel), px] as [HTMLElement | null, number])
     .filter((pair): pair is [HTMLElement, number] => pair[0] !== null);
 
+  // La entrada (fadeInDown) ya no la dispara este archivo: la controla el
+  // IntersectionObserver compartido de BaseLayout.astro, que agrega
+  // `.visible` a `.hero__text` (ver home/styles/index.css → "HERO
+  // ENTRANCE"). Acá solo esperamos el `animationend` del último elemento
+  // en animar (`.hero__actions`) para soltar la animación CSS —si no, el
+  // cascade de animaciones sigue "ganando" sobre el `transform` inline de
+  // abajo— y recién ahí habilitar el parallax de scroll. Si por lo que
+  // sea nunca dispara (ej. el observer nunca intersecta), el parallax
+  // simplemente queda inactivo en vez de romper algo.
   let heroReady = false;
-  setTimeout(() => {
-    heroEls.forEach(([el]) => {
-      el.style.animation = 'none';
-      el.style.opacity   = '1';
-      el.style.transform = 'translateY(0)';
-    });
-    heroReady = true;
-  }, 1500);
+  const lastEl = heroEls[heroEls.length - 1]?.[0];
+  if (lastEl) {
+    lastEl.addEventListener('animationend', () => {
+      heroEls.forEach(([el]) => { el.style.animation = 'none'; });
+      heroReady = true;
+    }, { once: true });
+  }
 
   let rafPending = false;
   const tick = () => {
