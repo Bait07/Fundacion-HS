@@ -13,7 +13,7 @@ const statIcons = [
     <h2 id="stats-heading" class="stats__heading reveal">Nuestro alcance</h2>
     <div class="stats__strip">
       {stats.map((stat, i) => (
-        <div class={`stats__item reveal reveal-delay-${i + 1}`}>
+        <div class={`stats__item anim-delay-${i + 1}`} data-anim="slideInUp">
           <span class="stats__icon">
             <Fragment set:html={statIcons[i]} />
           </span>

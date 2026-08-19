@@ -857,26 +857,24 @@
   }
 }
 
-/* ═══ HERO ENTRANCE (Task 3) ═════════════════════════════════════════════
+/* ═══ HERO ENTRANCE (Task 3, consolidated into the data-anim system in
+   Task 5) ═════════════════════════════════════════════════════════════
    Disparada por el IntersectionObserver compartido de BaseLayout.astro
-   (mismo mecanismo que usa `.reveal` → `.visible` en todo el sitio), no
-   por un `setTimeout` fijo. `.hero__text` es el único nodo observado; al
-   ganar `.visible` cada hijo anima con su propio delay para conservar el
-   efecto de cascada que tenía la versión anterior.
+   (mismo mecanismo que usa `.reveal` → `.visible` en todo el sitio, y
+   que ahora también dispara el sistema `[data-anim]` genérico de
+   src/styles/global.css), no por un `setTimeout` fijo. `.hero__text` es
+   el único nodo observado; al ganar `.visible` cada hijo anima con su
+   propio delay para conservar el efecto de cascada.
 
-   NOTA PARA TASK 5: esto es una implementación MÍNIMA de `fadeInDown`,
-   sin sistema `data-anim` genérico. Reutiliza el mismo observer de
-   BaseLayout (agrega `.visible`, no crea uno nuevo). Cuando Task 5
-   construya las 5 keyframes (fadeInDown/fadeInUp/fadeInLeft/slideInUp/
-   zoomIn) sobre `data-anim`, debe consolidar este bloque en ese sistema
-   —renombrando/objetivo `.hero__text` a `data-anim="fadeInDown"`— y
-   retirar esta regla dedicada en vez de mantener dos mecanismos en
-   paralelo. */
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
+   Task 5 consolidation: el `@keyframes fadeInDown` que antes vivía acá
+   duplicado ahora es UNO SOLO, definido en global.css junto con las
+   otras 4 direcciones — este archivo solo referencia ese nombre. Lo que
+   sigue siendo específico del hero (y por eso se queda acá, no en
+   global.css) es CUÁL elemento anima y con qué delay: el hero es un
+   contenedor único con 3 hijos en cascada, no un elemento único con
+   `data-anim` directo como las tarjetas de Programs/Stats — por eso usa
+   selectores descendientes en vez de la regla genérica
+   `[data-anim="fadeInDown"].visible` de global.css. */
 .hero__title,
 .hero__subtitle,
 .hero__actions {
@@ -895,6 +893,26 @@
   animation: fadeInDown 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
 }
 
+/* `.hero__text` carries `data-anim="fadeInDown"` purely so the shared
+   observer adds `.visible` to it (the trigger the 3 rules above key
+   off) — the container itself must NOT also receive the generic
+   `[data-anim="fadeInDown"].visible` animation from global.css (which
+   sets `opacity: 0` pre-visible and `animation-name: fadeInDown` on
+   `.visible` for ANY element carrying that attribute+value), or the
+   whole text block would fade+translate as one unit on top of its
+   children each already animating independently — and worse, would sit
+   at `opacity: 0` on first paint before the observer ever fires.
+   Specificity of `[data-anim="fadeInDown"].visible` (global.css) is 2
+   attribute/class selectors = (0,2,0); `.hero__text[data-anim]` here
+   matches that too, and home/styles/index.css is imported after
+   global.css (see src/pages/index.astro: BaseLayout → global.css, then
+   this file) so it would win on source order alone — pinned with
+   `!important` anyway so correctness doesn't depend on import order. */
+.hero__text[data-anim] {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
 /* ═══ SECTION-SPECIFIC REVEAL OVERRIDES ═════════════════════════════════ */
 /* Testimonial cards: subtle fade-up */
 .testimonial.reveal {
@@ -907,27 +925,11 @@
   opacity: 1;
 }
 
-/* Stats: only fade, numbers already have visual weight */
-.stats__item.reveal {
-  transform: none;
-  opacity: 0;
-}
-
-.stats__item.reveal.visible {
-  transform: none;
-  opacity: 1;
-}
-
-/* Program cards: slide from below */
-.prog-card.reveal {
-  transform: translateY(16px);
-  opacity: 0;
-}
-
-.prog-card.reveal.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
+/* Stats (`.stats__item`) and Program cards (`.prog-card`) used to have
+   their own `.reveal` overrides here (fade-only / slide-from-below);
+   Task 5 migrated both to the `data-anim` system instead
+   (slideInUp/fadeInLeft respectively, see Stats.astro/Programs.astro),
+   so those rules were removed rather than left dead. */
 
 /* ═══ REDUCED MOTION OVERRIDES ═══════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {

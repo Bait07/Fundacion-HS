@@ -289,6 +289,77 @@ img, svg {
 .reveal-delay-3 { transition-delay: 240ms; }
 .reveal-delay-4 { transition-delay: 320ms; }
 
+/* ─── Direction-aware scroll animations (data-anim) ─────────────────────
+   Sistema general, sitewide, keyed por el VALOR del atributo `data-anim`
+   (fadeInDown|fadeInUp|fadeInLeft|slideInUp|zoomIn), disparado por el
+   MISMO observer/clase `.visible` que usa `.reveal` arriba (ver
+   BaseLayout.astro — un solo IntersectionObserver observa `.reveal,
+   [data-anim]`). A diferencia de `.reveal` (transition simple de
+   opacity+translateY), esto son @keyframes con dirección propia,
+   consumidas directo por Task 5 (Programs/Stats) vía `data-anim="X"` en
+   el elemento animado.
+
+   Excepción: el hero (Task 3) usa `data-anim="fadeInDown"` en
+   `.hero__text` solo como disparador de observación (para que el
+   contenedor reciba `.visible`), pero el contenedor en sí NO debe recibir
+   esta animación genérica — sus 3 hijos (title/subtitle/actions) animan
+   con timings propios via selectores descendientes en
+   home/styles/index.css, referenciando el keyframe `fadeInDown` de acá
+   abajo. Ver la neutralización `.hero__text[data-anim]` en ese archivo. */
+[data-anim] {
+  opacity: 0;
+}
+
+[data-anim].visible {
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+[data-anim="fadeInDown"].visible { animation-name: fadeInDown; }
+[data-anim="fadeInUp"].visible   { animation-name: fadeInUp; }
+[data-anim="fadeInLeft"].visible { animation-name: fadeInLeft; }
+[data-anim="slideInUp"].visible  { animation-name: slideInUp; }
+[data-anim="zoomIn"].visible     { animation-name: zoomIn; }
+
+/* Stagger delays for the data-anim system, 150ms steps — a separate
+   namespace from `.reveal-delay-1..4` above (80ms, `transition-delay`),
+   per the Task 5 brief's choice of either reusing that pattern or adding
+   a dedicated one; kept separate so each system's own step size (80ms vs
+   150ms) stays legible from the class name. Set as a lone longhand
+   (`animation-delay`, not the `animation` shorthand) so it composes
+   safely with `[data-anim="X"].visible` above: that rule never touches
+   `animation-delay`, so there's nothing in a shorthand for it to reset. */
+.anim-delay-1 { animation-delay: 0.15s; }
+.anim-delay-2 { animation-delay: 0.3s; }
+.anim-delay-3 { animation-delay: 0.45s; }
+.anim-delay-4 { animation-delay: 0.6s; }
+
 /* ─── Reduced motion ──────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -296,6 +367,19 @@ img, svg {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  /* Generic, value-agnostic: covers all 5 keyframes above AND any future
+     data-anim value, without needing one override per animation name.
+     Forces the element to its final visible state immediately, the same
+     way `.reveal` above is forced — rather than relying only on the
+     catch-all `animation-duration: 0.01ms` below, which zeroes the
+     animation's length but not its `animation-delay`, so on its own it
+     would leave elements sitting at the keyframe's `from` state
+     (opacity: 0) for the full stagger delay before flipping visible. */
+  [data-anim] {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
   .btn { transition: none; }
   .btn:active { transform: none; }

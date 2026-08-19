@@ -19,7 +19,7 @@ const icons: Record<string, string> = {
 
     <ul class="prog-cards" role="list">
       {programs.map((prog, i) => (
-        <li class={`prog-card reveal reveal-delay-${i + 1}`}>
+        <li class={`prog-card anim-delay-${i + 1}`} data-anim="fadeInLeft">
           <a href={prog.href} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
             <span class="prog-card__icon-wrap" aria-hidden="true">
               <Fragment set:html={icons[prog.icon] ?? ''} />
