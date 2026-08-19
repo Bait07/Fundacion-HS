@@ -595,7 +595,7 @@
 .padrino-cta__text {
   font-size: 1.0625rem;
   line-height: 1.7;
-  color: var(--color-ink);
+  color: var(--color-white); /* --color-ink sobre --color-primary da 3.76:1, falla AA (4.5:1) */
 }
 
 /* ═══ CONTACTO RÁPIDO ════════════════════════════════════════════════════ */
