@@ -88,7 +88,7 @@ const areas = [
       </div>
       <div class="talleres-grid">
         {talleres.map((t, i) => (
-          <article class={`taller-card reveal reveal-delay-${(i % 4) + 1}`}>
+          <article class={`taller-card anim-delay-${(i % 4) + 1}`} data-anim="fadeInLeft">
             <h3 class="taller-card__title">{t.nombre}</h3>
             <p class="taller-card__desc">{t.desc}</p>
           </article>

@@ -112,7 +112,7 @@ const beneficiarios = [
       </div>
       <div class="modalidades-grid">
         {modalidades.map((m, i) => (
-          <div class={`modalidad-card ${m.featured ? 'modalidad-card--featured' : ''} reveal reveal-delay-${i + 1}`}>
+          <div class={`modalidad-card ${m.featured ? 'modalidad-card--featured' : ''} anim-delay-${i + 1}`} data-anim="fadeInLeft">
             {m.featured && <div class="modalidad-card__badge">Más popular</div>}
             <h3 class="modalidad-card__title">{m.title}</h3>
             <p class="modalidad-card__desc">{m.desc}</p>

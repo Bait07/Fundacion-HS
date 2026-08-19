@@ -45,7 +45,7 @@ const servicios = [
       <h2 id="servicios-heading" class="reveal" style="text-align:center;margin-bottom:var(--space-12)">Nuestros servicios</h2>
       <div class="servicios-grid">
         {servicios.map((s, i) => (
-          <article class={`servicio-card reveal reveal-delay-${i + 1}`} style={`--card-accent: ${s.color}`}>
+          <article class={`servicio-card anim-delay-${i + 1}`} data-anim="fadeInLeft" style={`--card-accent: ${s.color}`}>
             <div class="servicio-card__header">
               <p class="servicio-card__tipo">{s.titulo}</p>
               <h3 class="servicio-card__nombre">{s.nombre}</h3>
