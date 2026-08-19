@@ -5,13 +5,26 @@ if (!NO_MOTION) {
   const strip = document.querySelector('.stats__strip');
   if (strip) {
     const ease = (t: number) => 1 - (1 - t) ** 4;
+    // `.stats__item` carries `data-anim="slideInUp"` (Task 5), animated by
+    // BaseLayout's shared IntersectionObserver: animation-duration 0.7s
+    // plus a per-item `anim-delay-N` stagger of 0.15s/0.3s/0.45s/0.6s (see
+    // src/styles/global.css). That's a separate observer watching each
+    // item individually (threshold 0.2), while this one watches the whole
+    // `.stats__strip` (threshold 0.4) — merging them into one mechanism is
+    // a bigger refactor than this task calls for. To keep the numeric
+    // count-up from reading as a second, disconnected animation, delay its
+    // start by ENTRY_ANIM_MS (matching the shared entrance
+    // animation-duration) before layering the existing per-item stagger on
+    // top, so the digits start moving only once the cards have visibly
+    // landed instead of ticking while they're still sliding/fading in.
+    const ENTRY_ANIM_MS = 700;
     const io = new IntersectionObserver((entries) => {
       if (!entries[0].isIntersecting) return;
       io.disconnect();
       document.querySelectorAll<HTMLElement>('.stats__value').forEach((el, i) => {
         const n = parseInt((el.textContent ?? '').replace(/\D/g, ''), 10);
         if (!isNaN(n) && n > 0) {
-          const delay = i * 140;
+          const delay = ENTRY_ANIM_MS + i * 140;
           const duration = 1800;
           let startTime: number | null = null;
           const tick = (ts: number) => {
@@ -19,7 +32,7 @@ if (!NO_MOTION) {
             const elapsed = ts - startTime - delay;
             if (elapsed < 0) { requestAnimationFrame(tick); return; }
             const t = Math.min(1, elapsed / duration);
-            el.textContent = String(Math.round(ease(t) * n));
+            el.textContent = Math.round(ease(t) * n).toLocaleString('es-CO');
             if (t < 1) requestAnimationFrame(tick);
           };
           requestAnimationFrame(tick);
