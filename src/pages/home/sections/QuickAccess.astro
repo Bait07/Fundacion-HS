@@ -1,0 +1,31 @@
+---
+// Task 4: barra de accesos rápidos flotante. Se monta sobre el borde
+// inferior del hero (margin-top negativo en `.quick-access__bar`, ver
+// home/styles/index.css). Enlaza únicamente a rutas reales del sitio —
+// no existe una ruta `/voluntariado`, así que "Sé voluntario" apunta a
+// `/contacto` (el formulario de contacto no soporta hoy preseleccionar
+// el motivo vía query param; agregar esa preselección es trabajo del
+// formulario, fuera del alcance de esta tarea).
+const quickLinks = [
+  { href: '/donaciones', label: 'Donar', icon: 'volunteer_activism' },
+  { href: '/contacto', label: 'Sé voluntario', icon: 'diversity_3' },
+  { href: '/programas', label: 'Nuestros programas', icon: 'school' },
+  { href: '/contacto', label: 'Contacto', icon: 'mail' },
+];
+---
+<section class="quick-access" aria-label="Accesos rápidos">
+  <div class="container">
+    <nav class="quick-access__bar" aria-label="Accesos rápidos">
+      <ul class="quick-access__list">
+        {quickLinks.map((link) => (
+          <li class="quick-access__item">
+            <a href={link.href} class="quick-access__link">
+              <span class="material-symbols-outlined quick-access__icon" aria-hidden="true">{link.icon}</span>
+              <span class="quick-access__label">{link.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</section>

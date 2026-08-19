@@ -150,6 +150,77 @@
   fill: var(--color-bg);
 }
 
+/* ═══ QUICK ACCESS ═══════════════════════════════════════════════════════ */
+/* Barra blanca redondeada que "flota" montada sobre el borde inferior del
+   hero. `.hero__wave` (arriba) mide 64px de alto y está `position:absolute;
+   bottom:-1px` DENTRO de `.hero`, con z-index:1 en su propio contexto de
+   apilamiento. `.quick-access` es un elemento hermano de `.hero` que viene
+   después en el flujo normal del documento, así que se pinta por encima
+   de todo el contenido de `.hero` (incluida la ola) sin necesitar z-index
+   — el margin-top negativo simplemente la sube visualmente para que quede
+   "encajada" sobre la franja de la ola en vez de debajo de ella. Valor
+   elegido dentro del rango sugerido por el brief (-48px a -56px): -52px en
+   desktop, reducido en breakpoints más chicos (ver RESPONSIVE) porque ahí
+   la barra crece en alto (grid 2x2 o columna) y un overlap grande la haría
+   invadir demasiado el texto del hero. */
+.quick-access {
+  position: relative;
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.quick-access__bar {
+  margin-top: -52px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  padding: var(--space-4);
+}
+
+.quick-access__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+}
+
+.quick-access__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-ink);
+  text-align: center;
+  transition: background-color 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+
+.quick-access__link:hover,
+.quick-access__link:focus-visible {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  transform: translateY(-3px);
+}
+
+.quick-access__icon {
+  color: var(--color-primary);
+  font-size: 28px;
+  transition: color 200ms var(--ease-out);
+}
+
+.quick-access__link:hover .quick-access__icon,
+.quick-access__link:focus-visible .quick-access__icon {
+  color: var(--color-accent);
+}
+
+.quick-access__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
 /* ═══ ABOUT ══════════════════════════════════════════════════════════════ */
 .about {
   background-color: var(--color-bg);
@@ -708,6 +779,17 @@
   .hero__deco {
     display: none;
   }
+
+  /* La barra pasa a 2x2: crece en alto, así que se reduce el overlap para
+     no comerse el subtítulo/CTA del hero en tablet. */
+  .quick-access__bar {
+    margin-top: -40px;
+  }
+
+  .quick-access__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
 }
 
 @media (max-width: 767px) {
@@ -742,6 +824,26 @@
 
   .testimonials__grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Una sola columna, filas horizontales (icono + texto en línea) para que
+     la barra apilada no se vea rota ni desproporcionadamente alta; overlap
+     mínimo porque en mobile el hero ya reduce su propia altura. */
+  .quick-access__bar {
+    margin-top: -28px;
+    padding: var(--space-3);
+  }
+
+  .quick-access__list {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+
+  .quick-access__link {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    padding: var(--space-3);
   }
 }
 
