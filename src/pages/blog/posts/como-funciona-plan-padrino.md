@@ -48,4 +48,4 @@ Ser padrino es una forma concreta, medible y directa de transformar una vida. No
 
 Y el impacto trasciende al niño: cuando una persona con discapacidad accede a educación de calidad, toda su familia se fortalece.
 
-Si quieres saber más o iniciar el proceso, [contáctanos aquí](/contacto?motivo=plan-padrino). Estaremos encantados de acompañarte.
+Si quieres saber más o iniciar el proceso, [contáctanos aquí](/Fundacion-HS/contacto?motivo=plan-padrino). Estaremos encantados de acompañarte.

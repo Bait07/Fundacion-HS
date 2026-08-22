@@ -6,7 +6,7 @@ import { pillars } from '../data/index';
     <div class="about__visual reveal" aria-hidden="true">
       <div class="about__img-wrap">
         <img
-          src="/images/about-ninos.jpg"
+          src={`${import.meta.env.BASE_URL}images/about-ninos.jpg`}
           alt="Dos niños sonriendo junto a una pila de libros en un salón de la Fundación Horizontes de Sabiduría"
           width="1280"
           height="1923"
@@ -34,7 +34,7 @@ import { pillars } from '../data/index';
         ))}
       </ul>
 
-      <a href="/nosotros" class="btn btn-outline reveal reveal-delay-4">Conoce nuestra historia</a>
+      <a href={`${import.meta.env.BASE_URL}nosotros`} class="btn btn-outline reveal reveal-delay-4">Conoce nuestra historia</a>
     </div>
   </div>
 </section>

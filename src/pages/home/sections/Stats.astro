@@ -2,7 +2,7 @@
 import { stats } from '../data/index';
 ---
 <section class="section stats" aria-labelledby="stats-heading">
-  <dotlottie-wc class="stats__plane" src="/lottie-airplane.lottie" autoplay loop aria-hidden="true"></dotlottie-wc>
+  <dotlottie-wc class="stats__plane" src={`${import.meta.env.BASE_URL}lottie-airplane.lottie`} autoplay loop aria-hidden="true"></dotlottie-wc>
   <div class="container">
     <h2 id="stats-heading" class="stats__heading reveal">Nuestro alcance</h2>
     <div class="stats__strip">

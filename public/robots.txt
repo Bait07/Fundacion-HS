@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fundacionhorizontes.org/sitemap-index.xml
+Sitemap: https://bait07.github.io/Fundacion-HS/sitemap-index.xml

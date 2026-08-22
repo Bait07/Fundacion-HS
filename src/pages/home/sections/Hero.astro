@@ -3,7 +3,7 @@
 <section class="hero" aria-label="Bienvenida">
   <div class="hero__bg" aria-hidden="true">
     <img
-      src="/images/hero-banner.jpg"
+      src={`${import.meta.env.BASE_URL}images/hero-banner.jpg`}
       alt=""
       class="hero__bg-img"
       width="1024"
@@ -29,8 +29,8 @@
         Acompañamos a niños, jóvenes y adultos con discapacidad cognitiva en Bogotá a descubrir sus horizontes.
       </p>
       <div class="hero__actions">
-        <a href="/programas" class="btn btn-primary">Conoce nuestros programas</a>
-        <a href="/donaciones" class="btn btn-outline">Quiero donar</a>
+        <a href={`${import.meta.env.BASE_URL}programas`} class="btn btn-primary">Conoce nuestros programas</a>
+        <a href={`${import.meta.env.BASE_URL}donaciones`} class="btn btn-outline">Quiero donar</a>
       </div>
     </div>
   </div>

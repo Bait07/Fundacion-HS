@@ -2,15 +2,21 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
+// ponytail: base hardcoded here because Astro's `redirects` targets aren't
+// base-aware — revert to '' when this moves off the github.io/<repo> subpath
+// onto the custom domain (base: '/').
+const base = '/Fundacion-HS';
+
 export default defineConfig({
-  site: 'https://fundacionhorizontes.org',
+  site: 'https://bait07.github.io',
+  base: `${base}/`,
   redirects: {
-    '/home': '/',
-    '/programas/ninez': '/programas#ninez',
-    '/programas/jovenes': '/programas#jovenes',
-    '/programas/adultos': '/programas#adultos',
-    '/programas/servicios': '/programas#servicios',
-    '/programas/plan-padrino': '/programas#plan-padrino',
+    '/home': `${base}/`,
+    '/programas/ninez': `${base}/programas#ninez`,
+    '/programas/jovenes': `${base}/programas#jovenes`,
+    '/programas/adultos': `${base}/programas#adultos`,
+    '/programas/servicios': `${base}/programas#servicios`,
+    '/programas/plan-padrino': `${base}/programas#plan-padrino`,
   },
   server: {
     allowedHosts: true,

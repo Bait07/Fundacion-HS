@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/utils/url';
 const seo = {
   title: 'Nuestros Programas | Inclusión y Desarrollo para Personas con Discapacidad — FHS Bogotá',
   description: 'Programas especializados para niños, jóvenes y adultos con discapacidad cognitiva en Bogotá: talleres de vida independiente, inclusión escolar, terapias y Plan Padrino.',
@@ -116,7 +117,7 @@ const programs = [
           <!-- Visual side -->
           <div class="prog-row__visual reveal reveal-visual">
             {prog.lottie ? (
-              <dotlottie-wc class="prog-row__lottie" src={prog.lottie} autoplay loop aria-hidden="true"></dotlottie-wc>
+              <dotlottie-wc class="prog-row__lottie" src={withBase(prog.lottie)} autoplay loop aria-hidden="true"></dotlottie-wc>
             ) : (
               <div class="prog-row__img-wrap">
                 <img
@@ -160,7 +161,7 @@ const programs = [
                 </li>
               ))}
             </ul>
-            <a href={prog.href} class="btn btn-primary prog-row__cta reveal reveal-delay-4">
+            <a href={withBase(prog.href)} class="btn btn-primary prog-row__cta reveal reveal-delay-4">
               Solicitar información
               <span class="prog-row__arrow" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -190,8 +191,8 @@ const programs = [
         Tu donación permite que más familias accedan a programas de inclusión que transforman vidas.
       </p>
       <div class="cta-bottom__actions reveal reveal-delay-2">
-        <a href="/donaciones" class="btn btn-accent">Hacer una donación</a>
-        <a href="/programas#plan-padrino" class="btn btn-outline">Ser padrino</a>
+        <a href={`${import.meta.env.BASE_URL}donaciones`} class="btn btn-accent">Hacer una donación</a>
+        <a href={`${import.meta.env.BASE_URL}programas#plan-padrino`} class="btn btn-outline">Ser padrino</a>
       </div>
     </div>
   </section>
@@ -619,7 +620,7 @@ const programs = [
   left: 50%;
   width: 100vw;
   margin-left: -50vw;
-  background-image: url("/decor/heart.svg");
+  background-image: url("/Fundacion-HS/decor/heart.svg");
   background-repeat: repeat;
   background-size: 70px 70px;
   opacity: 0.08;

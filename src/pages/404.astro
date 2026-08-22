@@ -12,7 +12,7 @@ const seo = {
     <div class="container not-found__inner">
       <dotlottie-wc
         id="notFoundLottie"
-        src="/lottie-404.lottie"
+        src={`${import.meta.env.BASE_URL}lottie-404.lottie`}
         autoplay
         loop
         class="not-found__lottie"
@@ -25,8 +25,8 @@ const seo = {
         El enlace que seguiste no existe o cambió de lugar. Volvamos a un sitio conocido.
       </p>
       <div class="not-found__actions">
-        <a href="/" class="btn btn-primary">Volver al inicio</a>
-        <a href="/programas" class="btn btn-outline">Ver nuestros programas</a>
+        <a href={import.meta.env.BASE_URL} class="btn btn-primary">Volver al inicio</a>
+        <a href={`${import.meta.env.BASE_URL}programas`} class="btn btn-outline">Ver nuestros programas</a>
       </div>
     </div>
   </section>

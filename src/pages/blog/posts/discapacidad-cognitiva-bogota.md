@@ -47,4 +47,4 @@ En Bogotá existen varias rutas de atención:
 
 En la FHS acompañamos a familias en Bogotá con programas diseñados para cada etapa de la vida: niñez, adolescencia y adultez. Nuestro equipo interdisciplinario (psicología, fonoaudiología, terapia ocupacional) trabaja con cada persona desde sus fortalezas.
 
-Si tienes preguntas o quieres saber más sobre nuestros programas, [contáctanos](/contacto). Estamos aquí para acompañarte.
+Si tienes preguntas o quieres saber más sobre nuestros programas, [contáctanos](/Fundacion-HS/contacto). Estamos aquí para acompañarte.

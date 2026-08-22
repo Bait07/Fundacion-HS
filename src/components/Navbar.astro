@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/url';
+
 const navLinks = [
   { label: 'Inicio', href: '/' },
   {
@@ -43,15 +45,17 @@ const navLinks = [
 
 const currentPath = Astro.url.pathname;
 
-const isLinkActive = (href: string) =>
-  currentPath === href || (href !== '/' && currentPath.startsWith(href));
+const isLinkActive = (href: string) => {
+  const full = withBase(href);
+  return currentPath === full || (href !== '/' && currentPath.startsWith(full));
+};
 ---
 
 <header class="navbar" id="navbar">
   <div class="container navbar__inner">
     <!-- Logo -->
-    <a href="/" class="navbar__logo" aria-label="Fundación Horizontes de Sabiduría — Inicio">
-      <img src="/logo.png" alt="" class="navbar__logo-img" width="2400" height="857" />
+    <a href={import.meta.env.BASE_URL} class="navbar__logo" aria-label="Fundación Horizontes de Sabiduría — Inicio">
+      <img src={`${import.meta.env.BASE_URL}logo.png`} alt="" class="navbar__logo-img" width="2400" height="857" />
     </a>
 
     <!-- Desktop nav -->
@@ -84,7 +88,7 @@ const isLinkActive = (href: string) =>
 
                 <div class="mega-menu" id={panelId} role="region" aria-labelledby={triggerId} data-mega-panel hidden>
                   <div class="container mega-menu__inner">
-                    <a href={link.href} class="mega-menu__intro">
+                    <a href={withBase(link.href)} class="mega-menu__intro">
                       <span class="mega-menu__intro-title">{link.mega.intro.title}</span>
                       <span class="mega-menu__intro-desc">{link.mega.intro.desc}</span>
                       <span class="mega-menu__intro-cta" aria-hidden="true">Ver todo →</span>
@@ -92,7 +96,7 @@ const isLinkActive = (href: string) =>
                     <ul class="mega-menu__list" role="list">
                       {link.mega.items.map((item) => (
                         <li>
-                          <a href={item.href} class="mega-menu__link">
+                          <a href={withBase(item.href)} class="mega-menu__link">
                             <span class="mega-menu__link-title">{item.label}</span>
                             <span class="mega-menu__link-desc">{item.desc}</span>
                           </a>
@@ -107,7 +111,7 @@ const isLinkActive = (href: string) =>
 
           return (
             <li>
-              <a href={link.href} class={`navbar__link ${active ? 'navbar__link--active' : ''}`}>
+              <a href={withBase(link.href)} class={`navbar__link ${active ? 'navbar__link--active' : ''}`}>
                 {link.label}
               </a>
             </li>
@@ -117,7 +121,7 @@ const isLinkActive = (href: string) =>
     </nav>
 
     <!-- CTA Donar -->
-    <a href="/donaciones" class="btn btn-accent navbar__cta">Donar</a>
+    <a href={`${import.meta.env.BASE_URL}donaciones`} class="btn btn-accent navbar__cta">Donar</a>
 
     <!-- Hamburger -->
     <button
@@ -164,13 +168,13 @@ const isLinkActive = (href: string) =>
               </button>
               <ul class="mobile-menu__submenu" id={subId} hidden>
                 <li>
-                  <a href={link.href} class="mobile-menu__sublink mobile-menu__sublink--intro">
+                  <a href={withBase(link.href)} class="mobile-menu__sublink mobile-menu__sublink--intro">
                     Ver todo {link.label}
                   </a>
                 </li>
                 {link.mega.items.map((item) => (
                   <li>
-                    <a href={item.href} class="mobile-menu__sublink">{item.label}</a>
+                    <a href={withBase(item.href)} class="mobile-menu__sublink">{item.label}</a>
                   </li>
                 ))}
               </ul>
@@ -181,7 +185,7 @@ const isLinkActive = (href: string) =>
         return (
           <li>
             <a
-              href={link.href}
+              href={withBase(link.href)}
               class={`mobile-menu__link ${active ? 'mobile-menu__link--active' : ''}`}
             >
               {link.label}
@@ -190,7 +194,7 @@ const isLinkActive = (href: string) =>
         );
       })}
     </ul>
-    <a href="/donaciones" class="btn btn-accent mobile-menu__cta">Donar ahora</a>
+    <a href={`${import.meta.env.BASE_URL}donaciones`} class="btn btn-accent mobile-menu__cta">Donar ahora</a>
   </nav>
 </div>
 

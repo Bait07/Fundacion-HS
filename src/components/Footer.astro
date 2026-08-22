@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/url';
+
 const navLinks = [
   { label: 'Inicio', href: '/' },
   { label: 'Nosotros', href: '/nosotros' },
@@ -22,8 +24,8 @@ const programLinks = [
   <div class="container footer__inner">
     <!-- Brand column -->
     <div class="footer__brand">
-      <a href="/" class="footer__logo" aria-label="Inicio">
-        <img src="/logo.png" alt="Fundación Horizontes de Sabiduría" class="footer__logo-img" width="2400" height="857" />
+      <a href={import.meta.env.BASE_URL} class="footer__logo" aria-label="Inicio">
+        <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Fundación Horizontes de Sabiduría" class="footer__logo-img" width="2400" height="857" />
       </a>
       <p class="footer__desc">
         Transformando vidas a través de la educación, el amor y la inclusión en Bogotá.
@@ -50,7 +52,7 @@ const programLinks = [
       <p class="footer__nav-title">Navegación</p>
       <ul role="list">
         {navLinks.map(link => (
-          <li><a href={link.href} class="footer__nav-link">{link.label}</a></li>
+          <li><a href={withBase(link.href)} class="footer__nav-link">{link.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -60,7 +62,7 @@ const programLinks = [
       <p class="footer__nav-title">Programas</p>
       <ul role="list">
         {programLinks.map(link => (
-          <li><a href={link.href} class="footer__nav-link">{link.label}</a></li>
+          <li><a href={withBase(link.href)} class="footer__nav-link">{link.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -80,7 +82,7 @@ const programLinks = [
           <span aria-hidden="true">📧</span> <em class="footer__placeholder">Correo por confirmar</em>
         </p>
       </address>
-      <a href="/contacto" class="btn btn-outline btn-sm footer__contact-btn">Escríbenos</a>
+      <a href={`${import.meta.env.BASE_URL}contacto`} class="btn btn-outline btn-sm footer__contact-btn">Escríbenos</a>
     </div>
   </div>
 

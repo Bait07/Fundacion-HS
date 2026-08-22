@@ -1,5 +1,6 @@
 ---
 import { programs } from '../data/index';
+import { withBase } from '@/utils/url';
 ---
 <section class="section programs" aria-labelledby="programs-heading">
   <div class="container programs__inner">
@@ -14,7 +15,7 @@ import { programs } from '../data/index';
       <ul class="prog-cards" role="list">
         {programs.map((prog, i) => (
           <li class={`prog-card anim-delay-${i + 1}`} data-anim="fadeInLeft">
-            <a href={prog.href} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
+            <a href={withBase(prog.href)} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
               <h3 class="prog-card__name">{prog.title}</h3>
               <p class="prog-card__desc">{prog.desc}</p>
               <span class="prog-card__more">
@@ -28,7 +29,7 @@ import { programs } from '../data/index';
     </div>
 
     <div class="programs__cta reveal">
-      <a href="/programas" class="btn btn-primary">Ver todos los programas</a>
+      <a href={`${import.meta.env.BASE_URL}programas`} class="btn btn-primary">Ver todos los programas</a>
     </div>
   </div>
 </section>
