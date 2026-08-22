@@ -1,12 +1,5 @@
 ---
 import { programs } from '../data/index';
-
-const icons: Record<string, string> = {
-  seedling: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>`,
-  sun: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
-  hands: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>`,
-  heart: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
-};
 ---
 <section class="section programs" aria-labelledby="programs-heading">
   <div class="container programs__inner">
@@ -18,39 +11,10 @@ const icons: Record<string, string> = {
     </div>
 
     <div class="programs__body">
-      <!--
-        PLACEHOLDER: mascota/ilustración de personaje o comunidad.
-        No hay generador de imágenes ni brief de marca en este stack para
-        encargar el arte final — este SVG lineal simple (mismo espíritu
-        "orgánico, no geométrico" de DESIGN.md) es un placeholder honesto,
-        igual que el placeholder de logo en Navbar.astro. Reemplazar por
-        ilustración real cuando la FHS la provea (ver PROGRESO.md).
-      -->
-      <div class="programs__mascot" aria-hidden="true">
-        <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-          <!-- árbol -->
-          <path d="M150 210v-70" stroke="var(--color-primary)" stroke-width="1.75" stroke-linecap="round"/>
-          <path d="M150 170c-14-4-22-16-20-30 10 2 18 10 20 22 2-12 12-19 24-19 2 15-8 27-24 27z" stroke="var(--color-primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M150 150c-10-3-16-12-15-22 8 2 14 9 15 18" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- persona sencilla, brazos abiertos -->
-          <circle cx="70" cy="90" r="16" stroke="var(--color-accent)" stroke-width="1.75"/>
-          <path d="M70 106v58" stroke="var(--color-accent)" stroke-width="1.75" stroke-linecap="round"/>
-          <path d="M70 122c-16-6-24-2-30 10M70 122c16-6 24-2 30 10" stroke="var(--color-accent)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M70 164 55 210M70 164l15 46" stroke="var(--color-accent)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- corazón pequeño flotando -->
-          <path d="M108 60c-3-4-9-4-11 0-2 3-1 6 2 9l9 9 9-9c3-3 4-6 2-9-2-4-8-4-11 0z" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- suelo -->
-          <path d="M20 210h160" stroke="var(--color-ink-muted)" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
-        </svg>
-      </div>
-
       <ul class="prog-cards" role="list">
         {programs.map((prog, i) => (
           <li class={`prog-card anim-delay-${i + 1}`} data-anim="fadeInLeft">
             <a href={prog.href} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
-              <span class="prog-card__icon-wrap" aria-hidden="true">
-                <Fragment set:html={icons[prog.icon] ?? ''} />
-              </span>
               <h3 class="prog-card__name">{prog.title}</h3>
               <p class="prog-card__desc">{prog.desc}</p>
               <span class="prog-card__more">
@@ -64,7 +28,7 @@ const icons: Record<string, string> = {
     </div>
 
     <div class="programs__cta reveal">
-      <a href="/programas" class="btn btn-outline">Ver todos los programas</a>
+      <a href="/programas" class="btn btn-primary">Ver todos los programas</a>
     </div>
   </div>
 </section>

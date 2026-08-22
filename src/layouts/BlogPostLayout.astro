@@ -1,6 +1,5 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
 
 const { frontmatter } = Astro.props;
 
@@ -30,13 +29,6 @@ const formattedDate = frontmatter.date
       <div class="post-hero__overlay"></div>
     </div>
     <div class="container post-hero__content">
-      <Breadcrumbs
-        crumbs={[
-          { label: 'Blog', href: '/blog' },
-          { label: frontmatter.title },
-        ]}
-        inverted
-      />
       <div class="post-hero__meta reveal">
         {frontmatter.category && (
           <span class="post-hero__cat">{frontmatter.category}</span>
@@ -304,7 +296,7 @@ const formattedDate = frontmatter.date
 @media (min-width: 1024px) {
   .post-sidebar {
     position: sticky;
-    top: calc(68px + var(--space-8));
+    top: calc(var(--nav-height) + var(--space-8));
   }
 }
 

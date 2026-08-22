@@ -35,7 +35,7 @@ const { title, description, image, type } = Astro.props;
   <body>
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <Navbar />
-    <main id="main-content" style="padding-top: 68px">
+    <main id="main-content" style="padding-top: var(--nav-height)">
       <slot />
     </main>
     <Footer />

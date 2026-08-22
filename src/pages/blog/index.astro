@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
 
 const seo = {
   title: 'Blog | Educación Inclusiva y Discapacidad Cognitiva — Fundación Horizontes de Sabiduría',
@@ -27,7 +26,6 @@ const categories = ['Educación consciente', 'Desarrollo humano', 'Comunidad', '
 <BaseLayout title={seo.title} description={seo.description}>
   <section class="page-header" aria-labelledby="page-title">
     <div class="container">
-      <Breadcrumbs crumbs={[{ label: 'Blog' }]} />
       <h1 id="page-title" class="reveal">Blog</h1>
       <p class="page-header__desc reveal reveal-delay-1">
         Artículos sobre inclusión educativa, discapacidad cognitiva, desarrollo humano e historias que inspiran.

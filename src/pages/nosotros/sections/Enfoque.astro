@@ -1,47 +1,117 @@
 ---
 import { enfoque } from '../data/index';
 
-const icons: string[] = [
-  // Book Open — Inclusión educativa
-  `<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
-  // Activity — Atención integral
-  `<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>`,
-  // Scale — Enfoque diferencial
-  `<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/><path d="M7 21h10"/><line x1="12" x2="12" y1="3" y2="21"/><path d="M3 7h2c2 0 4-1 7-1s5 1 7 1h2"/>`,
-  // Home — Participación familiar
-  `<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
-  // Compass — Desarrollo de autonomía
-  `<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>`,
-  // Heart — Dignidad humana
-  `<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>`,
-  // Users — Fortalecimiento comunitario
-  `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+// Posición de cada hoja dentro de .enfoque-tree, en % del contenedor,
+// ancladas por su esquina superior izquierda (sin transform, para no
+// pisar la animación zoomIn que ya anima `transform` vía scale — ver
+// [data-anim] en global.css). Calibradas contra un screenshot real del
+// árbol ya crecido (sin las hojas superpuestas) para caer sobre lóbulos
+// de follaje reales, en abanico de abajo-izquierda a abajo-derecha.
+const leafPositions = [
+  { x: 29.75, y: 55.90, color: '#0F5131', wave: 1, stagger: 0 },                        // inclusion
+  { x: 30.43, y: 23.31, wave: 2, stagger: 0, small: true },                              // atencion
+  { x: 36.25, y: -9.84, color: '#13633F', wave: 3, stagger: 0, small: true },           // enfoque
+  { x: 44.71, y: 25.16, wave: 2, stagger: 0.12, small: true },                           // participacion
+  { x: 53.96, y: -9.92, color: '#21764C', wave: 3, stagger: 0.15, small: true },        // desarrollo
+  { x: 59.00, y: 23.31, color: '#008C64', wave: 2, stagger: 0.24, small: true },         // respeto
+  { x: 54.11, y: 55.23, color: '#0F5131', wave: 1, stagger: 0.15 },                      // fortalecimiento
 ];
+
+// Aparecen en 3 oleadas de abajo hacia arriba, calcando el crecimiento
+// del árbol (tronco/ramas bajas primero, copa alta al final) — no una
+// por una en orden de array. Segundos, no las clases .anim-delay-N
+// compartidas del resto del sitio (esas son pasos de 0.15s, muy rápido
+// para seguirle el ritmo a los ~2.9s que tarda el árbol en crecer a
+// velocidad 7x). `stagger` desincroniza un poco los 2-3 elementos que
+// comparten oleada (si entran exactamente al mismo tiempo se sienten
+// como un solo "golpe" en vez de una transición).
+const waveDelays: Record<number, number> = { 1: 0.8, 2: 1.6, 3: 2.3 };
 ---
 <section class="section enfoque-section" aria-labelledby="enfoque-heading">
   <div class="container enfoque-inner">
-    <div class="enfoque-header reveal">
+    <div class="enfoque-header" data-anim="fadeInDown">
       <h2 id="enfoque-heading">Nuestro enfoque</h2>
       <p>Principios que guían cada programa, taller y acompañamiento.</p>
     </div>
 
-    <ol class="principios-list" aria-label="Principios de la fundación">
-      {enfoque.map((item, i) => (
-        <li class={`principio-row reveal reveal-delay-${(i % 3) + 1}`}>
-          <svg
-            class="principio-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            set:html={icons[i]}
-          />
-          <span class="principio-text">{item}</span>
-        </li>
-      ))}
-    </ol>
+    <div class="enfoque-tree" id="enfoqueTree">
+      <dotlottie-wc
+        id="enfoqueTreeLottie"
+        class="enfoque-tree__lottie"
+        src="/tree.lottie"
+        speed="7"
+        aria-hidden="true"
+      ></dotlottie-wc>
+
+      <ul class="enfoque-leaves" aria-label="Principios de la fundación">
+        {enfoque.map((item, i) => (
+          <li
+            class={`enfoque-leaf enfoque-leaf--${(i % 3) + 1}${leafPositions[i].small ? ' enfoque-leaf--small' : ''}`}
+            data-anim="zoomIn"
+            style={`--leaf-x: ${leafPositions[i].x}%; --leaf-y: ${leafPositions[i].y}%; animation-delay: ${waveDelays[leafPositions[i].wave] + leafPositions[i].stagger}s;${leafPositions[i].color ? ` background-color: ${leafPositions[i].color};` : ''}`}
+          >
+            <span class="enfoque-leaf__bump enfoque-leaf__bump--left" aria-hidden="true"></span>
+            <span class="enfoque-leaf__bump enfoque-leaf__bump--right" aria-hidden="true"></span>
+            <span class="enfoque-leaf__bump enfoque-leaf__bump--bottom" aria-hidden="true"></span>
+            <span class="enfoque-leaf__text">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>
+
+<script>
+  // El árbol arranca detenido en su primer fotograma (sin `autoplay`) y
+  // se dispara una sola vez al entrar en viewport — mismo criterio que
+  // el resto del sitio (observer dedicado, no el genérico de
+  // BaseLayout, porque acá no solo hay que togglear `.visible`, hay que
+  // llamar `.play()` en el custom element de la animación).
+  // El custom element <dotlottie-wc> (Lit) no expone .play() directamente:
+  // el player real (@lottiefiles/dotlottie-web) vive en su propiedad
+  // reactiva `.dotLottie`, que se inicializa async — de ahí el poll corto
+  // antes de poder llamar .play()/.setSpeed().
+  interface DotLottieEl extends HTMLElement {
+    dotLottie?: { play(): void; setSpeed(n: number): void };
+  }
+
+  const NO_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // El árbol está oculto por CSS en mobile (display:none) — no tiene
+  // sentido reproducirlo ni observarlo ahí.
+  const IS_MOBILE = window.matchMedia('(max-width: 767px)').matches;
+  const treeContainer = document.getElementById('enfoqueTree');
+  const treeLottie = document.getElementById('enfoqueTreeLottie') as DotLottieEl | null;
+
+  if (treeContainer && treeLottie && !IS_MOBILE) {
+    const playTree = () => {
+      const start = Date.now();
+      const tryPlay = () => {
+        const player = treeLottie.dotLottie;
+        if (player) {
+          // Reduced motion: crecimiento casi instantáneo en vez de una
+          // animación continua perceptible.
+          if (NO_MOTION) player.setSpeed(20);
+          player.play();
+        } else if (Date.now() - start < 3000) {
+          setTimeout(tryPlay, 50);
+        }
+      };
+      tryPlay();
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            playTree();
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(treeContainer);
+  }
+</script>

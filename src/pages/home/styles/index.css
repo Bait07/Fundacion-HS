@@ -8,12 +8,10 @@
      se ve mientras la imagen carga y si esta llega a fallar, y compone
      con `.hero__overlay` (ya recalibrado en Task 1 sobre --color-ink) sin
      reemplazar la foto, que sigue siendo la capa dominante encima. */
-  background: linear-gradient(
-    160deg,
-    var(--color-secondary) 0%,
-    var(--color-primary) 60%,
-    var(--color-ink) 100%
-  );
+  background: linear-gradient(160deg,
+      var(--color-secondary) 0%,
+      var(--color-primary) 60%,
+      var(--color-ink) 100%);
 }
 
 .hero__bg {
@@ -36,12 +34,10 @@
      en vez de negro/khaki puro, para sentirse parte de la misma familia
      de color que el resto del sitio. Mismas paradas/opacidades que antes;
      solo se recalibró el color base. */
-  background: linear-gradient(
-    135deg,
-    oklch(0.22 0.04 150 / 0.82) 0%,
-    oklch(0.22 0.04 150 / 0.60) 50%,
-    oklch(0.55 0.155 154 / 0.45) 100%
-  );
+  background: linear-gradient(135deg,
+      oklch(0.22 0.04 150 / 0.82) 0%,
+      oklch(0.22 0.04 150 / 0.60) 50%,
+      oklch(0.55 0.155 154 / 0.45) 100%);
 }
 
 .hero__content {
@@ -85,6 +81,7 @@
   border-color: oklch(1 0 0 / 0.4);
   color: oklch(1 0 0 / 0.9);
 }
+
 .hero__actions .btn-outline:hover {
   background-color: var(--color-white);
   color: var(--color-ink);
@@ -129,8 +126,8 @@
   top: clamp(16px, 3vw, 40px);
 }
 
-/* ── Wave transition ──────────────────────────────────────────── */
-.hero__wave {
+/* ── Wave transition (compartido entre secciones, ver .section-wave) ──── */
+.section-wave {
   position: absolute;
   bottom: -1px;
   left: 0;
@@ -140,14 +137,20 @@
   z-index: 1;
 }
 
-.hero__wave svg {
+.section-wave svg {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.hero__wave-path {
+.section-wave-path {
   fill: var(--color-bg);
+}
+
+/* Cuando la sección siguiente es el footer oscuro (--color-ink) en vez
+   del fondo blanco/claro habitual */
+.section-wave-path--ink {
+  fill: var(--color-ink);
 }
 
 /* ═══ QUICK ACCESS ═══════════════════════════════════════════════════════ */
@@ -165,7 +168,8 @@
    invadir demasiado el texto del hero. */
 .quick-access {
   position: relative;
-  z-index: 2; /* el hero lo tapaba en la práctica pese al orden del DOM; forzado explícito */
+  z-index: 2;
+  /* el hero lo tapaba en la práctica pese al orden del DOM; forzado explícito */
   padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
@@ -282,7 +286,6 @@
   flex-direction: column;
   margin-block: var(--space-4);
   border-top: 1px solid oklch(0.26 0.035 145 / 0.10);
-  counter-reset: pillar;
 }
 
 .about__pillar {
@@ -293,24 +296,10 @@
   border-bottom: 1px solid oklch(0.26 0.035 145 / 0.08);
   cursor: default;
   transition: padding-left 220ms var(--ease-expo);
-  counter-increment: pillar;
 }
 
 .about__pillar:hover {
   padding-left: var(--space-3);
-}
-
-/* CSS counter as accent number */
-.about__pillar::before {
-  content: counter(pillar, decimal-leading-zero);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.625rem;
-  letter-spacing: 0.04em;
-  color: var(--color-accent);
-  min-width: 20px;
-  flex-shrink: 0;
-  align-self: center;
 }
 
 .about__pillar-label {
@@ -329,13 +318,33 @@
 
 /* ═══ STATS ══════════════════════════════════════════════════════════════ */
 .stats {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-primary);
+  position: relative;
+}
+
+/* Hojas repetidas (public/decor/leaves.svg) como textura de marca —
+   mismo tile de 70px que .padrino-cta::before para que ambos banners
+   verdes del sitio se sientan consistentes entre sí. */
+.stats::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("/decor/leaves.svg");
+  background-repeat: repeat;
+  background-size: 70px 70px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.stats .container {
+  position: relative;
+  z-index: 1;
 }
 
 .stats__heading {
-  font-size: 1.0625rem;
-  font-weight: 500;
-  color: var(--color-ink-muted);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--color-white);
   margin-bottom: var(--space-8);
   max-width: none;
 }
@@ -353,29 +362,20 @@
   gap: var(--space-3);
 }
 
-.stats__item + .stats__item {
-  border-left: 1px solid oklch(0.26 0.035 145 / 0.14);
-  padding-left: var(--space-6);
-}
 
-.stats__icon {
-  color: var(--color-accent);
-  display: flex;
-  align-items: center;
-}
 
 .stats__value {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(2.5rem, 4vw, 3.5rem);
-  color: var(--color-ink);
+  color: var(--color-white);
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
 .stats__label {
   font-size: 0.9375rem;
-  color: var(--color-ink);
+  color: var(--color-white);
   line-height: 1.45;
   max-width: 18ch;
 }
@@ -384,8 +384,29 @@
   margin-top: var(--space-6);
   font-size: 0.8125rem;
   font-style: italic;
-  color: var(--color-ink-muted);
+  color: oklch(1 0 0 / 0.75);
   max-width: 60ch;
+}
+
+/* Avión decorativo estático (sin animación): a la derecha de la
+   sección, en espejo (por defecto mira a la derecha; scaleX(-1) lo deja
+   mirando a la izquierda, hacia el contenido). Oculto en pantallas
+   angostas, donde no hay margen fuera del container para que quepa. */
+.stats__plane {
+  position: absolute;
+  top: 50%;
+  right: 12%;
+  width: 300px;
+  height: 300px;
+  transform: translateY(-50%) scaleX(-1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1279px) {
+  .stats__plane {
+    display: none;
+  }
 }
 
 /* ═══ PROGRAMS — card grid ═══════════════════════════════════════════════ */
@@ -416,18 +437,6 @@
 
 .programs__body {
   display: grid;
-  grid-template-columns: minmax(160px, 220px) 1fr;
-  gap: var(--space-10);
-  align-items: center;
-}
-
-.programs__mascot {
-  color: var(--color-primary);
-}
-
-.programs__mascot svg {
-  width: 100%;
-  height: auto;
 }
 
 .prog-cards {
@@ -454,33 +463,9 @@
   overflow: hidden;
 }
 
-/* Fondos alternados surface/peach — variedad cálida sin salirse de paleta */
-.prog-card:nth-child(even) .prog-card__link {
-  background-color: var(--color-peach);
-}
-
 .prog-card__link:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 40px oklch(0.26 0.035 145 / 0.14);
-}
-
-.prog-card__icon-wrap {
-  width: 56px;
-  height: 56px;
-  /* "Squircle": redondeo generoso pero no círculo (56px de lado, radio 20px) */
-  border-radius: 20px;
-  background-color: var(--color-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--card-accent, var(--color-primary));
-  flex-shrink: 0;
-  transition: background-color 250ms, color 250ms;
-}
-
-.prog-card__link:hover .prog-card__icon-wrap {
-  background-color: var(--card-accent, var(--color-primary));
-  color: white;
 }
 
 .prog-card__name {
@@ -502,29 +487,26 @@
 
 .prog-card__more {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.8125rem;
-  /* Fixed --color-ink fill (not the per-card --card-accent): white-on-accent
-     fails AA at this text size for both accent colors in rotation
-     (--color-primary ~4.44:1, --color-accent lower still — both under the
-     4.5:1 minimum for 13px semibold). --color-ink is already the codebase's
-     established solid-fill CTA background (Footer, Navbar, .cta-prog, etc.)
-     and gives white text ~17:1 contrast here, comfortably passing AA/AAA. */
-  color: white;
-  background-color: var(--color-ink);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   align-self: flex-start;
   margin-top: auto;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
-  transition: gap 200ms var(--ease-expo), transform 200ms var(--ease-expo);
+  padding: calc(var(--space-2) - 2px) calc(var(--space-4) - 2px);
+  border-radius: var(--radius-sm);
+  transition: gap 200ms var(--ease-expo), transform 200ms var(--ease-expo), color 200ms var(--ease-expo), border-color 200ms var(--ease-expo);
 }
 
 .prog-card__link:hover .prog-card__more {
   gap: var(--space-3);
   transform: translateX(2px);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .programs__cta {
@@ -573,8 +555,13 @@
   transition: box-shadow 280ms var(--ease-expo);
 }
 
-.testimonial:nth-child(2) { border-top-color: var(--color-accent); }
-.testimonial:nth-child(3) { border-top-color: var(--color-primary-light); }
+.testimonial:nth-child(2) {
+  border-top-color: var(--color-accent);
+}
+
+.testimonial:nth-child(3) {
+  border-top-color: var(--color-primary-light);
+}
 
 .testimonial:hover {
   box-shadow: 0 10px 32px oklch(0.26 0.035 145 / 0.12);
@@ -588,7 +575,9 @@
   height: 21px;
 }
 
-.testimonial:nth-child(2) .testimonial__quote-mark { color: var(--color-accent); }
+.testimonial:nth-child(2) .testimonial__quote-mark {
+  color: var(--color-accent);
+}
 
 .testimonial__text {
   font-size: clamp(0.9375rem, 1.1vw, 1rem);
@@ -621,7 +610,9 @@
   flex-shrink: 0;
 }
 
-.testimonial:nth-child(2) .testimonial__avatar { background-color: var(--color-accent); }
+.testimonial:nth-child(2) .testimonial__avatar {
+  background-color: var(--color-accent);
+}
 
 .testimonial__name {
   display: block;
@@ -647,20 +638,19 @@
   overflow: hidden;
 }
 
-/* Isotipo (hoja simplificada, ver Navbar.astro) repetido como textura de
-   marca. Opacidad baja horneada en el propio SVG (stroke-opacity 0.08,
-   igual que el dot-grid que reemplaza) para que el trazo quede sutil sin
-   tocar la opacidad del banner ni del texto — ambos viven en capas/DOM
-   distintos de este pseudo-elemento. Tile de 64px: suficientemente grande
-   para no verse como ruido en móvil y suficientemente chico para repetirse
-   varias veces incluso en desktop ancho. */
+/* Corazones (public/decor/heart.svg) repetidos como textura de marca —
+   temática con el resto de la sección (Lottie del corazón, "Apadrina un
+   sueño"). Opacidad baja vía CSS (el archivo en sí es blanco sólido).
+   Tile de 70px: ícono simple (viewBox 24x24), no necesita tanto espacio
+   como la ilustración de hojas para leerse bien repetido. */
 .padrino-cta::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 6c7 3 11 10 11 16 0 6-5 11-11 11S9 28 9 22c0-6 4-13 11-16z' fill='none' stroke='white' stroke-width='1.5' stroke-opacity='0.08'/%3E%3Cpath d='M20 11v22' fill='none' stroke='white' stroke-width='1.5' stroke-opacity='0.08'/%3E%3C/svg%3E");
+  background-image: url("/decor/heart.svg");
   background-repeat: repeat;
-  background-size: 64px 64px;
+  background-size: 70px 70px;
+  opacity: 0.08;
   pointer-events: none;
   z-index: 0;
 }
@@ -684,11 +674,41 @@
 .padrino-cta__text {
   font-size: 1.0625rem;
   line-height: 1.7;
-  color: var(--color-white); /* --color-ink sobre --color-primary da 3.76:1, falla AA (4.5:1) */
+  color: var(--color-white);
+  /* --color-ink sobre --color-primary da 3.76:1, falla AA (4.5:1) */
 }
 
 .padrino-cta__btn {
   align-self: center;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+}
+
+.padrino-cta__btn:hover {
+  background-color: var(--color-white);
+  color: var(--color-accent);
+  box-shadow: 0 4px 16px oklch(0.22 0.04 150 / 0.15);
+}
+
+/* Corazón decorativo a la izquierda, en espejo (por defecto mira a la
+   izquierda; scaleX(-1) lo deja mirando hacia el texto, a la derecha).
+   Oculto en pantallas angostas, donde no hay margen junto al texto
+   centrado para que quepa sin superponerse. */
+.padrino-cta__heart {
+  position: absolute;
+  top: 50%;
+  left: 11%;
+  width: 400px;
+  height: 400px;
+  transform: translateY(-50%) scaleX(-1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1439px) {
+  .padrino-cta__heart {
+    display: none;
+  }
 }
 
 /* ═══ CONTACTO RÁPIDO ════════════════════════════════════════════════════ */
@@ -746,12 +766,6 @@
   justify-content: center;
 }
 
-/* ═══ SECTION SEPARATORS ═════════════════════════════════════════════════ */
-.programs,
-.testimonials {
-  border-top: 1px solid oklch(0.26 0.035 145 / 0.10);
-}
-
 /* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
 @media (max-width: 1023px) {
   .about__inner {
@@ -795,13 +809,6 @@
     gap: var(--space-3);
   }
 
-  .programs__body {
-    grid-template-columns: 1fr;
-  }
-
-  .programs__mascot {
-    display: none;
-  }
 }
 
 @media (max-width: 767px) {
@@ -814,16 +821,7 @@
     padding: var(--space-6) 0;
   }
 
-  .stats__item + .stats__item {
-    border-left: none;
-    padding-left: 0;
-  }
 
-  /* 2-col stats border reset: items in left column get no border */
-  .stats__item:nth-child(2n) {
-    border-left: 1px solid oklch(0.26 0.035 145 / 0.14);
-    padding-left: var(--space-4);
-  }
 
   .hero__actions {
     flex-direction: column;
@@ -945,6 +943,7 @@
 
 /* ═══ REDUCED MOTION OVERRIDES ═══════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
+
   /* !important: `.hero__text.visible .hero__title` (3 clases) es MÁS
      específico que `.hero__text .hero__title` (2 clases) de acá abajo, y
      el observer de BaseLayout agrega `.visible` sin mirar

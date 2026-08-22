@@ -7,38 +7,34 @@ export const programs = [
   {
     title: 'Programa de Niñez',
     desc: 'Acompañamos a niños en su camino hacia la inclusión escolar y el desarrollo de habilidades fundamentales.',
-    href: '/programas/ninez',
-    icon: 'seedling',
+    href: '/programas#ninez',
     color: 'var(--color-primary)',
   },
   {
     title: 'Programa de Jóvenes',
     desc: 'Fortalecemos habilidades para la vida, la autonomía y la participación social de adolescentes y jóvenes.',
-    href: '/programas/jovenes',
-    icon: 'sun',
-    color: 'var(--color-accent)',
+    href: '/programas#jovenes',
+    color: 'var(--color-primary)',
   },
   {
     title: 'Programa de Adultos',
     desc: 'Promovemos la autonomía funcional, el bienestar emocional y la inclusión comunitaria de adultos.',
-    href: '/programas/adultos',
-    icon: 'hands',
+    href: '/programas#adultos',
     color: 'var(--color-primary)',
   },
   {
     title: 'Plan Padrino',
     desc: 'Apadrina un sueño: apoya económicamente a una familia con un niño en proceso de inclusión educativa.',
-    href: '/programas/plan-padrino',
-    icon: 'heart',
-    color: 'var(--color-accent)',
+    href: '/programas#plan-padrino',
+    color: 'var(--color-primary)',
   },
 ];
 
 export const stats = [
-  { value: 'XX', label: 'Familias acompañadas', unit: '' },
+  { value: '150+', label: 'Familias acompañadas', unit: '' },
   { value: '5',  label: 'Programas activos',    unit: '' },
-  { value: 'XX', label: 'Talleres realizados',  unit: '' },
-  { value: 'XX', label: 'Años de experiencia',  unit: '' },
+  { value: '80+', label: 'Talleres realizados',  unit: '' },
+  { value: '10+', label: 'Años de experiencia',  unit: '' },
 ];
 
 export const testimonials = [

@@ -1,8 +1,10 @@
 /* ── PAGE HEADER ─────────────────────────────────────────────────────────── */
 .page-header {
   background-color: var(--color-bg);
-  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-block-start: clamp(4rem, 8vw, 7rem);
+  padding-block-end: 0;
 }
+
 .page-header__eyebrow {
   font-family: var(--font-display);
   font-size: 0.6875rem;
@@ -13,6 +15,7 @@
   margin-top: var(--space-5);
   margin-bottom: var(--space-4);
 }
+
 .page-header__title {
   color: var(--color-ink);
   font-size: clamp(3rem, 7vw, 6rem);
@@ -21,6 +24,7 @@
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
+
 .page-header__subtitle {
   color: var(--color-ink-muted);
   font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -36,36 +40,43 @@
   gap: clamp(3rem, 6vw, 6rem);
   align-items: center;
 }
+
 .about-grid__copy {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
 }
+
 .prose {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
+
 .prose p {
   font-size: 1.0625rem;
   line-height: 1.75;
   color: var(--color-ink);
 }
+
 .about-grid__visual {
   overflow: hidden;
   border-radius: var(--radius-lg);
   box-shadow: 0 8px 32px oklch(0.26 0.035 145 / 0.12);
   transition: box-shadow 400ms var(--ease-expo);
 }
+
 .about-grid__visual:hover {
   box-shadow: 0 16px 48px oklch(0.26 0.035 145 / 0.18);
 }
+
 .about-img {
   width: 100%;
   height: 500px;
   object-fit: cover;
   transition: transform 600ms var(--ease-expo);
 }
+
 .about-grid__visual:hover .about-img {
   transform: scale(1.06);
 }
@@ -76,12 +87,14 @@
   border-top: 1px solid oklch(0.26 0.035 145 / 0.10);
   border-bottom: 1px solid oklch(0.26 0.035 145 / 0.10);
 }
+
 .impacto-grid {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-left: 1px solid oklch(0.26 0.035 145 / 0.12);
 }
+
 .impacto-item {
   display: flex;
   flex-direction: column;
@@ -91,6 +104,7 @@
   padding: var(--space-10) var(--space-6);
   border-right: 1px solid oklch(0.26 0.035 145 / 0.12);
 }
+
 .impacto-num {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 4vw, 4rem);
@@ -99,6 +113,7 @@
   letter-spacing: -0.04em;
   color: var(--color-accent);
 }
+
 .impacto-label {
   font-family: var(--font-display);
   font-size: 0.75rem;
@@ -112,23 +127,40 @@
 }
 
 /* ── MISIÓN / VISIÓN — editorial asimétrico ─────────────────────────────── */
+.mv-section {
+  background-color: var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.mv-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("/decor/leaves.svg");
+  background-repeat: repeat;
+  background-size: 140px 140px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .mv-inner {
   display: grid;
-  grid-template-columns: 1fr 1px 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 0 clamp(2.5rem, 5vw, 5rem);
   align-items: start;
+  position: relative;
+  z-index: 1;
 }
-.mv-divider {
-  background-color: oklch(1 0 0 / 0.28);
-  align-self: stretch;
-  min-height: 160px;
-}
+
 .mv-panel {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
   padding-block: var(--space-2);
 }
+
 .mv-eyebrow {
   display: block;
   font-family: var(--font-display);
@@ -138,6 +170,7 @@
   text-transform: uppercase;
   color: oklch(1 0 0 / 0.85);
 }
+
 .mv-mision-text {
   font-size: clamp(1rem, 1.3vw, 1.125rem);
   line-height: 1.85;
@@ -146,28 +179,7 @@
   padding-left: var(--space-5);
   border-left: 3px solid oklch(1 0 0 / 0.35);
 }
-.mv-year-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-.mv-year-label {
-  font-family: var(--font-display);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: oklch(1 0 0 / 0.40);
-}
-.mv-year {
-  font-family: var(--font-display);
-  font-size: clamp(4.5rem, 9vw, 8rem);
-  font-weight: 700;
-  line-height: 0.85;
-  letter-spacing: -0.05em;
-  color: oklch(1 0 0 / 0.13);
-  max-width: none;
-}
+
 .mv-vision-text {
   font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
   line-height: 1.8;
@@ -175,59 +187,248 @@
   max-width: 52ch;
 }
 
-/* ── ENFOQUE — cuadrícula con iconos ────────────────────────────────────── */
-.enfoque-inner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
+/* ── Wave transition (mismo patrón que home/styles/index.css) ──────────── */
+.section-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 64px;
+  pointer-events: none;
+  z-index: 1;
 }
-.enfoque-header { text-align: center; }
+
+.section-wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.section-wave-path {
+  fill: var(--color-bg);
+}
+
+/* Cuando la sección siguiente es oscura (--color-ink) en vez de clara */
+.section-wave-path--ink {
+  fill: var(--color-ink);
+}
+
+/* ── ENFOQUE — cuadrícula con iconos ────────────────────────────────────── */
+/* Título/subtítulo a la izquierda. Position: absolute (no grid-column)
+   a propósito: una columna compartida con .enfoque-tree le quitaba
+   ancho al árbol y lo achicaba/desplazaba — esto lo saca del flujo por
+   completo, así .enfoque-tree se queda exactamente con el mismo
+   ancho/alto/posición que tenía antes de tocar el header. */
+.enfoque-inner {
+  position: relative;
+}
+
+.enfoque-header {
+  position: absolute;
+  left: -0.75rem;
+  top: 0;
+  max-width: 300px;
+  text-align: left;
+  z-index: 1;
+}
+
 .enfoque-header p {
   color: var(--color-ink-muted);
   margin-top: var(--space-3);
-  margin-inline: auto;
-  text-align: center;
+  text-align: left;
 }
 
-.principios-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-top: 1px solid oklch(0.26 0.035 145 / 0.12);
-  border-left: 1px solid oklch(0.26 0.035 145 / 0.12);
+/* Árbol que crece (Lottie) con los 7 pilares como hojas de follaje.
+   Contenedor más alto que una sección normal a propósito — "alargar la
+   sección" pedido por el usuario, para darle espacio de crecimiento
+   vertical al árbol. */
+/* La sección ocupa menos alto en el layout (.enfoque-tree), pero el
+   árbol se dibuja más grande que esa caja y se centra verticalmente
+   sobre ella, desbordando arriba/abajo — mismo truco que .stats__plane
+   (decoración position:absolute que no infla la altura del contenedor). */
+.enfoque-tree {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 46vw, 520px);
 }
-.principio-row {
+
+.enfoque-tree__lottie {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 53%;
+  width: 100%;
+  height: clamp(680px, 92vw, 1040px);
+  transform: translateY(-50%);
+}
+
+.enfoque-leaves {
+  list-style: none;
+}
+
+/* Entrada propia de .enfoque-leaf, sin tocar el keyframe zoomIn
+   compartido (usado — o reservado para futuro uso — por el resto del
+   sitio vía [data-anim="zoomIn"]): el zoom genérico (scale 0.92→1) es
+   casi imperceptible, así que 2-3 hojas de la misma oleada apareciendo
+   con el mismo timing se sentían como un solo "golpe" en vez de una
+   transición. Esta anula solo el animation-name/duration para
+   .enfoque-leaf, con más recorrido (escala + un pequeño ascenso) y más
+   duración — el data-anim="zoomIn" en el markup sigue sirviendo para
+   enganchar el observer compartido de BaseLayout.astro, nada más. */
+@keyframes enfoqueLeafGrow {
+  from {
+    opacity: 0;
+    transform: scale(0.55) translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.enfoque-leaf[data-anim="zoomIn"].visible {
+  animation-name: enfoqueLeafGrow;
+  animation-duration: 0.9s;
+}
+
+/* Ancladas por esquina superior izquierda (no por centro): un
+   transform: translate(-50%,-50%) estático chocaría con el transform:
+   scale(...) que ya anima el keyframe zoomIn (ver [data-anim] en
+   global.css) — una sola propiedad `transform` no puede sostener las
+   dos cosas a la vez sin composición explícita. */
+/* Nube en vez de blob simple: un óvalo base + 2 bultos (::before/::after)
+   que se traslapan arriba-izquierda y arriba-derecha, mismo lenguaje
+   visual "cúmulo de círculos" que ya usa el follaje del árbol real.
+   Todo en % del propio elemento (no px fijos) para que escale bien con
+   el clamp() de abajo. El texto necesita position:relative + z-index
+   propio: sin eso, los bultos (position:absolute, z-index:auto) pintan
+   encima del texto en vez de detrás — position:absolute siempre gana
+   sobre contenido no posicionado, sin importar el orden en el DOM. */
+.enfoque-leaf {
+  position: absolute;
+  left: var(--leaf-x);
+  top: var(--leaf-y);
+  width: clamp(108px, 15vw, 148px);
+  height: clamp(88px, 12vw, 116px);
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-6) var(--space-5);
-  border-bottom: 1px solid oklch(0.26 0.035 145 / 0.12);
-  border-right: 1px solid oklch(0.26 0.035 145 / 0.12);
-  transition: background-color 200ms var(--ease-expo);
+  justify-content: center;
+  padding: var(--space-3);
+  text-align: center;
+  border-radius: 50% / 62%;
+  box-shadow: 0 10px 24px oklch(0.26 0.035 145 / 0.18);
 }
-.principio-row:hover {
-  background-color: oklch(0.67 0.065 155 / 0.07);
+
+/* Nube más chica para el grupo del medio (atención, enfoque,
+   participación, desarrollo, respeto) — Inclusión y Fortalecimiento
+   (fila de abajo) se quedan en el tamaño base. */
+.enfoque-leaf--small {
+  width: clamp(84px, 11.5vw, 114px);
+  height: clamp(68px, 9.2vw, 90px);
 }
-.principio-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  color: var(--color-primary);
+
+.enfoque-leaf::before,
+.enfoque-leaf::after {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  border-radius: 50%;
 }
-.principio-text {
+
+.enfoque-leaf::before {
+  width: 52%;
+  height: 62%;
+  top: -24%;
+  left: 6%;
+}
+
+.enfoque-leaf::after {
+  width: 46%;
+  height: 56%;
+  top: -18%;
+  right: 8%;
+}
+
+/* Izquierda/derecha/abajo no caben en ::before/::after (CSS solo da 2
+   pseudo-elementos por nodo) — son <span> reales, generados junto al
+   texto en Enfoque.astro, mismo truco de background-color: inherit. */
+.enfoque-leaf__bump {
+  position: absolute;
+  background-color: inherit;
+  border-radius: 50%;
+}
+
+.enfoque-leaf__bump--left {
+  width: 50%;
+  height: 56%;
+  top: 22%;
+  left: -18%;
+}
+
+.enfoque-leaf__bump--right {
+  width: 50%;
+  height: 56%;
+  top: 22%;
+  right: -18%;
+}
+
+.enfoque-leaf__bump--bottom {
+  width: 56%;
+  height: 50%;
+  bottom: -20%;
+  left: 22%;
+}
+
+.enfoque-leaf--1 {
+  background-color: var(--color-primary);
+}
+
+.enfoque-leaf--2 {
+  background-color: var(--color-secondary);
+}
+
+.enfoque-leaf--3 {
+  background-color: var(--color-accent);
+}
+
+.enfoque-leaf__text {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 0.9375rem;
-  color: var(--color-ink);
-  line-height: 1.45;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: var(--color-white);
+  max-width: none;
 }
 
 /* ── POR QUÉ ELEGIRNOS — lista numerada ─────────────────────────────────── */
 .razones-inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
 }
+
+/* Decorativo, position:absolute: no participa del flujo — el texto de
+   .razones-list (max-width: 62ch) se queda exactamente como estaba,
+   esto solo ocupa el espacio libre a la derecha que ya existía.
+   aspect-ratio en vez de width+height fijos: el lottie es panorámico
+   (1366×768 ≈ 16:9), forzarlo a una caja cuadrada lo dejaba angosto
+   (contain-fit dejaba una franja delgada centrada con mucho margen
+   vacío arriba/abajo). */
+.razones-family {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: clamp(400px, 100vw, 600px);
+  aspect-ratio: 1366 / 768;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 .razones-header p {
   color: var(--color-ink-muted);
   margin-top: var(--space-3);
@@ -240,6 +441,7 @@
   flex-direction: column;
   max-width: 62ch;
 }
+
 .razon-row {
   display: flex;
   align-items: flex-start;
@@ -247,13 +449,16 @@
   padding-block: var(--space-6);
   border-bottom: 1px solid oklch(0.26 0.035 145 / 0.10);
 }
+
 .razon-row:first-child {
   padding-top: 0;
 }
+
 .razon-row:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
+
 .razon-row__badge {
   flex-shrink: 0;
   display: flex;
@@ -268,6 +473,7 @@
   font-size: 0.9375rem;
   font-weight: 700;
 }
+
 .razon-row__icon {
   flex-shrink: 0;
   width: 22px;
@@ -275,11 +481,13 @@
   margin-top: var(--space-2);
   color: var(--color-accent);
 }
+
 .razon-row__copy {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
+
 .razon-row__title {
   font-family: var(--font-display);
   font-size: 1.0625rem;
@@ -287,6 +495,7 @@
   color: var(--color-ink);
   line-height: 1.3;
 }
+
 .razon-row__desc {
   font-size: 0.9375rem;
   line-height: 1.65;
@@ -295,19 +504,52 @@
 }
 
 /* ── EQUIPO — franja de avatares ────────────────────────────────────────── */
+/* Mismo fondo verde + textura de hojas + onda que .aliados-section (pedido
+   explícito del usuario: "quiero lo mismo para Nuestro equipo"). Sección
+   siguiente es Por qué elegirnos (--color-bg claro), de ahí la variante
+   default de la onda (no la --ink que usa Aliados, porque a Aliados le
+   sigue un CTA oscuro). */
+.equipo-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.equipo-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("/decor/leaves.svg");
+  background-repeat: repeat;
+  background-size: 140px 140px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .equipo-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-10);
   text-align: center;
 }
-.equipo-header { text-align: center; }
+
+.equipo-header {
+  text-align: center;
+}
+
+#equipo-heading {
+  color: var(--color-white);
+}
+
 .equipo-note {
   font-style: italic;
-  color: var(--color-ink-muted);
+  color: oklch(1 0 0 / 0.75);
   margin-top: var(--space-3);
   margin-inline: auto;
 }
+
 .equipo-strip {
   display: flex;
   gap: clamp(2rem, 5vw, 4.5rem);
@@ -315,6 +557,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .team-member {
   display: flex;
   flex-direction: column;
@@ -323,48 +566,81 @@
   text-align: center;
   min-width: 110px;
 }
+
 .team-member__avatar {
   width: 88px;
   height: 88px;
   border-radius: var(--radius-full);
-  background-color: oklch(0.67 0.065 155 / 0.07);
-  border: 2px solid oklch(0.67 0.065 155 / 0.22);
+  background-color: oklch(1 0 0 / 0.12);
+  border: 2px solid oklch(1 0 0 / 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary);
+  color: oklch(1 0 0 / 0.85);
   transition: border-color 280ms var(--ease-expo), background-color 280ms var(--ease-expo);
 }
+
 .team-member:hover .team-member__avatar {
-  border-color: var(--color-primary);
-  background-color: oklch(0.67 0.065 155 / 0.14);
+  border-color: var(--color-white);
+  background-color: oklch(1 0 0 / 0.2);
 }
+
 .team-member__name {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9375rem;
-  color: var(--color-ink);
+  color: var(--color-white);
   max-width: none;
 }
+
 .team-member__role {
   font-size: 0.8125rem;
-  color: var(--color-ink-muted);
+  color: oklch(1 0 0 / 0.7);
   font-style: italic;
   max-width: none;
 }
 
 /* ── ALIADOS ─────────────────────────────────────────────────────────────── */
+/* Mismo fondo verde + textura de hojas que .mv-section (pedido: "el mismo
+   efecto de onda... también el fondo y el color de fondo de Misión y
+   Visión"). Sección siguiente es ContactCta (--color-ink), de ahí que su
+   wave use la variante --ink en vez de la default (--color-bg). */
+.aliados-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.aliados-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("/decor/leaves.svg");
+  background-repeat: repeat;
+  background-size: 140px 140px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .aliados-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-6);
   text-align: center;
 }
+
+#aliados-heading {
+  color: var(--color-white);
+}
+
 .aliados-note {
   font-style: italic;
-  color: var(--color-ink-muted);
+  color: oklch(1 0 0 / 0.75);
 }
+
 /* Carrusel horizontal nativo (scroll-snap, sin librería). El contenedor
    scrolleable es el mismo elemento que recibe tabindex, para que el
    comportamiento nativo del navegador (flechas ← → scrollean la región
@@ -381,10 +657,12 @@
   -webkit-overflow-scrolling: touch;
   border-radius: var(--radius-sm);
 }
+
 .aliados-carousel:focus-visible {
-  outline: 3px solid var(--color-accent);
+  outline: 3px solid var(--color-white);
   outline-offset: 4px;
 }
+
 .aliados-track {
   display: flex;
   gap: var(--space-5);
@@ -394,22 +672,24 @@
   min-width: 100%;
   padding: var(--space-2) var(--space-2) var(--space-6);
 }
+
 .aliado-badge {
   flex: none;
   width: 96px;
   height: 96px;
   border-radius: var(--radius-full);
-  background-color: oklch(0.67 0.065 155 / 0.06);
-  border: 1px solid oklch(0.67 0.065 155 / 0.18);
+  background-color: oklch(1 0 0 / 0.12);
+  border: 1px solid oklch(1 0 0 / 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   scroll-snap-align: center;
-  box-shadow: 0 50px 30px -42px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 50px 30px -42px rgba(0, 0, 0, 0.25);
 }
+
 .aliado-badge__icon {
   font-size: 32px;
-  color: oklch(0.67 0.065 155 / 0.45);
+  color: oklch(1 0 0 / 0.85);
 }
 
 /* ── CTA ─────────────────────────────────────────────────────────────────── */
@@ -419,6 +699,7 @@
   text-align: center;
   background-color: var(--color-ink);
 }
+
 .contact-cta__texture {
   position: absolute;
   inset: 0;
@@ -426,6 +707,7 @@
   background-size: 28px 28px;
   pointer-events: none;
 }
+
 .contact-cta__eyebrow {
   font-family: var(--font-display);
   font-size: 0.6875rem;
@@ -435,6 +717,7 @@
   color: oklch(1 0 0 / 0.40);
   margin-bottom: var(--space-3);
 }
+
 .contact-cta__inner {
   position: relative;
   z-index: 1;
@@ -443,34 +726,66 @@
   align-items: center;
   gap: var(--space-8);
 }
+
 .contact-cta__inner h2 {
   color: white;
   font-size: clamp(1.75rem, 3vw, 2.5rem);
 }
+
 .contact-cta__actions {
   display: flex;
   gap: var(--space-4);
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .contact-cta__actions .btn-outline {
   border-color: oklch(1 0 0 / 0.4);
   color: oklch(1 0 0 / 0.85);
 }
+
 .contact-cta__actions .btn-outline:hover {
   background-color: var(--color-white);
   color: var(--color-ink);
 }
 
 /* ── FONDOS DE SECCIÓN ───────────────────────────────────────────────────── */
-.historia-section  { background-color: var(--color-bg); }
-.impacto-section   { background-color: var(--color-surface); }
-.mv-section        { background-color: var(--color-ink); }
-.enfoque-section   { background-color: var(--color-bg); }
-.razones-section   { background-color: var(--color-bg); }
-.equipo-section    { background-color: var(--color-bg); }
-.aliados-section   { background-color: var(--color-bg); }
-.contact-cta       { background-color: var(--color-ink); }
+.historia-section {
+  background-color: var(--color-bg);
+  padding-block-start: clamp(2rem, 4vw, 3rem);
+}
+
+.impacto-section {
+  background-color: var(--color-surface);
+}
+
+/* overflow:hidden en vez de z-index negativo: el lottie desborda por
+   arriba/abajo de .enfoque-tree a propósito (queda más grande, ver
+   comentario en .enfoque-tree__lottie) — recortarlo en el borde de la
+   SECCIÓN (no del contenedor del árbol) da el mismo resultado visual
+   que "quede detrás de las secciones vecinas" sin depender de en qué
+   contexto de apilamiento cae un z-index negativo, que varía según
+   ancestros. */
+.enfoque-section {
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+.razones-section {
+  background-color: var(--color-bg);
+}
+
+.equipo-section {
+  background-color: var(--color-primary);
+}
+
+.aliados-section {
+  background-color: var(--color-primary);
+}
+
+.contact-cta {
+  background-color: var(--color-ink);
+}
 
 /* Offset anchor-scroll targets so the fixed navbar doesn't cover the heading
    when navigating from the Nosotros mega-menu (e.g. /nosotros#historia) */
@@ -481,24 +796,34 @@
   scroll-margin-top: 84px;
 }
 
-/* Hairlines entre secciones del mismo fondo */
-.razones-section,
-.equipo-section,
-.aliados-section {
-  border-top: 1px solid oklch(0.26 0.035 145 / 0.10);
-}
+/* Antes .razones-section tenía un hairline para separarse de Equipo
+   (ambos fondo blanco). Equipo ahora es un bloque verde con su propia
+   onda en el borde inferior — ese hairline quedaba pegado justo debajo
+   de la onda y se veía como una línea oscura de más. Ya no aplica. */
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .about-grid__visual { order: -1; }
-  .about-img { height: 360px; }
+  .razones-family {
+    display: none;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid__visual {
+    order: -1;
+  }
+
+  .about-img {
+    height: 360px;
+  }
 
   .mv-inner {
     grid-template-columns: 1fr;
     gap: var(--space-10);
   }
-  .mv-divider { display: none; }
+
   .mv-panel:first-child {
     padding-bottom: var(--space-8);
     border-bottom: 1px solid oklch(1 0 0 / 0.28);
@@ -506,26 +831,80 @@
 }
 
 @media (max-width: 767px) {
-  .principios-list {
-    grid-template-columns: 1fr;
+
+  /* Mobile: el header absoluto no cabe cómodo al lado del árbol a este
+     ancho — vuelve al flujo normal, arriba del árbol. */
+  .enfoque-header {
+    position: static;
+    max-width: none;
   }
+
+  /* El árbol (lottie panorámico dentro de una caja angosta) se veía
+     roto/perdido en mobile — pedido explícito del usuario: quitarlo del
+     todo ahí, no intentar arreglar el encaje. Los 7 puntos se quedan,
+     solo pierden el fondo decorativo. */
+  .enfoque-tree__lottie {
+    display: none;
+  }
+
+  .enfoque-tree {
+    height: auto;
+    margin-top: var(--space-8);
+  }
+
+  /* Sin árbol de fondo, las coordenadas --leaf-x/--leaf-y (calibradas
+     contra la copa del árbol de escritorio) ya no tienen sentido — a
+     este ancho caían todas amontonadas/superpuestas. En mobile se
+     abandona el posicionamiento absoluto por completo: grid en flujo
+     normal, el gap separa el eje X solo con CSS. */
+  .enfoque-leaves {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-6);
+    column-gap: var(--space-4);
+    justify-items: center;
+  }
+
+  /* Séptimo punto (Fortalecimiento comunitario) queda solo en su fila
+     al ser impar en una grilla de 2 columnas — centrado en vez de
+     pegado a la izquierda. */
+  .enfoque-leaf:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  .enfoque-leaf {
+    position: static;
+    width: clamp(84px, 26vw, 108px);
+    height: clamp(70px, 22vw, 92px);
+  }
+
+  .enfoque-leaf__text {
+    font-size: 0.6875rem;
+  }
+
   .equipo-strip {
     gap: var(--space-8);
   }
+
   .aliados-track {
     gap: var(--space-4);
     justify-content: flex-start;
   }
+
   .aliado-badge {
     width: 76px;
     height: 76px;
   }
+
   .aliado-badge__icon {
     font-size: 26px;
   }
+
   .impacto-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .impacto-item:nth-child(3),
   .impacto-item:nth-child(4) {
     border-top: 1px solid oklch(0.26 0.035 145 / 0.12);
@@ -536,6 +915,7 @@
   .razon-row {
     gap: var(--space-4);
   }
+
   .razon-row__badge {
     width: 2.25rem;
     height: 2.25rem;

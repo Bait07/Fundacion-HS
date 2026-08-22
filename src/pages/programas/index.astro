@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
-
 const seo = {
   title: 'Nuestros Programas | Inclusión y Desarrollo para Personas con Discapacidad — FHS Bogotá',
   description: 'Programas especializados para niños, jóvenes y adultos con discapacidad cognitiva en Bogotá: talleres de vida independiente, inclusión escolar, terapias y Plan Padrino.',
@@ -10,59 +8,66 @@ const seo = {
 const programs = [
   {
     id: 'ninez',
-    href: '/programas/ninez',
+    href: '/contacto?motivo=informacion-programas',
     title: 'Programa de Niñez',
     subtitle: 'Primeros Pasos hacia la Inclusión Escolar',
     desc: 'Fortalecemos en niños y niñas las habilidades básicas para el acercamiento, la adaptación y la inclusión en el entorno escolar y social.',
     overlayColor: 'oklch(0.67 0.065 155 / 0.22)',
     bgImg: 'https://picsum.photos/seed/children-classroom-colombia/800/560',
-    tags: ['Inclusión escolar', 'Autonomía básica', 'Socialización', 'Lenguaje'],
+    areas: ['Adaptación al entorno escolar', 'Habilidades cognitivas y comunicativas', 'Autonomía básica', 'Socialización y manejo emocional', 'Acompañamiento terapéutico'],
     navLabel: 'Niñez',
+    lottie: '/lottie-ninos.lottie',
   },
   {
     id: 'jovenes',
-    href: '/programas/jovenes',
+    href: '/contacto?motivo=informacion-programas',
     title: 'Programa de Adolescentes y Jóvenes',
     subtitle: 'Habilidades para la Vida y la Inclusión Social',
     desc: 'Fortalecemos habilidades personales, sociales y funcionales que favorecen la autonomía, la participación social y el proyecto de vida.',
     overlayColor: 'oklch(0.41 0.138 143 / 0.22)',
     bgImg: 'https://picsum.photos/seed/youth-workshop-bogota/800/560',
-    tags: ['Habilidades para la vida', 'Independencia', 'Formación ocupacional'],
+    areas: ['Habilidades para la vida', 'Independencia funcional', 'Comunicación y relaciones sociales', 'Formación ocupacional', 'Participación comunitaria'],
     navLabel: 'Jóvenes',
+    highlight: true,
   },
   {
     id: 'adultos',
-    href: '/programas/adultos',
+    href: '/contacto?motivo=informacion-programas',
     title: 'Programa para Adultos',
     subtitle: 'Autonomía, Participación y Calidad de Vida',
     desc: 'Promovemos la autonomía funcional, la participación social y el bienestar integral de adultos con discapacidad cognitiva e intelectual.',
     overlayColor: 'oklch(0.67 0.065 155 / 0.22)',
     bgImg: 'https://picsum.photos/seed/adults-activities-foundation/800/560',
-    tags: ['Vida independiente', 'Bienestar emocional', 'Inclusión comunitaria'],
+    areas: ['Vida independiente', 'Participación social', 'Actividades ocupacionales', 'Bienestar emocional', 'Inclusión comunitaria'],
     navLabel: 'Adultos',
+    lottie: '/lottie-adult.lottie',
   },
   {
     id: 'servicios',
-    href: '/programas/servicios',
+    href: '/contacto?motivo=informacion-programas',
     title: 'Servicios Profesionales',
     subtitle: 'Apoyo Integral para la Inclusión',
     desc: 'Atención interdisciplinaria orientada al fortalecimiento del desarrollo integral y la inclusión educativa y social.',
     overlayColor: 'oklch(0.26 0.035 145 / 0.22)',
     bgImg: 'https://picsum.photos/seed/therapy-session-colombia/800/560',
-    tags: ['Psicología', 'Fonoaudiología', 'Terapia Ocupacional'],
+    areasLabel: 'Nuestros servicios',
+    areas: ['Psicología — acompañamiento emocional y apoyo conductual', 'Fonoaudiología — estimulación del lenguaje y comunicación funcional', 'Terapia Ocupacional — motricidad e integración sensorial'],
     navLabel: 'Servicios',
+    highlight: true,
   },
   {
     id: 'plan-padrino',
-    href: '/programas/plan-padrino',
+    href: '/contacto?motivo=plan-padrino',
     title: 'Plan Padrino',
     subtitle: 'Apadrina un Sueño, Transforma una Vida',
     desc: 'Una estrategia solidaria para brindar apoyo económico a niños con discapacidad cognitiva, facilitando su acceso a la educación inclusiva de calidad.',
     overlayColor: 'oklch(0.41 0.138 143 / 0.26)',
     bgImg: 'https://picsum.photos/seed/sponsor-child-education/800/560',
-    tags: ['Educación inclusiva', 'Apoyo económico', 'Solidaridad'],
+    areasLabel: 'Población beneficiaria',
+    areas: ['Niños, niñas y adolescentes con discapacidad cognitiva e intelectual', 'Familias de bajos recursos económicos', 'En riesgo de deserción escolar', 'Vinculados o en proceso de ingreso a instituciones inclusivas'],
     navLabel: 'Plan Padrino',
     featured: true,
+    lottie: '/lottie-heart-hi.lottie',
   },
 ];
 ---
@@ -71,19 +76,13 @@ const programs = [
 
   <!-- ── Page Header ── -->
   <section class="page-header bg-primary" aria-labelledby="page-title">
-    <span class="page-header__bg-num" aria-hidden="true">5</span>
     <div class="container">
-      <Breadcrumbs crumbs={[{ label: 'Programas' }]} />
       <div class="page-header__body">
         <div class="page-header__text">
           <h1 id="page-title" class="reveal">Nuestros programas</h1>
           <p class="page-header__subtitle reveal reveal-delay-1">
             Cinco programas diseñados para acompañar cada etapa de la vida con especialización, calidez e interdisciplinariedad.
           </p>
-        </div>
-        <div class="page-header__count reveal reveal-delay-2" aria-hidden="true">
-          <span class="page-header__count-num">5</span>
-          <span class="page-header__count-label">programas</span>
         </div>
       </div>
     </div>
@@ -111,26 +110,30 @@ const programs = [
       {programs.map((prog, i) => (
         <article
           id={prog.id}
-          class={`prog-row ${prog.featured ? 'prog-row--featured' : ''} ${i % 2 !== 0 ? 'prog-row--reversed' : ''}`}
+          class={`prog-row ${prog.featured ? 'prog-row--featured' : ''} ${prog.highlight ? 'prog-row--highlight' : ''} ${(i % 2 !== 0 || prog.reversed) ? 'prog-row--reversed' : ''}`}
         >
 
           <!-- Visual side -->
           <div class="prog-row__visual reveal reveal-visual">
-            <div class="prog-row__img-wrap">
-              <img
-                src={prog.bgImg}
-                alt={`${prog.title} — ${prog.subtitle}`}
-                width="800"
-                height="560"
-                loading="lazy"
-                class="prog-row__img"
-              />
-              <div
-                class="prog-row__overlay"
-                style={`--prog-overlay: ${prog.overlayColor};`}
-                aria-hidden="true"
-              ></div>
-            </div>
+            {prog.lottie ? (
+              <dotlottie-wc class="prog-row__lottie" src={prog.lottie} autoplay loop aria-hidden="true"></dotlottie-wc>
+            ) : (
+              <div class="prog-row__img-wrap">
+                <img
+                  src={prog.bgImg}
+                  alt={`${prog.title} — ${prog.subtitle}`}
+                  width="800"
+                  height="560"
+                  loading="lazy"
+                  class="prog-row__img"
+                />
+                <div
+                  class="prog-row__overlay"
+                  style={`--prog-overlay: ${prog.overlayColor};`}
+                  aria-hidden="true"
+                ></div>
+              </div>
+            )}
             {prog.featured && (
               <div class="prog-row__badge" aria-label="Programa destacado">
                 <span>Programa estrella</span>
@@ -144,13 +147,21 @@ const programs = [
             <p class="prog-row__subtitle reveal">{prog.subtitle}</p>
             <h2 class="prog-row__title reveal reveal-delay-1">{prog.title}</h2>
             <p class="prog-row__desc reveal reveal-delay-2">{prog.desc}</p>
-            <ul class="prog-row__tags reveal reveal-delay-3" role="list" aria-label="Áreas de trabajo">
-              {prog.tags.map(tag => (
-                <li class="prog-row__tag">{tag}</li>
+            <p class="prog-row__areas-label reveal reveal-delay-3">{prog.areasLabel ?? 'Áreas de trabajo'}</p>
+            <ul class="prog-row__areas reveal reveal-delay-3" role="list">
+              {prog.areas.map(area => (
+                <li class="prog-row__area">
+                  <span class="prog-row__area-check" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  </span>
+                  {area}
+                </li>
               ))}
             </ul>
             <a href={prog.href} class="btn btn-primary prog-row__cta reveal reveal-delay-4">
-              Ver programa completo
+              Solicitar información
               <span class="prog-row__arrow" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -159,6 +170,13 @@ const programs = [
             </a>
           </div>
 
+          {prog.highlight && (
+            <div class="section-wave" aria-hidden="true">
+              <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path class="section-wave-path" d="M0,40 C240,64 480,16 720,40 C960,64 1200,20 1440,40 L1440,64 L0,64 Z"/>
+              </svg>
+            </div>
+          )}
         </article>
       ))}
     </div>
@@ -173,7 +191,7 @@ const programs = [
       </p>
       <div class="cta-bottom__actions reveal reveal-delay-2">
         <a href="/donaciones" class="btn btn-accent">Hacer una donación</a>
-        <a href="/programas/plan-padrino" class="btn btn-outline">Ser padrino</a>
+        <a href="/programas#plan-padrino" class="btn btn-outline">Ser padrino</a>
       </div>
     </div>
   </section>
@@ -187,20 +205,6 @@ const programs = [
   position: relative;
   overflow: hidden;
   padding-block: clamp(3rem, 6vw, 5rem);
-}
-
-.page-header__bg-num {
-  position: absolute;
-  right: -0.04em;
-  bottom: -0.18em;
-  font-family: var(--font-display);
-  font-size: clamp(8rem, 22vw, 18rem);
-  font-weight: 800;
-  line-height: 1;
-  color: oklch(1 0 0 / 0.08);
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: -0.04em;
 }
 
 .page-header h1 {
@@ -240,35 +244,10 @@ const programs = [
   max-width: 56ch;
 }
 
-.page-header__count {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0;
-  flex-shrink: 0;
-}
-
-.page-header__count-num {
-  font-family: var(--font-display);
-  font-size: clamp(3.5rem, 8vw, 6rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: oklch(1 0 0 / 0.18);
-}
-
-.page-header__count-label {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: oklch(1 0 0 / 0.45);
-}
-
 /* ── Quick nav ─────────────────────────────────────────────────── */
 .qnav {
   position: sticky;
-  top: 68px;
+  top: var(--nav-height);
   z-index: 15;
   background-color: var(--color-bg);
   border-bottom: 1px solid oklch(0.26 0.035 145 / 0.1);
@@ -348,7 +327,7 @@ const programs = [
   grid-template-columns: 1fr 1fr;
   gap: clamp(2.5rem, 5vw, 5rem);
   align-items: center;
-  scroll-margin-top: 128px; /* sticky navbar 68px + qnav ~44px + buffer */
+  scroll-margin-top: calc(var(--nav-height) + 44px + 16px); /* navbar + qnav ~44px + buffer */
 }
 
 .prog-row--reversed .prog-row__visual { order: 2; }
@@ -357,6 +336,14 @@ const programs = [
 /* ── Image visual ─────────────────────────────────────────────── */
 .prog-row__visual {
   position: relative;
+}
+
+/* ── Lottie visual (Niñez) — más grande que la foto para que la
+   animación se note, sin salir del grid de la fila. ───────────── */
+.prog-row__lottie {
+  display: block;
+  width: 100%;
+  height: clamp(420px, 34vw, 620px);
 }
 
 /* Override global .reveal for visual: scale entry instead of translateY */
@@ -483,30 +470,50 @@ const programs = [
   color: var(--color-ink-muted);
 }
 
-/* ── Tags ───────────────────────────────────────────────────────── */
-.prog-row__tags {
+/* ── Áreas de trabajo (checklist) ──────────────────────────────────
+   Reemplaza los tags-pill anteriores: el usuario pidió más contenido
+   visible por programa sin volver a páginas separadas ni un acordeón;
+   esta lista recupera el contenido de "¿Qué trabajamos?" que tenían
+   las sub-páginas eliminadas, en formato compacto de checklist. */
+.prog-row__areas-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-muted);
+  max-width: none;
+  margin-top: var(--space-2);
+}
+
+.prog-row__areas {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-2);
   list-style: none;
 }
 
-.prog-row__tag {
-  background-color: oklch(0.67 0.065 155 / 0.1);
-  color: var(--color-primary);
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 0.8125rem;
-  padding: 0.3rem 0.75rem;
-  border-radius: var(--radius-full);
-  border: 1px solid oklch(0.67 0.065 155 / 0.18);
-  cursor: default;
-  transition: background-color 200ms ease, border-color 200ms ease;
+.prog-row__area {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  padding: 0.5rem 0.75rem;
+  background-color: oklch(0.67 0.065 155 / 0.07);
+  border-radius: var(--radius-sm);
+  transition: background-color 200ms ease;
 }
 
-.prog-row__tag:hover {
-  background-color: oklch(0.67 0.065 155 / 0.2);
-  border-color: oklch(0.67 0.065 155 / 0.35);
+.prog-row__area:hover {
+  background-color: oklch(0.67 0.065 155 / 0.14);
+}
+
+.prog-row__area-check {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 /* ── CTA button arrow ───────────────────────────────────────────── */
@@ -576,6 +583,108 @@ const programs = [
   color: oklch(0.41 0.138 143 / 0.7);
 }
 
+/* ── Highlighted rows (Niñez / Adultos / Plan Padrino) ─────────────
+   Same green-banner treatment as the home page's .stats / .padrino-cta:
+   full-bleed background, heart texture, wave transition at the
+   bottom, white text — overrides .prog-row--featured's green
+   title/subtitle when both classes land on the same row (Plan
+   Padrino). Both the green fill and the heart texture bleed via
+   left:50%/width:100vw/margin-left:-50vw (::before / ::after) rather
+   than box-shadow+clip-path: that combo left a subpixel rounding
+   seam (a hairline sliver of the shadow color) right at the clip
+   edge, visible as a thin green line under the wave. */
+.prog-row--highlight {
+  position: relative;
+  padding-block: clamp(3rem, 6vw, 5rem) calc(clamp(3rem, 6vw, 5rem) + 64px);
+}
+
+.prog-row--highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  background-color: var(--color-primary);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.prog-row--highlight::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  background-image: url("/decor/heart.svg");
+  background-repeat: repeat;
+  background-size: 70px 70px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.prog-row--highlight .prog-row__visual,
+.prog-row--highlight .prog-row__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.prog-row--highlight .prog-row__subtitle,
+.prog-row--highlight .prog-row__title,
+.prog-row--highlight .prog-row__desc,
+.prog-row--highlight .prog-row__areas-label,
+.prog-row--highlight .prog-row__area {
+  color: var(--color-white);
+}
+
+.prog-row--highlight .prog-row__area {
+  background-color: oklch(1 0 0 / 0.1);
+}
+
+.prog-row--highlight .prog-row__area:hover {
+  background-color: oklch(1 0 0 / 0.18);
+}
+
+.prog-row--highlight .prog-row__area-check {
+  color: var(--color-white);
+}
+
+.prog-row--highlight .prog-row__cta.btn-primary {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+}
+
+.prog-row--highlight .prog-row__cta.btn-primary:hover {
+  background-color: var(--color-white);
+  color: var(--color-accent);
+  box-shadow: 0 4px 16px oklch(0.22 0.04 150 / 0.15);
+}
+
+.prog-row--highlight .section-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  height: 64px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.prog-row--highlight .section-wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.prog-row--highlight .section-wave-path {
+  fill: var(--color-bg);
+}
+
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   .prog-row {
@@ -587,7 +696,6 @@ const programs = [
     order: 0;
   }
   .prog-row__img { height: 280px; }
-  .page-header__count { display: none; }
 }
 
 @media (max-width: 639px) {
@@ -617,6 +725,8 @@ const programs = [
   }
 }
 </style>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>
 
 <script>
 // ── Quick-nav active state via IntersectionObserver ─────────────

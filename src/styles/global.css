@@ -90,6 +90,11 @@
   --z-dropdown: 10;
   --z-sticky:   20;
   --z-fab:      30;
+
+  /* Navbar height — referenced by every fixed/sticky offset that sits
+     below the navbar (BaseLayout main padding, mega-menu tops, mobile
+     menu inset, sticky sidebars). Change once here, not per-file. */
+  --nav-height: 104px;
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────── */
@@ -208,15 +213,19 @@ img, svg {
   box-shadow: 0 4px 16px oklch(0.55 0.155 154 / 0.3);
 }
 
+/* btn-accent: mismo verde que btn-primary (antes usaba --color-accent,
+   un verde bosque tan oscuro que se percibía como botón negro). Se
+   mantiene la clase por los ~15 usos existentes en el markup, pero ya
+   no es un verde distinto — un solo verde de marca en todos los CTA. */
 .btn-accent {
-  background-color: var(--color-accent);
+  background-color: var(--color-primary);
   color: var(--color-white);
 }
 
 .btn-accent:hover {
-  background-color: oklch(0.34 0.138 143);
-  color: var(--color-white);
-  box-shadow: 0 4px 16px oklch(0.41 0.138 143 / 0.35);
+  background-color: var(--color-primary-light);
+  color: var(--color-ink);
+  box-shadow: 0 4px 16px oklch(0.55 0.155 154 / 0.3);
 }
 
 .btn-outline {
@@ -360,6 +369,9 @@ img, svg {
 .anim-delay-2 { animation-delay: 0.3s; }
 .anim-delay-3 { animation-delay: 0.45s; }
 .anim-delay-4 { animation-delay: 0.6s; }
+.anim-delay-5 { animation-delay: 0.75s; }
+.anim-delay-6 { animation-delay: 0.9s; }
+.anim-delay-7 { animation-delay: 1.05s; }
 
 /* ─── Reduced motion ──────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

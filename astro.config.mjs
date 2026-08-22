@@ -6,6 +6,11 @@ export default defineConfig({
   site: 'https://fundacionhorizontes.org',
   redirects: {
     '/home': '/',
+    '/programas/ninez': '/programas#ninez',
+    '/programas/jovenes': '/programas#jovenes',
+    '/programas/adultos': '/programas#adultos',
+    '/programas/servicios': '/programas#servicios',
+    '/programas/plan-padrino': '/programas#plan-padrino',
   },
   server: {
     allowedHosts: true,
