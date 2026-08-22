@@ -4,4 +4,13 @@ dist/
 .env
 .env.*
 .superpowers/
-.claude/scheduled_tasks.lock
+.claude/
+.agents/
+skills-lock.json
+.impeccable/
+mejoras/
+DESIGN.md
+PRODUCT.md
+PROGRESO.md
+FHS_website_spec.md
+mejoras-landing-horizontes.md
