@@ -25,7 +25,7 @@ export const programs = [
   {
     title: 'Plan Padrino',
     desc: 'Apadrina un sueño: apoya económicamente a una familia con un niño en proceso de inclusión educativa.',
-    href: '/programas#plan-padrino',
+    href: '/plan-padrino',
     color: 'var(--color-primary)',
   },
 ];

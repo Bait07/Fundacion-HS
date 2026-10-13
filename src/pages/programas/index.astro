@@ -58,7 +58,8 @@ const programs = [
   },
   {
     id: 'plan-padrino',
-    href: '/contacto?motivo=plan-padrino',
+    href: '/plan-padrino',
+    ctaLabel: 'Conocer el Plan Padrino',
     title: 'Plan Padrino',
     subtitle: 'Apadrina un Sueño, Transforma una Vida',
     desc: 'Una estrategia solidaria para brindar apoyo económico a niños con discapacidad cognitiva, facilitando su acceso a la educación inclusiva de calidad.',
@@ -162,7 +163,7 @@ const programs = [
               ))}
             </ul>
             <a href={withBase(prog.href)} class="btn btn-primary prog-row__cta reveal reveal-delay-4">
-              Solicitar información
+              {prog.ctaLabel ?? 'Solicitar información'}
               <span class="prog-row__arrow" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -192,7 +193,7 @@ const programs = [
       </p>
       <div class="cta-bottom__actions reveal reveal-delay-2">
         <a href={`${import.meta.env.BASE_URL}donaciones`} class="btn btn-accent">Hacer una donación</a>
-        <a href={`${import.meta.env.BASE_URL}programas#plan-padrino`} class="btn btn-outline">Ser padrino</a>
+        <a href={`${import.meta.env.BASE_URL}plan-padrino`} class="btn btn-outline">Ser padrino</a>
       </div>
     </div>
   </section>

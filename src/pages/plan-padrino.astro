@@ -1,0 +1,332 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/utils/url';
+
+const seo = {
+  title: 'Plan Padrino | Apadrina la educación de un niño o joven en Bogotá',
+  description: 'Apadrina la educación inclusiva de un niño o joven con discapacidad cognitiva o neurodivergencia en Bogotá, en alianza con el Colegio Gimnasio Colombo Andino.',
+};
+
+const aporte = [
+  'Programas adecuados a sus necesidades de aprendizaje.',
+  'Acompañamiento de educadoras especiales.',
+  'Procesos pedagógicos orientados a su desarrollo integral.',
+  'Un entorno educativo en el que puedan fortalecer sus capacidades y avanzar a su propio ritmo.',
+];
+
+const puerta = [
+  { title: 'Seguir estudiando', desc: 'La posibilidad de que un estudiante neurodivergente continúe su proceso educativo.' },
+  { title: 'Tranquilidad', desc: 'Alivio para una familia que enfrenta condiciones económicas difíciles.' },
+  { title: 'Autonomía para la vida', desc: 'La oportunidad de seguir desarrollando capacidades, habilidades y autonomía.' },
+];
+
+// ponytail: vacío hasta recibir los testimonios reales de padrinos; la sección
+// solo se renderiza cuando hay al menos uno. `video` = URL de embed de YouTube.
+const testimonios: { nombre: string; texto?: string; video?: string }[] = [];
+
+const padrinoHref = withBase('/contacto?motivo=plan-padrino');
+const donarHref = withBase('/donaciones');
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <section class="page-header bg-primary" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">Plan Padrino</h1>
+      <p class="page-header__lead">
+        Una oportunidad para apadrinar un niño o un joven y acompañar a su familia, apoyar su desarrollo y la construcción de su futuro.
+      </p>
+    </div>
+  </section>
+
+  <section class="section padrino-intro" aria-label="Presentación">
+    <div class="container padrino-narrow">
+      <p>
+        En Bogotá hay muchos niños y jóvenes con discapacidad cognitiva o neurodivergencias que no tienen acceso a un colegio porque no cuentan con las condiciones económicas, lo cual limita el desarrollo de sus capacidades y la construcción de un proyecto de vida.
+      </p>
+      <p class="padrino-intro__highlight">Tú puedes ayudar a que un niño o joven continúe su proceso educativo.</p>
+      <p>
+        Con el <strong>Plan Padrino de la Fundación Horizontes de Sabiduría, en alianza con el Colegio Gimnasio Colombo Andino</strong>, puedes apoyar directamente la educación inclusiva de un estudiante de una familia de bajos recursos y contribuir a que tenga la oportunidad de seguir aprendiendo en un proceso educativo que se adapta a sus necesidades.
+      </p>
+
+      <div class="padrino-accordion">
+        <details>
+          <summary>¿Por qué nace el Plan Padrino?</summary>
+          <div class="padrino-accordion__body">
+            <p>
+              Desde 2008, el Colegio Gimnasio Colombo Andino ha desarrollado una labor social, ofreciendo educación inclusiva a niños y jóvenes de familias de bajos recursos con discapacidad cognitiva o neurodivergencia.
+            </p>
+            <p>
+              La fundación, consciente de la necesidad de muchas familias y de sus dificultades económicas, desarrolló una alianza estratégica con el Gimnasio Colombo Andino para ofrecer la posibilidad de asignar apoyo financiero a estudiantes con estas condiciones. Así pueden acceder a una atención formativa con el acompañamiento de educadoras especiales y las herramientas necesarias para avanzar en su proceso de desarrollo: juntos tenemos la experiencia y los conocimientos necesarios para garantizar la continuidad de sus procesos de aprendizaje.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Objetivo del Plan Padrino</summary>
+          <div class="padrino-accordion__body">
+            <p>
+              El Plan Padrino busca vincular a personas, familias, empresas y organizaciones que quieran convertirse en <strong>aliados de la educación y del futuro de un niño o joven con discapacidad o neurodivergencia</strong>.
+            </p>
+            <p>
+              Cada padrino realiza un aporte que permite financiar la permanencia de un estudiante durante un año académico, apoyado en un programa de educación inclusiva.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Qué hace posible tu aporte?</summary>
+          <div class="padrino-accordion__body">
+            <p>Tu apoyo contribuye a que un estudiante pueda continuar su proceso educativo con:</p>
+            <ul class="padrino-checks" role="list">
+              {aporte.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-surface" aria-labelledby="puerta-heading">
+    <div class="container">
+      <h2 id="puerta-heading" class="padrino-h2">Apadrinar es abrir una puerta</h2>
+      <p class="padrino-sub">
+        Tu aporte no representa solamente el pago de una colegiatura. Representa:
+      </p>
+      <ul class="padrino-cards" role="list">
+        {puerta.map((p) => (
+          <li class="padrino-card">
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="costo-heading">
+    <div class="container padrino-narrow padrino-costo">
+      <h2 id="costo-heading" class="padrino-h2">¿Cuánto cuesta apadrinar?</h2>
+      <p>El costo anual para apoyar la educación especializada de un estudiante es de:</p>
+      <p class="padrino-costo__valor">$6.430.000 <span>al año</span></p>
+      <p>Este aporte permite financiar su proceso educativo durante un año escolar (de febrero a noviembre).</p>
+      <p>Si deseas hacerlo posible, puedes convertirte en padrino y ayudarnos a mantener abierta esta oportunidad educativa.</p>
+    </div>
+  </section>
+
+  <section class="section bg-primary padrino-cta" aria-labelledby="cta-heading">
+    <div class="container padrino-narrow padrino-cta__inner">
+      <h2 id="cta-heading">¿Quieres ser parte de esta historia?</h2>
+      <p>
+        Puedes convertirte en padrino de un estudiante y contribuir directamente a que continúe su educación y su formación para la vida, ayudando no solo a un niño o joven en condiciones vulnerables, sino también impactando a toda una familia. Tu apoyo les cambiará la vida.
+      </p>
+      <a href={padrinoHref} class="btn btn-accent">Quiero ser padrino</a>
+      <p>
+        Si deseas conocer el programa, resolver tus inquietudes o conocer el proceso para realizar el apadrinamiento, <a href={padrinoHref}>comunícate con nosotros</a>.
+      </p>
+      <p>
+        También puedes apoyar nuestra labor mediante una <strong>donación</strong>, destinada a fortalecer el programa y ampliar nuestro alcance a otras acciones enfocadas en mejorar la calidad de vida de las personas con discapacidad o neurodivergencia y de sus familias.
+      </p>
+      <a href={donarHref} class="btn btn-outline">Quiero donar</a>
+    </div>
+
+    <!-- Ola hacia la sección siguiente: footer oscuro mientras no haya testimonios -->
+    <div class="padrino-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,64 480,16 720,40 C960,64 1200,20 1440,40 L1440,64 L0,64 Z"
+          fill={testimonios.length > 0 ? 'var(--color-bg)' : 'var(--color-ink)'}
+        />
+      </svg>
+    </div>
+  </section>
+
+  {testimonios.length > 0 && (
+    <section class="section" aria-labelledby="testimonios-heading">
+      <div class="container">
+        <h2 id="testimonios-heading" class="padrino-h2">Una comunidad que ayuda a otra comunidad</h2>
+        <p class="padrino-sub">
+          El Plan Padrino existe gracias a personas que creen que la diferencia es una posibilidad de transformar debilidades en oportunidades. Como ellos, puedes sumarte: estos son sus testimonios.
+        </p>
+        <ul class="padrino-cards" role="list">
+          {testimonios.map((t) => (
+            <li class="padrino-card">
+              {t.video && (
+                <iframe
+                  src={t.video}
+                  title={`Testimonio de ${t.nombre}`}
+                  loading="lazy"
+                  allow="encrypted-media; picture-in-picture"
+                  allowfullscreen
+                  class="padrino-card__video"
+                ></iframe>
+              )}
+              {t.texto && <blockquote>{t.texto}</blockquote>}
+              <p class="padrino-card__autor">{t.nombre}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+.page-header { padding-block: clamp(3rem, 6vw, 5rem); }
+.page-header h1 {
+  color: var(--color-white);
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.page-header__lead {
+  color: oklch(1 0 0 / 0.9);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  text-wrap: pretty;
+}
+
+.padrino-narrow { max-width: 760px; }
+.padrino-narrow > p { font-size: 1.0625rem; line-height: 1.75; margin-bottom: var(--space-5); }
+
+.padrino-intro__highlight {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem) !important;
+  line-height: 1.35 !important;
+  color: var(--color-accent);
+}
+
+.padrino-h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: var(--space-4); }
+.padrino-sub { font-size: 1.0625rem; color: var(--color-ink-muted); max-width: 60ch; margin-bottom: var(--space-8); }
+
+/* ── Accordion (details nativo) ── */
+.padrino-accordion {
+  margin-top: var(--space-10);
+  border-top: 1px solid oklch(0.22 0.04 150 / 0.12);
+}
+.padrino-accordion details { border-bottom: 1px solid oklch(0.22 0.04 150 / 0.12); }
+.padrino-accordion summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  cursor: pointer;
+  list-style: none;
+}
+.padrino-accordion summary::-webkit-details-marker { display: none; }
+.padrino-accordion summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-primary);
+  transition: transform 200ms var(--ease-out);
+}
+.padrino-accordion details[open] summary::after { transform: rotate(45deg); }
+.padrino-accordion summary:hover { color: var(--color-primary); }
+.padrino-accordion__body { padding-bottom: var(--space-6); }
+.padrino-accordion__body p { line-height: 1.75; margin-bottom: var(--space-4); }
+
+.padrino-checks { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+.padrino-checks li { position: relative; padding-left: 1.75rem; line-height: 1.6; }
+.padrino-checks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* ── Cards ── */
+.padrino-cards {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
+}
+.padrino-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+}
+.padrino-card h3 { font-size: 1.25rem; margin-bottom: var(--space-2); color: var(--color-accent); }
+.padrino-card p { line-height: 1.6; }
+.padrino-card__video { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--radius-sm); margin-bottom: var(--space-4); }
+.padrino-card blockquote { font-style: italic; line-height: 1.7; margin-bottom: var(--space-4); }
+.padrino-card__autor { font-family: var(--font-display); font-weight: 600; }
+
+/* ── Costo ── */
+.padrino-costo { text-align: center; }
+.padrino-costo > p { margin-inline: auto; }
+.padrino-costo__valor {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+  margin-block: var(--space-4) var(--space-6) !important;
+}
+.padrino-costo__valor span { font-size: 0.4em; font-weight: 600; color: var(--color-ink-muted); letter-spacing: 0; }
+
+/* ── CTA ── */
+/* Mismo tratamiento que el banner Plan Padrino del inicio
+   (home/styles/index.css → .padrino-cta): verde, textura de corazones y ola. */
+.padrino-cta {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(3rem, 5vw, 4.5rem);
+  padding-bottom: calc(clamp(3rem, 5vw, 4.5rem) + 40px);
+}
+.padrino-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("/Fundacion-HS/decor/heart.svg");
+  background-size: 70px 70px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+.padrino-cta__inner { position: relative; z-index: 1; }
+.padrino-cta, .padrino-cta p { color: var(--color-white); }
+.padrino-cta h2 { color: var(--color-white); font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: var(--space-5); }
+.padrino-cta .btn { margin-bottom: var(--space-8); }
+.padrino-cta .btn:last-child { margin-bottom: 0; }
+.padrino-cta a:not(.btn) { color: var(--color-white); text-decoration: underline; font-weight: 700; }
+.padrino-cta strong { color: var(--color-white); }
+/* Verde casi negro (--color-ink): 3.8:1 contra el fondo verde, texto blanco 17:1.
+   Ser padrino: blanco → verde en hover. Donar: el inverso. */
+.padrino-cta .btn-accent,
+.padrino-cta .btn-outline:hover {
+  background-color: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-ink);
+}
+.padrino-cta .btn-accent:hover,
+.padrino-cta .btn-outline {
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-white);
+}
+
+.padrino-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 64px;
+  pointer-events: none;
+  z-index: 1;
+}
+.padrino-wave svg { display: block; width: 100%; height: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .padrino-accordion summary::after { transition: none; }
+}
+</style>

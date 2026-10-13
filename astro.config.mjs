@@ -16,7 +16,7 @@ export default defineConfig({
     '/programas/jovenes': `${base}/programas#jovenes`,
     '/programas/adultos': `${base}/programas#adultos`,
     '/programas/servicios': `${base}/programas#servicios`,
-    '/programas/plan-padrino': `${base}/programas#plan-padrino`,
+    '/programas/plan-padrino': `${base}/plan-padrino`,
   },
   server: {
     allowedHosts: true,

@@ -21,6 +21,15 @@ function validateField(id: string, errorId: string, message: string): boolean {
   return true;
 }
 
+// Preselecciona el motivo desde ?motivo=<slug> (enlaces de Programas y Plan Padrino)
+const motivoSlugs: Record<string, string> = {
+  'plan-padrino': 'Quiero ser padrino',
+  'informacion-programas': 'Quiero información sobre programas',
+};
+const motivoParam = motivoSlugs[new URLSearchParams(location.search).get('motivo') ?? ''];
+const motivoSelect = document.getElementById('motivo') as HTMLSelectElement | null;
+if (motivoParam && motivoSelect) motivoSelect.value = motivoParam;
+
 const blurMessages: Record<string, string> = {
   nombre:  'Por favor ingresa tu nombre completo.',
   email:   'Por favor ingresa un correo electrónico válido.',
