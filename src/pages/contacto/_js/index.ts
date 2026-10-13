@@ -1,6 +1,12 @@
 const form = document.getElementById('contactForm') as HTMLFormElement;
 const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+const submitLabel = submitBtn.querySelector('.form-submit__label') as HTMLElement;
 const status = document.getElementById('form-status') as HTMLElement;
+
+function setSubmitState(state: 'idle' | 'loading' | 'success', label: string) {
+  submitBtn.dataset.state = state;
+  submitLabel.textContent = label;
+}
 
 function validateField(id: string, errorId: string, message: string): boolean {
   const field = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
@@ -49,7 +55,7 @@ form?.addEventListener('submit', async (e) => {
   if (!isValid) return;
 
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Enviando...';
+  setSubmitState('loading', 'Enviando...');
 
   // TODO: Integrar EmailJS cuando la FHS provea las credenciales
   // emailjs.sendForm('SERVICE_ID', 'TEMPLATE_ID', form, 'PUBLIC_KEY')
@@ -58,6 +64,10 @@ form?.addEventListener('submit', async (e) => {
   status.className = 'form-status success';
   status.textContent = '¡Mensaje enviado! Te responderemos pronto.';
   form.reset();
-  submitBtn.disabled = false;
-  submitBtn.textContent = 'Enviar mensaje';
+  setSubmitState('success', '¡Enviado!');
+
+  setTimeout(() => {
+    setSubmitState('idle', 'Enviar mensaje');
+    submitBtn.disabled = false;
+  }, 1400);
 });
