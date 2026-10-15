@@ -45,4 +45,4 @@ Las familias son los aliados más importantes en el proceso de inclusión. Su pa
 
 En la Fundación Horizontes de Sabiduría acompañamos a las familias no solo en el proceso terapéutico, sino también en la comprensión de sus derechos y en cómo navegar el sistema educativo con seguridad.
 
-¿Tienes preguntas sobre los derechos de tu hijo? [Escríbenos](/Fundacion-HS/contacto) y te orientamos.
+¿Tienes preguntas sobre los derechos de tu hijo? [Escríbenos](/contacto) y te orientamos.

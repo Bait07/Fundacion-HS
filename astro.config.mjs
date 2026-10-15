@@ -2,13 +2,13 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-// ponytail: base hardcoded here because Astro's `redirects` targets aren't
-// base-aware — revert to '' when this moves off the github.io/<repo> subpath
-// onto the custom domain (base: '/').
-const base = '/Fundacion-HS';
+// ponytail: Vercel (cuenta de la fundación) sirve en la raíz; GitHub Pages
+// (cuenta personal) en /Fundacion-HS. Los `redirects` no aplican base solos.
+const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+const base = vercel ? '' : '/Fundacion-HS';
 
 export default defineConfig({
-  site: 'https://bait07.github.io',
+  site: vercel ? `https://${vercel}` : 'https://bait07.github.io',
   base: `${base}/`,
   redirects: {
     '/home': `${base}/`,

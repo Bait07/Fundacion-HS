@@ -10,6 +10,8 @@ const formattedDate = frontmatter.date
       year: 'numeric',
     })
   : '';
+// Los enlaces internos de los posts ("/contacto") no llevan la base del sitio
+const cuerpo = (await Astro.slots.render('default')).replaceAll('href="/', `href="${import.meta.env.BASE_URL}`);
 ---
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
@@ -52,7 +54,7 @@ const formattedDate = frontmatter.date
   <!-- Cuerpo del artículo -->
   <div class="post-layout">
     <article class="post-body prose reveal">
-      <slot />
+      <Fragment set:html={cuerpo} />
     </article>
 
     <!-- Sidebar -->
