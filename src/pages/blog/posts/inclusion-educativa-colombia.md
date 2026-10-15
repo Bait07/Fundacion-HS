@@ -2,7 +2,7 @@
 layout: "@/layouts/BlogPostLayout.astro"
 title: "Inclusión educativa en Colombia: derechos y recursos para familias"
 description: "Conoce los derechos legales de las personas con discapacidad en Colombia y cómo exigirlos para garantizar el acceso a una educación de calidad."
-date: "2025-05-15"
+date: "2026-05-15"
 category: "Desarrollo humano"
 readTime: "6 min"
 image: "https://picsum.photos/seed/education-rights-colombia/1200/630"

@@ -2,7 +2,7 @@
 layout: "@/layouts/BlogPostLayout.astro"
 title: "¿Qué es la discapacidad cognitiva y cómo apoyar a tu hijo en Bogotá?"
 description: "Guía práctica para familias bogotanas: qué es la discapacidad cognitiva, cómo se diagnostica y qué recursos existen en Bogotá para acompañar a tu hijo."
-date: "2025-06-01"
+date: "2026-06-01"
 category: "Educación consciente"
 readTime: "8 min"
 image: "https://picsum.photos/seed/cognitive-disability-guide/1200/630"

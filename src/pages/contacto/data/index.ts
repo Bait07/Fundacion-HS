@@ -6,6 +6,7 @@ export const seo = {
 export const motivos = [
   'Quiero información sobre programas',
   'Quiero ser padrino',
+  'Quiero ser voluntario',
   'Quiero hacer una donación',
   'Soy aliado o empresa',
   'Otro',

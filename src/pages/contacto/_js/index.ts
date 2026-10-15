@@ -32,6 +32,7 @@ function validateField(id: string, errorId: string, message: string): boolean {
 const motivoSlugs: Record<string, string> = {
   'plan-padrino': 'Quiero ser padrino',
   'informacion-programas': 'Quiero información sobre programas',
+  'voluntariado': 'Quiero ser voluntario',
 };
 const motivoParam = motivoSlugs[new URLSearchParams(location.search).get('motivo') ?? ''];
 const motivoRadio = [...form.querySelectorAll<HTMLInputElement>('input[name="motivo"]')].find(r => r.value === motivoParam);

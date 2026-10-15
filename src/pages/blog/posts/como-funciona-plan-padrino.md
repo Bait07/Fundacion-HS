@@ -2,7 +2,7 @@
 layout: "@/layouts/BlogPostLayout.astro"
 title: "Cómo funciona el Plan Padrino de la Fundación Horizontes de Sabiduría"
 description: "Todo lo que necesitas saber sobre el Plan Padrino: qué es, cómo funciona, qué incluye y cómo puedes apoyar a un niño con discapacidad cognitiva en Bogotá."
-date: "2025-05-01"
+date: "2026-05-01"
 category: "Comunidad"
 readTime: "5 min"
 image: "https://picsum.photos/seed/plan-padrino-fhs/1200/630"

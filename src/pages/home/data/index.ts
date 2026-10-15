@@ -29,6 +29,14 @@ export const programs = [
     color: 'var(--color-primary)',
   },
   {
+    title: 'Servicios Profesionales',
+    short: 'Servicios',
+    lottie: '/tree.lottie',
+    desc: 'Atención interdisciplinaria que fortalece el desarrollo integral y la inclusión educativa y social.',
+    href: '/programas#servicios',
+    color: 'var(--color-primary)',
+  },
+  {
     title: 'Plan Padrino',
     short: 'Plan Padrino',
     lottie: '/lottie-heart-hi.lottie',
