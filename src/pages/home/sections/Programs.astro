@@ -12,15 +12,15 @@ import { withBase } from '@/utils/url';
     </div>
 
     <div class="programs__body">
-      <ul class="prog-cards" role="list">
+      <ul class="prog-index" role="list">
         {programs.map((prog, i) => (
-          <li class={`prog-card anim-delay-${i + 1}`} data-anim="fadeInLeft">
-            <a href={withBase(prog.href)} class="prog-card__link" style={`--card-accent: ${prog.color}`}>
-              <h3 class="prog-card__name">{prog.title}</h3>
-              <p class="prog-card__desc">{prog.desc}</p>
-              <span class="prog-card__more">
-                Conoce más
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <li class={`prog-index__item anim-delay-${i + 1}`} data-anim="fadeInLeft">
+            <a href={withBase(prog.href)} class:list={['prog-index__link', { 'prog-index__link--destacado': prog.destacado }]} aria-label={`${prog.title}: conoce más`}>
+              <span class="prog-index__name">{prog.short}</span>
+              <span class="prog-index__desc">{prog.desc}</span>
+              <dotlottie-wc class="prog-index__lottie" src={withBase(prog.lottie)} autoplay loop aria-hidden="true"></dotlottie-wc>
+              <span class="prog-index__arrow" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </a>
           </li>
@@ -33,3 +33,5 @@ import { withBase } from '@/utils/url';
     </div>
   </div>
 </section>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>

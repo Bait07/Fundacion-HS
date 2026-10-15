@@ -1,4 +1,3 @@
-.page-header { padding-block: clamp(3rem, 6vw, 5rem); }
 .bg-accent { background-color: var(--color-accent); }
 
 .como-donar-inner {
@@ -110,20 +109,42 @@
 .transparencia-copy h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .transparencia-copy p { font-size: 1.0625rem; line-height: 1.75; color: var(--color-ink); }
 
-.transparencia-badge {
-  background-color: oklch(0.67 0.065 155 / 0.1);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-md);
-  padding: var(--space-8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  text-align: center;
-  color: var(--color-primary);
+/* Sello tipo estampa: anillo de texto que gira despacio alrededor del escudo. */
+.transparencia-sello {
+  position: relative;
+  width: min(280px, 100%);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  color: var(--color-accent);
 }
+.transparencia-sello::before {
+  content: '';
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background-color: oklch(0.67 0.065 155 / 0.12);
+}
+.transparencia-sello__anillo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: sello-gira 40s linear infinite;
+}
+.transparencia-sello__anillo text {
+  fill: currentColor;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+}
+.transparencia-sello__escudo { position: relative; width: 30%; height: 30%; color: var(--color-primary); }
 
-.transparencia-badge p { font-family: var(--font-display); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink); max-width: 20ch; text-align: center; margin-inline: auto; }
+@keyframes sello-gira { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .transparencia-sello__anillo { animation: none; }
+}
 
 @media (max-width: 1023px) {
   .como-donar-inner { grid-template-columns: 1fr; }

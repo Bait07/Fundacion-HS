@@ -8,10 +8,10 @@ import { withBase } from '@/utils/url';
 // el motivo vía query param; agregar esa preselección es trabajo del
 // formulario, fuera del alcance de esta tarea).
 const quickLinks = [
-  { href: '/donaciones', label: 'Donar', icon: 'volunteer_activism' },
-  { href: '/contacto', label: 'Sé voluntario', icon: 'diversity_3' },
-  { href: '/programas', label: 'Nuestros programas', icon: 'school' },
-  { href: '/contacto', label: 'Contacto', icon: 'mail' },
+  { href: '/donaciones', label: 'Donar', desc: 'Apoya nuestros programas', icon: 'volunteer_activism', main: true },
+  { href: '/contacto', label: 'Sé voluntario', desc: 'Suma tu tiempo y talento', icon: 'diversity_3' },
+  { href: '/programas', label: 'Programas', desc: 'Acompañamos cada etapa', icon: 'school' },
+  { href: '/contacto', label: 'Contacto', desc: 'Escríbenos, te respondemos', icon: 'mail' },
 ];
 ---
 <section class="quick-access" aria-label="Accesos rápidos">
@@ -20,9 +20,15 @@ const quickLinks = [
       <ul class="quick-access__list">
         {quickLinks.map((link) => (
           <li class="quick-access__item">
-            <a href={withBase(link.href)} class="quick-access__link">
-              <span class="material-symbols-outlined quick-access__icon" aria-hidden="true">{link.icon}</span>
-              <span class="quick-access__label">{link.label}</span>
+            <a href={withBase(link.href)} class:list={['quick-access__link', { 'quick-access__link--main': link.main }]}>
+              <span class="quick-access__icon-wrap" aria-hidden="true">
+                <span class="material-symbols-outlined quick-access__icon">{link.icon}</span>
+              </span>
+              <span class="quick-access__text">
+                <span class="quick-access__label">{link.label}</span>
+                <span class="quick-access__desc">{link.desc}</span>
+              </span>
+              <span class="material-symbols-outlined quick-access__arrow" aria-hidden="true">arrow_forward</span>
             </a>
           </li>
         ))}

@@ -3,15 +3,22 @@ const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
 const submitLabel = submitBtn.querySelector('.form-submit__label') as HTMLElement;
 const status = document.getElementById('form-status') as HTMLElement;
 
+const SENT_KEY = 'fhs-contacto-enviado';
+const SENT_LOCK_MS = 4 * 60 * 60 * 1000; // 4 horas
+
 function setSubmitState(state: 'idle' | 'loading' | 'success', label: string) {
   submitBtn.dataset.state = state;
   submitLabel.textContent = label;
 }
 
 function validateField(id: string, errorId: string, message: string): boolean {
-  const field = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+  const field = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement;
   const error = document.getElementById(errorId) as HTMLElement;
-  if (!field.value.trim() || (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value))) {
+  // El motivo es un grupo de radios dentro de un <fieldset id="motivo">
+  const value = id === 'motivo'
+    ? form.querySelector<HTMLInputElement>('input[name="motivo"]:checked')?.value ?? ''
+    : field.value;
+  if (!value.trim() || (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))) {
     field.classList.add('error');
     error.textContent = message;
     return false;
@@ -27,8 +34,11 @@ const motivoSlugs: Record<string, string> = {
   'informacion-programas': 'Quiero información sobre programas',
 };
 const motivoParam = motivoSlugs[new URLSearchParams(location.search).get('motivo') ?? ''];
-const motivoSelect = document.getElementById('motivo') as HTMLSelectElement | null;
-if (motivoParam && motivoSelect) motivoSelect.value = motivoParam;
+const motivoRadio = [...form.querySelectorAll<HTMLInputElement>('input[name="motivo"]')].find(r => r.value === motivoParam);
+if (motivoRadio) motivoRadio.checked = true;
+
+form.querySelectorAll('input[name="motivo"]').forEach(r =>
+  r.addEventListener('change', () => validateField('motivo', 'motivo-error', blurMessages.motivo)));
 
 const blurMessages: Record<string, string> = {
   nombre:  'Por favor ingresa tu nombre completo.',
@@ -37,8 +47,8 @@ const blurMessages: Record<string, string> = {
   mensaje: 'Por favor escribe tu mensaje.',
 };
 
-['nombre', 'email', 'motivo', 'mensaje'].forEach((id) => {
-  const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+['nombre', 'email', 'mensaje'].forEach((id) => {
+  const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
   if (!el) return;
 
   el.addEventListener('blur', () => {
@@ -66,17 +76,47 @@ form?.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
   setSubmitState('loading', 'Enviando...');
 
-  // TODO: Integrar EmailJS cuando la FHS provea las credenciales
-  // emailjs.sendForm('SERVICE_ID', 'TEMPLATE_ID', form, 'PUBLIC_KEY')
-  await new Promise(r => setTimeout(r, 1200));
-
-  status.className = 'form-status success';
-  status.textContent = '¡Mensaje enviado! Te responderemos pronto.';
-  form.reset();
-  setSubmitState('success', '¡Enviado!');
-
-  setTimeout(() => {
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+  } catch {
+    status.className = 'form-status error';
+    status.textContent = 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos por WhatsApp.';
     setSubmitState('idle', 'Enviar mensaje');
     submitBtn.disabled = false;
-  }, 1400);
+    return;
+  }
+
+  try { localStorage.setItem(SENT_KEY, String(Date.now())); } catch {}
+  setSubmitState('success', '¡Enviado!');
+  form.reset();
+  setTimeout(() => showSent(true), 600);
 });
+
+// ── Estado "enviado" ─────────────────────────────────────────────
+// ponytail: freno del lado del navegador para reenvíos ansiosos, no seguridad
+// (se salta con incógnito); el antispam real es botcheck + rate limit de Web3Forms.
+function showSent(animate: boolean) {
+  const wrap = form.closest('.contacto-form-wrap') as HTMLElement;
+  const sent = document.getElementById('contactSent') as HTMLElement;
+  const swap = () => {
+    wrap.dataset.sent = '';
+    sent.hidden = false;
+    // Se crea al mostrarse para que la animación arranque desde el inicio
+    document.getElementById('contactSentLottie')!.innerHTML =
+      `<dotlottie-wc src="${import.meta.env.BASE_URL}send.lottie" autoplay></dotlottie-wc>`;
+    if (animate) sent.focus();
+  };
+  if (!animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return swap();
+  wrap.classList.add('is-leaving');
+  setTimeout(swap, 350);
+}
+
+try {
+  if (Date.now() - Number(localStorage.getItem(SENT_KEY) ?? 0) < SENT_LOCK_MS) showSent(false);
+} catch {}

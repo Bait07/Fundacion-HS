@@ -1,4 +1,5 @@
 ---
+import PageHeader from '@/components/PageHeader.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/utils/url';
 
@@ -15,9 +16,9 @@ const aporte = [
 ];
 
 const puerta = [
-  { title: 'Seguir estudiando', desc: 'La posibilidad de que un estudiante neurodivergente continúe su proceso educativo.' },
-  { title: 'Tranquilidad', desc: 'Alivio para una familia que enfrenta condiciones económicas difíciles.' },
-  { title: 'Autonomía para la vida', desc: 'La oportunidad de seguir desarrollando capacidades, habilidades y autonomía.' },
+  { para: 'Para el estudiante', title: 'Seguir estudiando', desc: 'La posibilidad de que un estudiante neurodivergente continúe su proceso educativo.' },
+  { para: 'Para la familia', title: 'Tranquilidad', desc: 'Alivio para una familia que enfrenta condiciones económicas difíciles.' },
+  { para: 'Para su futuro', title: 'Autonomía para la vida', desc: 'La oportunidad de seguir desarrollando capacidades, habilidades y autonomía.' },
 ];
 
 // ponytail: vacío hasta recibir los testimonios reales de padrinos; la sección
@@ -29,16 +30,13 @@ const donarHref = withBase('/donaciones');
 ---
 
 <BaseLayout title={seo.title} description={seo.description}>
-  <section class="page-header bg-primary" aria-labelledby="page-title">
-    <div class="container">
-      <h1 id="page-title">Plan Padrino</h1>
-      <p class="page-header__lead">
-        Una oportunidad para apadrinar un niño o un joven y acompañar a su familia, apoyar su desarrollo y la construcción de su futuro.
-      </p>
-    </div>
-  </section>
+  <PageHeader
+    crumb="Plan Padrino"
+    lead="Una oportunidad para apadrinar un niño o un joven y acompañar a su familia, apoyar su desarrollo y la construcción de su futuro."
+  >Plan <mark>Padrino</mark></PageHeader>
 
   <section class="section padrino-intro" aria-label="Presentación">
+    <dotlottie-wc class="padrino-intro__lottie" src={withBase('/lottie-heart-hi.lottie')} autoplay loop aria-hidden="true"></dotlottie-wc>
     <div class="container padrino-narrow">
       <p>
         En Bogotá hay muchos niños y jóvenes con discapacidad cognitiva o neurodivergencias que no tienen acceso a un colegio porque no cuentan con las condiciones económicas, lo cual limita el desarrollo de sus capacidades y la construcción de un proyecto de vida.
@@ -47,6 +45,10 @@ const donarHref = withBase('/donaciones');
       <p>
         Con el <strong>Plan Padrino de la Fundación Horizontes de Sabiduría, en alianza con el Colegio Gimnasio Colombo Andino</strong>, puedes apoyar directamente la educación inclusiva de un estudiante de una familia de bajos recursos y contribuir a que tenga la oportunidad de seguir aprendiendo en un proceso educativo que se adapta a sus necesidades.
       </p>
+      <figure class="padrino-alianza">
+        <figcaption>En alianza con</figcaption>
+        <img src={withBase('/images/logo-colombo-andino.jpeg')} alt="Colegio Gimnasio Colombo Andino" width="1600" height="488" loading="lazy" />
+      </figure>
 
       <div class="padrino-accordion">
         <details>
@@ -92,14 +94,15 @@ const donarHref = withBase('/donaciones');
       <p class="padrino-sub">
         Tu aporte no representa solamente el pago de una colegiatura. Representa:
       </p>
-      <ul class="padrino-cards" role="list">
+      <ol class="padrino-impacto">
         {puerta.map((p) => (
-          <li class="padrino-card">
+          <li class="padrino-impacto__item">
+            <p class="padrino-impacto__para">{p.para}</p>
             <h3>{p.title}</h3>
             <p>{p.desc}</p>
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   </section>
 
@@ -109,6 +112,15 @@ const donarHref = withBase('/donaciones');
       <p>El costo anual para apoyar la educación especializada de un estudiante es de:</p>
       <p class="padrino-costo__valor">$6.430.000 <span>al año</span></p>
       <p>Este aporte permite financiar su proceso educativo durante un año escolar (de febrero a noviembre).</p>
+      <p>También puedes apadrinar una parte del costo anual:</p>
+      <ul class="padrino-costo__partes" role="list">
+        <li><strong>25 %</strong> $1.607.500</li>
+        <li><strong>50 %</strong> $3.215.000</li>
+        <li><strong>75 %</strong> $4.822.500</li>
+      </ul>
+      <p class="padrino-costo__nota">
+        Los valores corresponden a las tarifas de 2026. Sus incrementos estarán sujetos a las tarifas que la Secretaría de Educación de Bogotá establezca cada año, con el fin de cubrir los gastos educativos contemplados en el Plan Padrino.
+      </p>
       <p>Si deseas hacerlo posible, puedes convertirte en padrino y ayudarnos a mantener abierta esta oportunidad educativa.</p>
     </div>
   </section>
@@ -170,24 +182,29 @@ const donarHref = withBase('/donaciones');
   )}
 </BaseLayout>
 
-<style>
-.page-header { padding-block: clamp(3rem, 6vw, 5rem); }
-.page-header h1 {
-  color: var(--color-white);
-  font-size: clamp(2.75rem, 7vw, 5.5rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-.page-header__lead {
-  color: oklch(1 0 0 / 0.9);
-  font-size: clamp(1.125rem, 2vw, 1.375rem);
-  max-width: 52ch;
-  margin-top: var(--space-5);
-  text-wrap: pretty;
-}
+<script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>
 
+<style>
 .padrino-narrow { max-width: 760px; }
 .padrino-narrow > p { font-size: 1.0625rem; line-height: 1.75; margin-bottom: var(--space-5); }
+
+/* Mismo tratamiento que los lotties laterales del inicio (.padrino-cta__heart):
+   absoluto en el margen derecho, oculto donde no cabe junto al texto. */
+.padrino-intro { position: relative; }
+.padrino-intro__lottie {
+  position: absolute;
+  top: 50%;
+  /* justo a la derecha de la columna de texto (760px centrada) */
+  left: calc(50% + 380px + 2rem);
+  width: min(400px, calc(50% - 380px - 4rem));
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+@media (max-width: 1439px) {
+  .padrino-intro__lottie { display: none; }
+}
 
 .padrino-intro__highlight {
   font-family: var(--font-display);
@@ -196,6 +213,10 @@ const donarHref = withBase('/donaciones');
   line-height: 1.35 !important;
   color: var(--color-accent);
 }
+
+.padrino-alianza { margin: var(--space-6) 0; text-align: center; }
+.padrino-alianza figcaption { font-size: 0.875rem; color: var(--color-ink-muted); margin-bottom: var(--space-2); }
+.padrino-alianza img { width: min(280px, 100%); height: auto; margin-inline: auto; border-radius: var(--radius-sm); }
 
 .padrino-h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: var(--space-4); }
 .padrino-sub { font-size: 1.0625rem; color: var(--color-ink-muted); max-width: 60ch; margin-bottom: var(--space-8); }
@@ -242,6 +263,66 @@ const donarHref = withBase('/donaciones');
   color: var(--color-primary);
 }
 
+/* ── Impacto: recorrido estudiante → familia → futuro ── */
+.padrino-impacto {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-4);
+  padding: 0;
+}
+.padrino-impacto__item { position: relative; padding-top: var(--space-8); }
+/* Línea que une los puntos: cada ítem dibuja su tramo hasta el siguiente */
+.padrino-impacto__item::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: calc(100% + var(--space-8));
+  height: 2px;
+  background-color: oklch(0.41 0.138 143 / 0.25);
+}
+.padrino-impacto__item:last-child::before { width: 100%; background: linear-gradient(to right, oklch(0.41 0.138 143 / 0.25), transparent); }
+.padrino-impacto__item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0 5px var(--color-surface), 0 0 0 7px oklch(0.41 0.138 143 / 0.25);
+}
+.padrino-impacto__para {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+.padrino-impacto__item h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+  text-wrap: balance;
+}
+.padrino-impacto__item p:last-child { line-height: 1.6; color: var(--color-ink-muted); max-width: 32ch; }
+
+/* Móvil: el recorrido se vuelve vertical */
+@media (max-width: 767px) {
+  .padrino-impacto { grid-template-columns: 1fr; gap: var(--space-8); }
+  .padrino-impacto__item { padding-top: 0; padding-left: var(--space-10); }
+  .padrino-impacto__item::before { top: 0; left: 7px; width: 2px; height: calc(100% + var(--space-8)); }
+  .padrino-impacto__item:last-child::before { width: 2px; height: 100%; background: linear-gradient(to bottom, oklch(0.41 0.138 143 / 0.25), transparent); }
+  .padrino-impacto__item::after { top: 4px; }
+}
+
 /* ── Cards ── */
 .padrino-cards {
   list-style: none;
@@ -274,6 +355,23 @@ const donarHref = withBase('/donaciones');
   margin-block: var(--space-4) var(--space-6) !important;
 }
 .padrino-costo__valor span { font-size: 0.4em; font-weight: 600; color: var(--color-ink-muted); letter-spacing: 0; }
+.padrino-costo__partes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-block: var(--space-4) var(--space-6);
+}
+.padrino-costo__partes li {
+  display: flex;
+  flex-direction: column;
+  min-width: 9rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+}
+.padrino-costo__partes strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--color-accent); }
+.padrino-costo__nota { font-size: 0.875rem; color: var(--color-ink-muted); }
 
 /* ── CTA ── */
 /* Mismo tratamiento que el banner Plan Padrino del inicio

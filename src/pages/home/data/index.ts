@@ -6,24 +6,33 @@ export const seo = {
 export const programs = [
   {
     title: 'Programa de Niñez',
+    short: 'Niñez',
+    lottie: '/lottie-ninos.lottie',
     desc: 'Acompañamos a niños en su camino hacia la inclusión escolar y el desarrollo de habilidades fundamentales.',
     href: '/programas#ninez',
     color: 'var(--color-primary)',
   },
   {
     title: 'Programa de Jóvenes',
+    short: 'Jóvenes',
+    lottie: '/family.lottie',
     desc: 'Fortalecemos habilidades para la vida, la autonomía y la participación social de adolescentes y jóvenes.',
     href: '/programas#jovenes',
     color: 'var(--color-primary)',
   },
   {
     title: 'Programa de Adultos',
+    short: 'Adultos',
+    lottie: '/lottie-adult.lottie',
     desc: 'Promovemos la autonomía funcional, el bienestar emocional y la inclusión comunitaria de adultos.',
     href: '/programas#adultos',
     color: 'var(--color-primary)',
   },
   {
     title: 'Plan Padrino',
+    short: 'Plan Padrino',
+    lottie: '/lottie-heart-hi.lottie',
+    destacado: true,
     desc: 'Apadrina un sueño: apoya económicamente a una familia con un niño en proceso de inclusión educativa.',
     href: '/plan-padrino',
     color: 'var(--color-primary)',

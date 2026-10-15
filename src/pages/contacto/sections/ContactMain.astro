@@ -6,6 +6,24 @@ import { motivos } from '../data/index';
     <div class="contacto-form-wrap">
       <h2 id="form-heading">Envíanos un mensaje</h2>
       <form class="contacto-form" id="contactForm" novalidate aria-label="Formulario de contacto">
+        <!-- ponytail: la access key de Web3Forms es pública por diseño -->
+        <input type="hidden" name="access_key" value="b566757a-dc84-40ac-9ca6-4fd4e30fe5a6" />
+        <input type="hidden" name="subject" value="Nuevo mensaje desde el sitio web - Fundación HS" />
+        <input type="hidden" name="from_name" value="Sitio web Fundación HS" />
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+        <fieldset class="form-group form-group--full form-motivos" id="motivo" aria-describedby="motivo-error">
+          <legend class="form-label">¿En qué podemos ayudarte? <span aria-hidden="true">*</span></legend>
+          <div class="form-motivos__list">
+            {motivos.map(m => (
+              <label class="form-chip">
+                <input type="radio" name="motivo" value={m} required />
+                <span>{m}</span>
+              </label>
+            ))}
+          </div>
+          <span class="form-error" id="motivo-error" role="alert" aria-live="polite"></span>
+        </fieldset>
+
         <div class="form-group">
           <label for="nombre" class="form-label">Nombre completo <span aria-hidden="true">*</span></label>
           <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre completo" required autocomplete="name" aria-required="true" />
@@ -18,18 +36,9 @@ import { motivos } from '../data/index';
           <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-group--full">
           <label for="telefono" class="form-label">Teléfono / WhatsApp</label>
           <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="+57 300 000 0000" autocomplete="tel" />
-        </div>
-
-        <div class="form-group">
-          <label for="motivo" class="form-label">Motivo de contacto <span aria-hidden="true">*</span></label>
-          <select id="motivo" name="motivo" class="form-input form-select" required aria-required="true">
-            <option value="" disabled selected>Selecciona un motivo</option>
-            {motivos.map(m => <option value={m}>{m}</option>)}
-          </select>
-          <span class="form-error" id="motivo-error" role="alert" aria-live="polite"></span>
         </div>
 
         <div class="form-group form-group--full">
@@ -54,6 +63,16 @@ import { motivos } from '../data/index';
           </span>
         </button>
       </form>
+
+      <!-- Estado "enviado": reemplaza al formulario por 4 h (ver _js/index.ts) -->
+      <div class="contacto-enviado" id="contactSent" role="status" tabindex="-1" hidden>
+        <div class="contacto-enviado__lottie" id="contactSentLottie" aria-hidden="true"></div>
+        <h2>¡Mensaje enviado!</h2>
+        <p>Gracias por escribirnos. Pronto nos comunicaremos contigo al correo que nos dejaste.</p>
+        <p class="contacto-enviado__nota">
+          ¿Es urgente? <a href="https://wa.me/573173759920?text=Hola,%20les%20acabo%20de%20escribir%20por%20el%20formulario%20de%20la%20web." target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>.
+        </p>
+      </div>
     </div>
 
     <aside class="contacto-info" aria-label="Información de contacto">
@@ -76,7 +95,7 @@ import { motivos } from '../data/index';
           </svg>
           <div>
             <p class="contacto-info__label">Teléfono</p>
-            <p class="contacto-info__placeholder">Por confirmar</p>
+            <p class="contacto-info__value"><a href="tel:+573173759920">+57 317 375 9920</a></p>
           </div>
         </div>
 
@@ -86,7 +105,7 @@ import { motivos } from '../data/index';
           </svg>
           <div>
             <p class="contacto-info__label">Correo electrónico</p>
-            <p class="contacto-info__placeholder">Por confirmar</p>
+            <p class="contacto-info__value"><a href="mailto:contacto@fundhorizontesdesabiduria.org">contacto@fundhorizontesdesabiduria.org</a></p>
           </div>
         </div>
       </div>
@@ -94,7 +113,7 @@ import { motivos } from '../data/index';
       <div class="contacto-info__wa">
         <p class="contacto-info__wa-text">¿Prefieres escribirnos directamente?</p>
         <a
-          href="https://wa.me/XXXXXXXXXX?text=Hola,%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20la%20Fundaci%C3%B3n%20Horizontes%20de%20Sabidur%C3%ADa."
+          href="https://wa.me/573173759920?text=Hola,%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20la%20Fundaci%C3%B3n%20Horizontes%20de%20Sabidur%C3%ADa."
           class="btn btn-primary contacto-info__wa-btn"
           target="_blank"
           rel="noopener noreferrer"

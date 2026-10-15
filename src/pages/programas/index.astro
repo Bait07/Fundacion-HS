@@ -1,4 +1,5 @@
 ---
+import PageHeader from '@/components/PageHeader.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/utils/url';
 const seo = {
@@ -77,18 +78,10 @@ const programs = [
 <BaseLayout title={seo.title} description={seo.description}>
 
   <!-- ── Page Header ── -->
-  <section class="page-header bg-primary" aria-labelledby="page-title">
-    <div class="container">
-      <div class="page-header__body">
-        <div class="page-header__text">
-          <h1 id="page-title" class="reveal">Nuestros programas</h1>
-          <p class="page-header__subtitle reveal reveal-delay-1">
-            Cinco programas diseñados para acompañar cada etapa de la vida con especialización, calidez e interdisciplinariedad.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <PageHeader
+    crumb="Programas"
+    lead="Cinco programas diseñados para acompañar cada etapa de la vida con especialización, calidez e interdisciplinariedad."
+  >Nuestros <mark>programas</mark></PageHeader>
 
   <!-- ── Quick Nav ── -->
   <nav class="qnav" aria-label="Ir a programa">
@@ -201,50 +194,6 @@ const programs = [
 </BaseLayout>
 
 <style>
-
-/* ── Page header ───────────────────────────────────────────────── */
-.page-header {
-  position: relative;
-  overflow: hidden;
-  padding-block: clamp(3rem, 6vw, 5rem);
-}
-
-.page-header h1 {
-  color: var(--color-white);
-  margin-top: var(--space-5);
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 700;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-.page-header h1::before {
-  content: '';
-  display: block;
-  width: 44px;
-  height: 3px;
-  background-color: var(--color-accent);
-  border-radius: 2px;
-  margin-bottom: var(--space-5);
-}
-
-.page-header__body {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-6);
-  flex-wrap: wrap;
-}
-
-.page-header__text { flex: 1; min-width: 0; }
-
-.page-header__subtitle {
-  color: oklch(1 0 0 / 0.82);
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.65;
-  margin-top: var(--space-4);
-  max-width: 56ch;
-}
 
 /* ── Quick nav ─────────────────────────────────────────────────── */
 .qnav {
