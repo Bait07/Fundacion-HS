@@ -1,23 +1,36 @@
 ---
+import { equipo, EQUIPO_MINIMO, huecos } from '@/data/organizacion';
+import { withBase } from '@/utils/url';
+
+// ponytail: string + set:html porque el frontmatter de Astro no admite JSX
+const silueta = '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 ---
 <section class="section equipo-section" id="equipo" aria-labelledby="equipo-heading">
   <div class="container equipo-inner">
     <div class="equipo-header reveal">
       <h2 id="equipo-heading">Nuestro equipo</h2>
-      <p class="equipo-note">
-        Próximamente presentaremos al equipo interdisciplinario de la FHS.
-      </p>
+      {equipo.length === 0 && (
+        <p class="equipo-note">
+          Próximamente presentaremos al equipo interdisciplinario de la FHS.
+        </p>
+      )}
     </div>
 
-    <div class="equipo-strip reveal reveal-delay-1" aria-label="Miembros del equipo (pendientes)">
-      {Array.from({ length: 4 }).map((_, i) => (
+    <div class="equipo-strip reveal reveal-delay-1">
+      {equipo.map((p) => (
         <div class="team-member">
-          <div class="team-member__avatar" aria-hidden="true">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
+          <div class="team-member__avatar">
+            {p.foto
+              ? <img src={withBase(p.foto)} alt="" width="88" height="88" loading="lazy" />
+              : <Fragment set:html={silueta} />}
           </div>
+          <p class="team-member__name">{p.nombre}</p>
+          <p class="team-member__role">{p.cargo}</p>
+        </div>
+      ))}
+      {huecos(equipo.length, EQUIPO_MINIMO).map(() => (
+        <div class="team-member" aria-hidden="true">
+          <div class="team-member__avatar"><Fragment set:html={silueta} /></div>
           <p class="team-member__name">Nombre Apellido</p>
           <p class="team-member__role">Cargo · Profesión</p>
         </div>

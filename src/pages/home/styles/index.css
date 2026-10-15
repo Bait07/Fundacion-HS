@@ -1019,3 +1019,112 @@
     transform: none;
   }
 }
+/* ═══ ALIADOS — carrusel continuo de logos (src/data/organizacion.ts) ═══ */
+.aliados-home {
+  padding-block: clamp(3rem, 6vw, 5rem);
+  background:
+    radial-gradient(55% 60% at 50% 60%, oklch(0.95 0.022 140 / 0.8), transparent 75%),
+    var(--color-bg);
+  overflow: hidden;
+}
+
+/* Título centrado entre dos líneas finas */
+.aliados-home__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  max-width: 520px;
+  margin: 0 auto clamp(2rem, 4vw, 3rem);
+  padding-inline: var(--space-4);
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-accent);
+  text-align: center;
+}
+.aliados-home__title::before,
+.aliados-home__title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--dir, right), transparent, oklch(0.41 0.138 143 / 0.35));
+}
+.aliados-home__title::after { --dir: left; }
+
+/* Ventana fija y más angosta que la página; sus bordes se desvanecen.
+   La máscara va en la ventana (quieta), no en la fila que se mueve. */
+.aliados-home__viewport {
+  max-width: min(960px, calc(100% - 2rem));
+  margin-inline: auto;
+  overflow: hidden;
+  padding-block: var(--space-4) var(--space-6); /* espacio para sombra y hover */
+  mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+}
+
+/* Bucle: dos copias idénticas de la fila; se desplazan de izquierda a derecha. */
+.aliados-home__marquee {
+  display: flex;
+  width: max-content;
+  animation: aliados-desliza 40s linear infinite;
+}
+.aliados-home__marquee:hover { animation-play-state: paused; }
+@keyframes aliados-desliza {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.aliados-home__track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  padding-right: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* Cada logo en una ficha blanca con sombra suave; se eleva al pasar el mouse */
+.aliados-home__logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 220px;
+  height: 104px;
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--color-white);
+  border: 1px solid oklch(0.22 0.04 150 / 0.08);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px oklch(0.22 0.04 150 / 0.05), 0 10px 24px -12px oklch(0.22 0.04 150 / 0.18);
+  transition: transform 300ms var(--ease-expo), box-shadow 300ms var(--ease-expo);
+}
+.aliados-home__logo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 1px 2px oklch(0.22 0.04 150 / 0.05), 0 18px 32px -14px oklch(0.22 0.04 150 / 0.28);
+}
+.aliados-home__logo a { display: contents; }
+.aliados-home__logo img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: var(--radius-sm); }
+
+.aliados-home__logo--hueco {
+  background-color: transparent;
+  border: 1.5px dashed oklch(0.41 0.138 143 / 0.3);
+  box-shadow: none;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: oklch(0.41 0.138 143 / 0.6);
+}
+.aliados-home__logo--hueco:hover { transform: none; box-shadow: none; }
+
+/* Sin movimiento: fila estática centrada (sin la copia) */
+@media (prefers-reduced-motion: reduce) {
+  .aliados-home__viewport { mask-image: none; -webkit-mask-image: none; }
+  .aliados-home__marquee { animation: none; width: auto; justify-content: center; flex-wrap: wrap; }
+  .aliados-home__track[aria-hidden] { display: none; }
+  .aliados-home__track { flex-wrap: wrap; justify-content: center; padding-inline: var(--space-4); }
+}
+
+@media (max-width: 767px) {
+  .aliados-home__logo { width: 170px; height: 84px; }
+}

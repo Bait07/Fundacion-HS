@@ -887,3 +887,17 @@
     font-size: 0.8125rem;
   }
 }
+/* ── Equipo y aliados con datos reales (src/data/organizacion.ts) ─────── */
+.team-member__avatar { overflow: hidden; }
+.team-member__avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.aliados-track { list-style: none; margin: 0; }
+/* Logo real: rectángulo blanco (los logos suelen ser horizontales) */
+.aliado-badge--logo {
+  width: 200px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  padding: var(--space-3);
+}
+.aliado-badge--logo a { display: contents; }
+.aliado-badge--logo img { max-width: 100%; max-height: 100%; object-fit: contain; }

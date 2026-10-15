@@ -1,0 +1,37 @@
+---
+import { aliados, ALIADOS_MINIMO, huecos } from '@/data/organizacion';
+import { withBase } from '@/utils/url';
+
+// Logos reales + espacios provisionales, repetidos hasta llenar el ancho;
+// la fila se pinta dos veces para que el desplazamiento sea un bucle sin saltos.
+const items = [
+  ...aliados.map((a) => ({ ...a, hueco: false })),
+  ...huecos(aliados.length, ALIADOS_MINIMO).map(() => ({ nombre: '', logo: '', url: undefined, hueco: true })),
+];
+const fila = Array.from({ length: Math.ceil(8 / Math.max(items.length, 1)) }).flatMap(() => items);
+---
+{items.length > 0 && (
+  <section class="aliados-home" aria-labelledby="aliados-home-heading">
+    <h2 id="aliados-home-heading" class="aliados-home__title">
+      <span>Con el apoyo de</span>
+    </h2>
+
+    <div class="aliados-home__viewport">
+    <div class="aliados-home__marquee">
+      {[0, 1].map((copia) => (
+        <ul class="aliados-home__track" role="list" aria-hidden={copia === 1 ? 'true' : undefined}>
+          {fila.map((a) => (
+            <li class:list={['aliados-home__logo', { 'aliados-home__logo--hueco': a.hueco }]}>
+              {a.hueco
+                ? <span>Tu logo aquí</span>
+                : a.url
+                  ? <a href={a.url} target="_blank" rel="noopener noreferrer" tabindex={copia === 1 ? -1 : undefined}><img src={withBase(a.logo)} alt={a.nombre} loading="lazy" /></a>
+                  : <img src={withBase(a.logo)} alt={copia === 1 ? '' : a.nombre} loading="lazy" />}
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+    </div>
+  </section>
+)}
