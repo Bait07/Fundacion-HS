@@ -110,7 +110,7 @@ function showSent(animate: boolean) {
     sent.hidden = false;
     // Se crea al mostrarse para que la animación arranque desde el inicio
     document.getElementById('contactSentLottie')!.innerHTML =
-      `<dotlottie-wc src="${import.meta.env.BASE_URL}send.lottie" autoplay></dotlottie-wc>`;
+      `<dotlottie-wc src="${import.meta.env.BASE_URL}lottie/send.lottie" autoplay></dotlottie-wc>`;
     if (animate) sent.focus();
   };
   if (!animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return swap();

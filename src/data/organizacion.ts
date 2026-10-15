@@ -26,7 +26,7 @@ export const equipo: Persona[] = [];
 export const aliados: Aliado[] = [
   {
     nombre: 'Colegio Gimnasio Colombo Andino',
-    logo: '/images/logo-colombo-andino.jpeg',
+    logo: '/images/aliados/colombo-andino.jpeg',
     logoNosotros: '/images/aliados/colombo-andino-amarillo.jpeg',
   },
 ];
