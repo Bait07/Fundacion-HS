@@ -31,7 +31,7 @@ export const programs = [
   {
     title: 'Servicios Profesionales',
     short: 'Servicios',
-    lottie: '/lottie/tree.lottie',
+    lottie: '/lottie/servicios.lottie',
     desc: 'Atención interdisciplinaria que fortalece el desarrollo integral y la inclusión educativa y social.',
     href: '/programas#servicios',
     color: 'var(--color-primary)',
@@ -54,22 +54,11 @@ export const stats = [
   { value: '10+', label: 'Años de experiencia',  unit: '' },
 ];
 
+// Videos en public/videos/. El primero es vertical y ocupa la columna izquierda.
 export const testimonials = [
-  {
-    quote: 'Gracias a la fundación, mi hijo encontró un espacio donde puede aprender a su ritmo, con amor y respeto. Ver cómo crece cada semana nos llena de esperanza.',
-    name: 'María Elena Rodríguez',
-    role: 'Mamá de Juan Pablo, 10 años',
-  },
-  {
-    quote: 'El Programa de Jóvenes cambió la vida de mi hija. Hoy tiene habilidades que pensábamos imposibles, y sobre todo, tiene confianza en sí misma.',
-    name: 'Carlos Hernández',
-    role: 'Papá de Valentina, 17 años',
-  },
-  {
-    quote: 'Como padrino, ver el impacto real de mi apoyo en una familia es emocionante. La fundación es transparente, comprometida y hace un trabajo extraordinario.',
-    name: 'Andrés Morales',
-    role: 'Padrino del programa',
-  },
+  { video: 'videos/testimonio-madre.mp4', role: 'Mamá de una niña de la fundación', vertical: true },
+  { video: 'videos/testimonio-madre-joven.mp4', role: 'Mamá de un joven de la fundación' },
+  { video: 'videos/testimonio-abuela-joven.mp4', role: 'Abuela de un joven de la fundación' },
 ];
 
 export const pillars = [

@@ -36,9 +36,9 @@
 }
 
 .about-img {
+  display: block;
   width: 100%;
-  height: 500px;
-  object-fit: cover;
+  height: auto;
   transition: transform 600ms var(--ease-expo);
 }
 
@@ -778,10 +778,6 @@
 
   .about-grid__visual {
     order: -1;
-  }
-
-  .about-img {
-    height: 360px;
   }
 
   .mv-inner {

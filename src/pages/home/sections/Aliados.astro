@@ -8,17 +8,19 @@ const items = [
   ...aliados.map((a) => ({ ...a, hueco: false })),
   ...huecos(aliados.length, ALIADOS_MINIMO).map(() => ({ nombre: '', logo: '', url: undefined, hueco: true })),
 ];
-const fila = Array.from({ length: Math.ceil(8 / Math.max(items.length, 1)) }).flatMap(() => items);
+// ponytail: con pocos logos el carrusel repetiría el mismo; se muestran quietos y centrados.
+const quieto = items.length < 4;
+const fila = quieto ? items : Array.from({ length: Math.ceil(8 / Math.max(items.length, 1)) }).flatMap(() => items);
 ---
 {items.length > 0 && (
-  <section class="aliados-home" aria-labelledby="aliados-home-heading">
+  <section class:list={['aliados-home', { 'aliados-home--quieto': quieto }]} aria-labelledby="aliados-home-heading">
     <h2 id="aliados-home-heading" class="aliados-home__title">
       <span>Con el apoyo de</span>
     </h2>
 
     <div class="aliados-home__viewport">
     <div class="aliados-home__marquee">
-      {[0, 1].map((copia) => (
+      {(quieto ? [0] : [0, 1]).map((copia) => (
         <ul class="aliados-home__track" role="list" aria-hidden={copia === 1 ? 'true' : undefined}>
           {fila.map((a) => (
             <li class:list={['aliados-home__logo', { 'aliados-home__logo--hueco': a.hueco }]}>

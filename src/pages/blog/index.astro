@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/utils/url';
 import PageHeader from '@/components/PageHeader.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
@@ -42,7 +43,7 @@ const categories = ['Educación consciente', 'Desarrollo humano', 'Comunidad', '
         <article class={`blog-card reveal reveal-delay-${(i % 3) + 1}`}>
           <a href={post.slug} class="blog-card__img-link" tabindex="-1" aria-hidden="true">
             <img
-              src={post.image || `https://picsum.photos/seed/blog-${i}/600/340`}
+              src={withBase(post.image)}
               alt=""
               width="600"
               height="340"

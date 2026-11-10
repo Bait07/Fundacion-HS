@@ -1,9 +1,10 @@
 ---
+import { withBase } from '@/utils/url';
 ---
 <section class="section" aria-labelledby="como-donar-heading">
   <div class="container como-donar-inner">
     <div class="como-donar__copy reveal">
-      <h2 id="como-donar-heading">Cómo donar</h2>
+      <h2 id="como-donar-heading">¿Cómo donar?</h2>
       <p>Por el momento, escríbenos por WhatsApp y te guiaremos en el proceso de donación. Próximamente tendremos pagos en línea.</p>
       <div class="donacion-methods">
         <div class="donacion-method">
@@ -20,8 +21,8 @@
     </div>
     <div class="donacion-visual reveal reveal-delay-2">
       <img
-        src="https://picsum.photos/seed/donation-impact-children/500/400"
-        alt="Niño beneficiado por donaciones a la Fundación Horizontes de Sabiduría en Bogotá"
+        src={withBase("/images/fotos/donaciones-merienda.jpeg")}
+        alt="Niña de la fundación compartiendo una merienda con sus compañeros"
         width="500"
         height="400"
         loading="lazy"

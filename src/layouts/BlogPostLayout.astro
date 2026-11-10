@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/utils/url';
 import BaseLayout from './BaseLayout.astro';
 
 const { frontmatter } = Astro.props;
@@ -20,7 +21,7 @@ const cuerpo = (await Astro.slots.render('default')).replaceAll('href="/', `href
     <div class="post-hero__bg" aria-hidden="true">
       {frontmatter.image && (
         <img
-          src={frontmatter.image}
+          src={withBase(frontmatter.image)}
           alt=""
           width="1200"
           height="630"

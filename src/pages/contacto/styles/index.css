@@ -1,3 +1,6 @@
+/* Menos aire entre el encabezado de la página y el formulario */
+.contacto-main { padding-top: var(--space-12); }
+
 .contacto-inner {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
@@ -71,7 +74,7 @@
 .form-input.error { border-color: var(--color-accent); }
 
 
-.form-textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+.form-textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 
 /* Motivo: botones tipo píldora (radios nativos, accesibles con teclado) */
 .form-motivos { border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -246,3 +249,6 @@
   .contacto-form-wrap > h2, .contacto-form { transition: none; }
   .contacto-enviado { animation: none; }
 }
+
+/* Sin aviso no ocupa espacio entre el mensaje y el botón */
+.form-status:empty { display: none; }

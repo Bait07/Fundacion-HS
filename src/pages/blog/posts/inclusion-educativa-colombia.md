@@ -5,7 +5,7 @@ description: "Conoce los derechos legales de las personas con discapacidad en Co
 date: "2026-05-15"
 category: "Desarrollo humano"
 readTime: "6 min"
-image: "https://picsum.photos/seed/education-rights-colombia/1200/630"
+image: "/images/fotos/blog-inclusion.jpeg"
 tags: ["inclusión educativa", "derechos", "Colombia", "familias"]
 ---
 

@@ -15,7 +15,6 @@ const programs = [
     subtitle: 'Primeros Pasos hacia la Inclusión Escolar',
     desc: 'Fortalecemos en niños y niñas las habilidades básicas para el acercamiento, la adaptación y la inclusión en el entorno escolar y social.',
     overlayColor: 'oklch(0.67 0.065 155 / 0.22)',
-    bgImg: 'https://picsum.photos/seed/children-classroom-colombia/800/560',
     areas: ['Adaptación al entorno escolar', 'Habilidades cognitivas y comunicativas', 'Autonomía básica', 'Socialización y manejo emocional', 'Acompañamiento terapéutico'],
     navLabel: 'Niñez',
     lottie: '/lottie/ninos.lottie',
@@ -27,7 +26,7 @@ const programs = [
     subtitle: 'Habilidades para la Vida y la Inclusión Social',
     desc: 'Fortalecemos habilidades personales, sociales y funcionales que favorecen la autonomía, la participación social y el proyecto de vida.',
     overlayColor: 'oklch(0.41 0.138 143 / 0.22)',
-    bgImg: 'https://picsum.photos/seed/youth-workshop-bogota/800/560',
+    bgImg: '/images/fotos/jovenes-parque.jpeg',
     areas: ['Habilidades para la vida', 'Independencia funcional', 'Comunicación y relaciones sociales', 'Formación ocupacional', 'Participación comunitaria'],
     navLabel: 'Jóvenes',
     highlight: true,
@@ -39,7 +38,6 @@ const programs = [
     subtitle: 'Autonomía, Participación y Calidad de Vida',
     desc: 'Promovemos la autonomía funcional, la participación social y el bienestar integral de adultos con discapacidad cognitiva e intelectual.',
     overlayColor: 'oklch(0.67 0.065 155 / 0.22)',
-    bgImg: 'https://picsum.photos/seed/adults-activities-foundation/800/560',
     areas: ['Vida independiente', 'Participación social', 'Actividades ocupacionales', 'Bienestar emocional', 'Inclusión comunitaria'],
     navLabel: 'Adultos',
     lottie: '/lottie/adult.lottie',
@@ -51,7 +49,7 @@ const programs = [
     subtitle: 'Apoyo Integral para la Inclusión',
     desc: 'Atención interdisciplinaria orientada al fortalecimiento del desarrollo integral y la inclusión educativa y social.',
     overlayColor: 'oklch(0.26 0.035 145 / 0.22)',
-    bgImg: 'https://picsum.photos/seed/therapy-session-colombia/800/560',
+    bgImg: '/images/fotos/grupo-salon.jpeg',
     areasLabel: 'Nuestros servicios',
     areas: ['Psicología — acompañamiento emocional y apoyo conductual', 'Fonoaudiología — estimulación del lenguaje y comunicación funcional', 'Terapia Ocupacional — motricidad e integración sensorial'],
     navLabel: 'Servicios',
@@ -65,7 +63,6 @@ const programs = [
     subtitle: 'Apadrina un Sueño, Transforma una Vida',
     desc: 'Una estrategia solidaria para brindar apoyo económico a niños con discapacidad cognitiva, facilitando su acceso a la educación inclusiva de calidad.',
     overlayColor: 'oklch(0.41 0.138 143 / 0.26)',
-    bgImg: 'https://picsum.photos/seed/sponsor-child-education/800/560',
     areasLabel: 'Población beneficiaria',
     areas: ['Niños, niñas y adolescentes con discapacidad cognitiva e intelectual', 'Familias de bajos recursos económicos', 'En riesgo de deserción escolar', 'Vinculados o en proceso de ingreso a instituciones inclusivas'],
     navLabel: 'Plan Padrino',
@@ -115,7 +112,7 @@ const programs = [
             ) : (
               <div class="prog-row__img-wrap">
                 <img
-                  src={prog.bgImg}
+                  src={withBase(prog.bgImg)}
                   alt={`${prog.title} — ${prog.subtitle}`}
                   width="800"
                   height="560"

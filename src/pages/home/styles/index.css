@@ -287,9 +287,9 @@
 }
 
 .about__img {
+  display: block;
   width: 100%;
-  height: 500px;
-  object-fit: cover;
+  height: auto;
   transition: transform 600ms var(--ease-expo);
 }
 
@@ -566,105 +566,44 @@
 }
 
 .testimonials__note {
-  font-style: italic;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--color-ink-muted);
-  margin-top: var(--space-3);
+  margin: var(--space-3) auto 0;
   text-align: center;
 }
 
+/* Vertical a la izquierda ocupando dos filas; los dos horizontales apilados.
+   Las columnas siguen la proporción 9:16 vs 16:9 para que las alturas casen. */
 .testimonials__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 0.65fr 1fr;
   gap: var(--space-6);
 }
 
 .testimonial {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
-  padding: var(--space-8) var(--space-6);
-  background-color: white;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.testimonial--vertical {
+  grid-row: span 2;
+}
+
+.testimonial__video {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background-color: var(--color-ink);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
-  border-top: 4px solid var(--color-primary);
-  transition: box-shadow 280ms var(--ease-expo);
 }
 
-.testimonial:nth-child(2) {
-  border-top-color: var(--color-accent);
-}
-
-.testimonial:nth-child(3) {
-  border-top-color: var(--color-primary-light);
-}
-
-.testimonial:hover {
-  box-shadow: 0 10px 32px oklch(0.26 0.035 145 / 0.12);
-}
-
-.testimonial__quote-mark {
-  color: var(--color-primary);
-  opacity: 0.45;
-  flex-shrink: 0;
-  width: 28px;
-  height: 21px;
-}
-
-.testimonial:nth-child(2) .testimonial__quote-mark {
-  color: var(--color-accent);
-}
-
-.testimonial__text {
-  font-size: clamp(0.9375rem, 1.1vw, 1rem);
-  line-height: 1.78;
-  color: var(--color-ink);
-  font-style: italic;
-  flex: 1;
-  max-width: none;
-}
-
-.testimonial__footer {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: auto;
-}
-
-.testimonial__avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.125rem;
-  flex-shrink: 0;
-}
-
-.testimonial:nth-child(2) .testimonial__avatar {
-  background-color: var(--color-accent);
-}
-
-.testimonial__name {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--color-ink);
-  font-style: normal;
-  max-width: none;
-}
-
-.testimonial__role {
-  display: block;
-  font-size: 0.8125rem;
-  color: var(--color-ink-muted);
-  max-width: none;
+.testimonial--vertical .testimonial__video {
+  aspect-ratio: auto;
 }
 
 /* ═══ PLAN PADRINO CTA (banner ancho completo) ═══════════════════════════ */
@@ -812,13 +751,6 @@
     order: -1;
   }
 
-  .about__img {
-    height: 380px;
-  }
-
-  .testimonials__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 
   /* !important: garantiza que gane sobre `.hero__text.visible .hero__title`
      (más específico) sin depender del orden de aparición en el archivo. */
@@ -881,6 +813,9 @@
   .testimonials__grid {
     grid-template-columns: 1fr;
   }
+
+  .testimonial--vertical { grid-row: auto; }
+  .testimonial--vertical .testimonial__video { aspect-ratio: 9 / 16; max-height: 70vh; object-fit: contain; }
 
   /* Una sola columna, filas horizontales (icono + texto en línea) para que
      la barra apilada no se vea rota ni desproporcionadamente alta; overlap
@@ -1005,8 +940,7 @@
   .prog-index__arrow,
   .prog-index__lottie { transition: none; transform: none !important; }
 
-  .testimonial,
-  .testimonial:hover {
+  .testimonial {
     transition: none;
     transform: none;
   }
@@ -1117,7 +1051,10 @@
 }
 .aliados-home__logo--hueco:hover { transform: none; box-shadow: none; }
 
-/* Sin movimiento: fila estática centrada (sin la copia) */
+/* Sin movimiento (pocos aliados o movimiento reducido): fila estática centrada */
+.aliados-home--quieto .aliados-home__viewport { mask-image: none; -webkit-mask-image: none; }
+.aliados-home--quieto .aliados-home__marquee { animation: none; width: auto; justify-content: center; }
+.aliados-home--quieto .aliados-home__track { flex-wrap: wrap; justify-content: center; padding-inline: var(--space-4); }
 @media (prefers-reduced-motion: reduce) {
   .aliados-home__viewport { mask-image: none; -webkit-mask-image: none; }
   .aliados-home__marquee { animation: none; width: auto; justify-content: center; flex-wrap: wrap; }

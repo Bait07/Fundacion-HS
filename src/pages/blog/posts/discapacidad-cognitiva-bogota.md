@@ -5,7 +5,7 @@ description: "Guía práctica para familias bogotanas: qué es la discapacidad c
 date: "2026-06-01"
 category: "Educación consciente"
 readTime: "8 min"
-image: "https://picsum.photos/seed/cognitive-disability-guide/1200/630"
+image: "/images/fotos/blog-discapacidad.jpeg"
 tags: ["discapacidad cognitiva", "Bogotá", "familias", "inclusión"]
 ---
 

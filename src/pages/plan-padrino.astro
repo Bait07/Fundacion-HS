@@ -21,9 +21,10 @@ const puerta = [
   { para: 'Para su futuro', title: 'Autonomía para la vida', desc: 'La oportunidad de seguir desarrollando capacidades, habilidades y autonomía.' },
 ];
 
-// ponytail: vacío hasta recibir los testimonios reales de padrinos; la sección
-// solo se renderiza cuando hay al menos uno. `video` = URL de embed de YouTube.
-const testimonios: { nombre: string; texto?: string; video?: string }[] = [];
+// La sección solo se renderiza cuando hay al menos uno. `video` = archivo en public/videos/.
+const testimonios: { nombre: string; texto?: string; video?: string }[] = [
+  { nombre: 'Apadrina a una joven de la fundación', video: 'videos/testimonio-padrino.mp4' },
+];
 
 const padrinoHref = withBase('/contacto?motivo=plan-padrino');
 const donarHref = withBase('/donaciones');
@@ -106,6 +107,61 @@ const donarHref = withBase('/donaciones');
     </div>
   </section>
 
+  {testimonios.length > 0 && (
+    <section class="section" aria-labelledby="testimonios-heading">
+      <div class="container">
+        <h2 id="testimonios-heading" class="padrino-h2">Una comunidad que ayuda a otra comunidad</h2>
+        <p class="padrino-sub">
+          El Plan Padrino existe gracias a personas que creen que la diferencia es una posibilidad de transformar debilidades en oportunidades. Como ellos, puedes sumarte: estos son sus testimonios.
+        </p>
+        <ul class="padrino-cards" role="list">
+          {testimonios.map((t) => (
+            <li class="padrino-card">
+              {t.video && (
+                <video
+                  src={`${withBase(t.video)}#t=0.5`}
+                  controls
+                  preload="metadata"
+                  playsinline
+                  aria-label={`Testimonio: ${t.nombre}`}
+                  class="padrino-card__video"
+                ></video>
+              )}
+              {t.texto && <blockquote>{t.texto}</blockquote>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section bg-primary padrino-cta" aria-labelledby="cta-heading">
+    <div class="container padrino-narrow padrino-cta__inner">
+      <h2 id="cta-heading">¿Quieres ser parte de esta historia?</h2>
+      <p>
+        Puedes convertirte en padrino de un estudiante y contribuir directamente a que continúe su educación y su formación para la vida, ayudando no solo a un niño o joven en condiciones vulnerables, sino también impactando a toda una familia. Tu apoyo les cambiará la vida.
+      </p>
+      <a href={padrinoHref} class="btn btn-accent">Quiero ser padrino</a>
+      <p>
+        Si deseas conocer el programa, resolver tus inquietudes o conocer el proceso para realizar el apadrinamiento, <a href={padrinoHref}>comunícate con nosotros</a>.
+      </p>
+      <p>
+        También puedes apoyar nuestra labor mediante una <strong>donación</strong>, destinada a fortalecer el programa y ampliar nuestro alcance a otras acciones enfocadas en mejorar la calidad de vida de las personas con discapacidad o neurodivergencia y de sus familias.
+      </p>
+      <a href={donarHref} class="btn btn-outline">Quiero donar</a>
+    </div>
+
+    <!-- Ola hacia la sección siguiente (¿Cuánto cuesta apadrinar?) -->
+    <div class="padrino-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,64 480,16 720,40 C960,64 1200,20 1440,40 L1440,64 L0,64 Z"
+          fill="var(--color-bg)"
+        />
+      </svg>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="costo-heading">
     <div class="container padrino-narrow padrino-costo">
       <h2 id="costo-heading" class="padrino-h2">¿Cuánto cuesta apadrinar?</h2>
@@ -124,62 +180,6 @@ const donarHref = withBase('/donaciones');
       <p>Si deseas hacerlo posible, puedes convertirte en padrino y ayudarnos a mantener abierta esta oportunidad educativa.</p>
     </div>
   </section>
-
-  <section class="section bg-primary padrino-cta" aria-labelledby="cta-heading">
-    <div class="container padrino-narrow padrino-cta__inner">
-      <h2 id="cta-heading">¿Quieres ser parte de esta historia?</h2>
-      <p>
-        Puedes convertirte en padrino de un estudiante y contribuir directamente a que continúe su educación y su formación para la vida, ayudando no solo a un niño o joven en condiciones vulnerables, sino también impactando a toda una familia. Tu apoyo les cambiará la vida.
-      </p>
-      <a href={padrinoHref} class="btn btn-accent">Quiero ser padrino</a>
-      <p>
-        Si deseas conocer el programa, resolver tus inquietudes o conocer el proceso para realizar el apadrinamiento, <a href={padrinoHref}>comunícate con nosotros</a>.
-      </p>
-      <p>
-        También puedes apoyar nuestra labor mediante una <strong>donación</strong>, destinada a fortalecer el programa y ampliar nuestro alcance a otras acciones enfocadas en mejorar la calidad de vida de las personas con discapacidad o neurodivergencia y de sus familias.
-      </p>
-      <a href={donarHref} class="btn btn-outline">Quiero donar</a>
-    </div>
-
-    <!-- Ola hacia la sección siguiente: footer oscuro mientras no haya testimonios -->
-    <div class="padrino-wave" aria-hidden="true">
-      <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path
-          d="M0,40 C240,64 480,16 720,40 C960,64 1200,20 1440,40 L1440,64 L0,64 Z"
-          fill={testimonios.length > 0 ? 'var(--color-bg)' : 'var(--color-ink)'}
-        />
-      </svg>
-    </div>
-  </section>
-
-  {testimonios.length > 0 && (
-    <section class="section" aria-labelledby="testimonios-heading">
-      <div class="container">
-        <h2 id="testimonios-heading" class="padrino-h2">Una comunidad que ayuda a otra comunidad</h2>
-        <p class="padrino-sub">
-          El Plan Padrino existe gracias a personas que creen que la diferencia es una posibilidad de transformar debilidades en oportunidades. Como ellos, puedes sumarte: estos son sus testimonios.
-        </p>
-        <ul class="padrino-cards" role="list">
-          {testimonios.map((t) => (
-            <li class="padrino-card">
-              {t.video && (
-                <iframe
-                  src={t.video}
-                  title={`Testimonio de ${t.nombre}`}
-                  loading="lazy"
-                  allow="encrypted-media; picture-in-picture"
-                  allowfullscreen
-                  class="padrino-card__video"
-                ></iframe>
-              )}
-              {t.texto && <blockquote>{t.texto}</blockquote>}
-              <p class="padrino-card__autor">{t.nombre}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
 </BaseLayout>
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>
@@ -330,6 +330,7 @@ const donarHref = withBase('/donaciones');
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--space-6);
 }
+.padrino-cards:has(> :only-child) { max-width: 820px; margin-inline: auto; }
 .padrino-card {
   background: var(--color-white);
   border-radius: var(--radius-md);
@@ -338,7 +339,8 @@ const donarHref = withBase('/donaciones');
 }
 .padrino-card h3 { font-size: 1.25rem; margin-bottom: var(--space-2); color: var(--color-accent); }
 .padrino-card p { line-height: 1.6; }
-.padrino-card__video { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--radius-sm); margin-bottom: var(--space-4); }
+.padrino-card__video { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--color-ink); border: 0; border-radius: var(--radius-sm); margin-bottom: var(--space-4); }
+.padrino-card__video:last-child { margin-bottom: 0; }
 .padrino-card blockquote { font-style: italic; line-height: 1.7; margin-bottom: var(--space-4); }
 .padrino-card__autor { font-family: var(--font-display); font-weight: 600; }
 

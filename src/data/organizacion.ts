@@ -34,6 +34,6 @@ export const aliados: Aliado[] = [
 // ponytail: espacios provisionales hasta recibir los datos reales;
 // poner en 0 antes de publicar si no llegan.
 export const EQUIPO_MINIMO = 4;
-export const ALIADOS_MINIMO = 4;
+export const ALIADOS_MINIMO = 0;
 
 export const huecos = (n: number, minimo: number) => Array.from({ length: Math.max(0, minimo - n) });
