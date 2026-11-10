@@ -266,9 +266,9 @@
 
 .about__inner {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(3rem, 6vw, 6rem);
-  align-items: center;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: start; /* foto alineada con el título, no centrada */
 }
 
 .about__visual {
