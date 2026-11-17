@@ -455,3 +455,41 @@ img, svg {
   direction: ltr;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ── Etiqueta sobre títulos y palabra resaltada (secciones rediseñadas) ── */
+.eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.acento { color: var(--color-primary); }
+
+/* Marco de foto: bloque verde desplazado detrás + punto lima.
+   Va en el contenedor de afuera (el de adentro recorta la imagen). */
+.marco-foto { position: relative; isolation: isolate; margin: 0 18px 18px 0; }
+.marco-foto::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate(18px, 18px) rotate(1.5deg);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  z-index: -1;
+}
+.marco-foto::after {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  width: 56px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-lime);
+  z-index: -1;
+}
+.marco-foto > * { border: 6px solid var(--color-white); }

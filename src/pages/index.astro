@@ -1,15 +1,15 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { seo } from './home/data/index';
-import Hero from './home/sections/Hero.astro';
-import QuickAccess from './home/sections/QuickAccess.astro';
-import About from './home/sections/About.astro';
-import Stats from './home/sections/Stats.astro';
-import Programs from './home/sections/Programs.astro';
-import Testimonials from './home/sections/Testimonials.astro';
-import PadrinoCta from './home/sections/PadrinoCta.astro';
-import ContactQuick from './home/sections/ContactQuick.astro';
-import Aliados from './home/sections/Aliados.astro';
+import { seo } from './home/_data/index';
+import Hero from './home/_sections/Hero.astro';
+import QuickAccess from './home/_sections/QuickAccess.astro';
+import About from './home/_sections/About.astro';
+import Stats from './home/_sections/Stats.astro';
+import Programs from './home/_sections/Programs.astro';
+import Testimonials from './home/_sections/Testimonials.astro';
+import PadrinoCta from './home/_sections/PadrinoCta.astro';
+import ContactQuick from './home/_sections/ContactQuick.astro';
+import Aliados from './home/_sections/Aliados.astro';
 import './home/styles/index.css';
 ---
 
@@ -20,9 +20,16 @@ import './home/styles/index.css';
     "@type": "NGO",
     "name": "Fundación Horizontes de Sabiduría",
     "alternateName": "FHS",
-    "description": "Fundación sin ánimo de lucro en Bogotá que acompaña a personas con discapacidad cognitiva e intelectual mediante programas de inclusión educativa y social.",
+    "description": "Fundación sin ánimo de lucro en Bogotá que acompaña a niños, jóvenes y adultos con discapacidad cognitiva e intelectual y a sus familias mediante programas de inclusión educativa y social, atención interdisciplinaria y el Plan Padrino.",
     "url": "https://fundhorizontesdesabiduria.org",
     "logo": "https://fundhorizontesdesabiduria.org/logo.png",
+    "image": "https://fundhorizontesdesabiduria.org/og-image.jpg",
+    "taxID": "902.040.005-1",
+    "nonprofitStatus": "Nonprofit",
+    "email": "contacto@fundhorizontesdesabiduria.org",
+    "telephone": "+57 317 375 9920",
+    "areaServed": { "@type": "City", "name": "Bogotá" },
+    "knowsAbout": ["Discapacidad cognitiva", "Discapacidad intelectual", "Inclusión educativa", "Neurodivergencia", "Educación especial"],
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Bogotá",
@@ -32,6 +39,8 @@ import './home/styles/index.css';
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
+      "telephone": "+57 317 375 9920",
+      "email": "contacto@fundhorizontesdesabiduria.org",
       "availableLanguage": "Spanish"
     }
   }

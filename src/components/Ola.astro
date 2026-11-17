@@ -1,0 +1,29 @@
+---
+// Ola al final de una sección; `color` = fondo de la sección siguiente.
+// Igual a .section-wave del inicio y Nosotros.
+interface Props { color?: string }
+const { color = 'var(--color-bg)' } = Astro.props;
+---
+<div class="ola" aria-hidden="true">
+  <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C240,64 480,16 720,40 C960,64 1200,20 1440,40 L1440,64 L0,64 Z" fill={color} />
+  </svg>
+</div>
+
+<style>
+.ola {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 64px;
+  pointer-events: none;
+  z-index: 1;
+}
+.ola svg { display: block; width: 100%; height: 100%; }
+/* la sección que la contiene: referencia de posición y espacio para la ola */
+:global(section:has(> .ola)) {
+  position: relative;
+  padding-bottom: calc(clamp(4rem, 8vw, 8rem) + 32px);
+}
+</style>

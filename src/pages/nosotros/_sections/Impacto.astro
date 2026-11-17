@@ -1,5 +1,6 @@
 ---
-import { impacto } from '../data/index';
+import Ola from '@/components/Ola.astro';
+import { impacto } from '../_data/index';
 ---
 <section class="section-sm impacto-section" aria-label="Datos de impacto">
   <div class="container">
@@ -20,6 +21,7 @@ import { impacto } from '../data/index';
       ))}
     </ol>
   </div>
+  <Ola color="var(--color-primary)" />
 </section>
 
 <script>

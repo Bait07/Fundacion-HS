@@ -1,20 +1,23 @@
 ---
+import Ola from '@/components/Ola.astro';
 import { withBase } from '@/utils/url';
+import CuentaBancaria from '@/components/CuentaBancaria.astro';
 ---
 <section class="section" aria-labelledby="como-donar-heading">
   <div class="container como-donar-inner">
     <div class="como-donar__copy reveal">
       <h2 id="como-donar-heading">¿Cómo donar?</h2>
-      <p>Por el momento, escríbenos por WhatsApp y te guiaremos en el proceso de donación. Próximamente tendremos pagos en línea.</p>
+      <p>Por el momento recibimos donaciones por transferencia bancaria. Cuando la hagas, envíanos el comprobante por WhatsApp para agradecerte y contarte a dónde llega tu aporte.</p>
+      <CuentaBancaria />
       <div class="donacion-methods">
         <div class="donacion-method">
           <a
-            href="https://wa.me/573173759920?text=Quiero%20hacer%20una%20donaci%C3%B3n%20a%20la%20Fundaci%C3%B3n%20Horizontes%20de%20Sabidur%C3%ADa"
+            href="https://wa.me/573173759920?text=Hice%20una%20donaci%C3%B3n%20a%20la%20Fundaci%C3%B3n%20Horizontes%20de%20Sabidur%C3%ADa"
             class="btn btn-primary"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Donar por WhatsApp
+            Enviar comprobante por WhatsApp
           </a>
         </div>
       </div>
@@ -30,4 +33,5 @@ import { withBase } from '@/utils/url';
       />
     </div>
   </div>
+  <Ola color="var(--color-surface)" />
 </section>

@@ -1,9 +1,13 @@
 ---
+import Ola from '@/components/Ola.astro';
 ---
 <section class="section historia-section" id="historia" aria-labelledby="historia-heading">
   <div class="container about-grid">
     <div class="about-grid__copy">
-      <h2 id="historia-heading" class="reveal">Nuestra historia</h2>
+      <div class="reveal">
+        <span class="eyebrow">De dónde venimos</span>
+        <h2 id="historia-heading">Nuestra <span class="acento">historia</span></h2>
+      </div>
       <div class="prose reveal reveal-delay-1">
         <p>
           La Fundación Horizontes de Sabiduría nació del convencimiento de que la discapacidad no define los límites de una persona: define el punto de partida de un camino que, con el acompañamiento adecuado, puede llegar lejos.
@@ -16,7 +20,8 @@
         </p>
       </div>
     </div>
-    <div class="about-grid__visual reveal">
+    <div class="marco-foto reveal">
+      <div class="about-grid__visual">
       <img
         src={`${import.meta.env.BASE_URL}images/fotos/jovenes-parque.jpeg`}
         alt="Grupo de niños y jóvenes de la Fundación Horizontes de Sabiduría en un parque de Bogotá"
@@ -25,6 +30,8 @@
         loading="lazy"
         class="about-img"
       />
+      </div>
     </div>
   </div>
+  <Ola color="var(--color-surface)" />
 </section>

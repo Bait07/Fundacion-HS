@@ -1,0 +1,118 @@
+---
+import { cuentaBancaria as c } from '@/data/organizacion';
+import { withBase } from '@/utils/url';
+---
+<div class="cuenta" role="group" aria-label="Datos para transferencia">
+  <div class="cuenta__top">
+    <span class="cuenta__tipo">{c.tipo}</span>
+    <span class="cuenta__banco"><img src={withBase(c.logoBanco)} alt={c.banco} width="2000" height="460" loading="lazy" /></span>
+  </div>
+
+  <div class="cuenta__dato">
+    <span class="cuenta__label">Número de cuenta</span>
+    <div class="cuenta__fila">
+      <span class="cuenta__numero">{c.numero}</span>
+      <button type="button" class="cuenta__copiar" data-copiar={c.numero} aria-label="Copiar número de cuenta">Copiar</button>
+    </div>
+  </div>
+
+  <div class="cuenta__pie">
+    <div class="cuenta__dato">
+      <span class="cuenta__label">Titular</span>
+      <span class="cuenta__valor">{c.titular}</span>
+    </div>
+    <div class="cuenta__dato">
+      <span class="cuenta__label">NIT</span>
+      <div class="cuenta__fila">
+        <span class="cuenta__valor">{c.nit}</span>
+        <button type="button" class="cuenta__copiar" data-copiar={c.nit.replace(/\D/g, '').slice(0, -1)} aria-label="Copiar NIT">Copiar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.cuenta__copiar').forEach((b) =>
+    b.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(b.dataset.copiar!);
+        b.textContent = '¡Copiado!';
+        setTimeout(() => (b.textContent = 'Copiar'), 1800);
+      } catch { /* sin portapapeles: el dato sigue visible para copiarlo a mano */ }
+    }),
+  );
+</script>
+
+<style>
+.cuenta {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 440px;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  border-radius: var(--radius-lg);
+  color: var(--color-white);
+  text-align: left;
+  background:
+    radial-gradient(120% 90% at 100% 0%, oklch(0.81 0.196 123 / 0.35), transparent 55%),
+    linear-gradient(135deg, var(--color-accent), var(--color-primary) 60%, var(--color-secondary));
+  box-shadow: 0 18px 40px -14px oklch(0.41 0.138 143 / 0.55), inset 0 1px 0 oklch(1 0 0 / 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+/* brillo diagonal sutil */
+.cuenta::after {
+  content: '';
+  position: absolute;
+  inset: -40% -10% auto auto;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid oklch(1 0 0 / 0.14);
+  pointer-events: none;
+}
+.cuenta__top { display: flex; justify-content: space-between; align-items: center; }
+.cuenta__tipo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cuenta__banco {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  box-shadow: 0 4px 12px -4px oklch(0.22 0.04 150 / 0.4);
+}
+.cuenta__banco img { display: block; width: auto; height: 26px; }
+.cuenta__dato { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cuenta__label { font-size: 0.75rem; opacity: 0.8; letter-spacing: 0.04em; }
+.cuenta__fila { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.cuenta__numero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+.cuenta__valor { font-weight: 700; font-size: 0.9375rem; }
+.cuenta__pie { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.cuenta__copiar {
+  position: relative;
+  z-index: 1;
+  padding: 4px 12px;
+  border: 1px solid oklch(1 0 0 / 0.5);
+  border-radius: var(--radius-full);
+  background: oklch(1 0 0 / 0.12);
+  color: inherit;
+  font: 600 0.75rem var(--font-body);
+  cursor: pointer;
+  transition: background 200ms;
+}
+.cuenta__copiar:hover { background: oklch(1 0 0 / 0.25); }
+.cuenta__copiar:focus-visible { outline: 2px solid var(--color-white); outline-offset: 2px; }
+</style>

@@ -15,7 +15,19 @@ const formattedDate = frontmatter.date
 const cuerpo = (await Astro.slots.render('default')).replaceAll('href="/', `href="${import.meta.env.BASE_URL}`);
 ---
 
-<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+<BaseLayout title={frontmatter.title} description={frontmatter.description} image={frontmatter.image} type="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    image: frontmatter.image ? new URL(withBase(frontmatter.image), Astro.site).href : undefined,
+    datePublished: frontmatter.date,
+    inLanguage: "es-CO",
+    author: { "@type": "Organization", name: "Fundación Horizontes de Sabiduría" },
+    publisher: { "@type": "NGO", name: "Fundación Horizontes de Sabiduría", url: "https://fundhorizontesdesabiduria.org" },
+    mainEntityOfPage: Astro.url.href,
+  })} />
   <!-- Hero del artículo -->
   <header class="post-hero">
     <div class="post-hero__bg" aria-hidden="true">

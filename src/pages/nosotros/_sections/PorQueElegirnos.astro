@@ -1,0 +1,30 @@
+---
+import { razones } from '../_data/index';
+---
+<section class="section razones-section" aria-labelledby="razones-heading">
+  <div class="container razones-inner">
+    <div class="razones-header reveal">
+      <span class="eyebrow">Lo que nos distingue</span>
+      <h2 id="razones-heading">¿Por qué <span class="acento">elegirnos</span>?</h2>
+      <p>Lo que nos distingue como acompañantes de familias en Bogotá.</p>
+      <dotlottie-wc
+        class="razones-family"
+        src={`${import.meta.env.BASE_URL}lottie/family.lottie`}
+        autoplay
+        loop
+        aria-hidden="true"
+      ></dotlottie-wc>
+    </div>
+
+    <ul class="razones-list" role="list" aria-label="Razones para elegirnos">
+      {razones.map((razon, i) => (
+        <li class={`razon reveal reveal-delay-${(i % 3) + 1}`}>
+          <h3 class="razon__title">{razon.title}</h3>
+          <p class="razon__desc">{razon.desc}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>

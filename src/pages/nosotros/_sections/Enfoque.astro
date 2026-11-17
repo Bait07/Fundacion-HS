@@ -1,5 +1,6 @@
 ---
-import { enfoque } from '../data/index';
+import { enfoque } from '../_data/index';
+import Ola from '@/components/Ola.astro';
 
 // Posición de cada hoja dentro de .enfoque-tree, en % del contenedor,
 // ancladas por su esquina superior izquierda (sin transform, para no
@@ -59,6 +60,7 @@ const waveDelays: Record<number, number> = { 1: 0.8, 2: 1.6, 3: 2.3 };
       </ul>
     </div>
   </div>
+  <Ola color="var(--color-primary)" />
 </section>
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>

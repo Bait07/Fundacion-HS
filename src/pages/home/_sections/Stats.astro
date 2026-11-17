@@ -1,10 +1,15 @@
 ---
-import { stats } from '../data/index';
+import { stats } from '../_data/index';
 ---
 <section class="section stats" aria-labelledby="stats-heading">
-  <dotlottie-wc class="stats__plane" src={`${import.meta.env.BASE_URL}lottie/airplane.lottie`} autoplay loop aria-hidden="true"></dotlottie-wc>
   <div class="container">
-    <h2 id="stats-heading" class="stats__heading reveal">Nuestro alcance</h2>
+    <div class="stats__head">
+      <div class="reveal">
+        <span class="stats__eyebrow">Lo que hemos logrado</span>
+        <h2 id="stats-heading" class="stats__heading">Nuestro <span class="stats__acento">alcance</span></h2>
+      </div>
+      <dotlottie-wc class="stats__plane" src={`${import.meta.env.BASE_URL}lottie/airplane.lottie`} autoplay loop aria-hidden="true"></dotlottie-wc>
+    </div>
     <div class="stats__strip">
       {stats.map((stat, i) => (
         <div class={`stats__item anim-delay-${i + 1}`} data-anim="slideInUp">

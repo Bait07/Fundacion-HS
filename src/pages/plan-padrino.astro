@@ -1,5 +1,7 @@
 ---
 import PageHeader from '@/components/PageHeader.astro';
+import CuentaBancaria from '@/components/CuentaBancaria.astro';
+import Ola from '@/components/Ola.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/utils/url';
 
@@ -87,36 +89,24 @@ const donarHref = withBase('/donaciones');
         </details>
       </div>
     </div>
-  </section>
-
-  <section class="section bg-surface" aria-labelledby="puerta-heading">
-    <div class="container">
-      <h2 id="puerta-heading" class="padrino-h2">Apadrinar es abrir una puerta</h2>
-      <p class="padrino-sub">
-        Tu aporte no representa solamente el pago de una colegiatura. Representa:
-      </p>
-      <ol class="padrino-impacto">
-        {puerta.map((p) => (
-          <li class="padrino-impacto__item">
-            <p class="padrino-impacto__para">{p.para}</p>
-            <h3>{p.title}</h3>
-            <p>{p.desc}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
+    <Ola color="var(--color-surface)" />
   </section>
 
   {testimonios.length > 0 && (
-    <section class="section" aria-labelledby="testimonios-heading">
-      <div class="container">
-        <h2 id="testimonios-heading" class="padrino-h2">Una comunidad que ayuda a otra comunidad</h2>
-        <p class="padrino-sub">
-          El Plan Padrino existe gracias a personas que creen que la diferencia es una posibilidad de transformar debilidades en oportunidades. Como ellos, puedes sumarte: estos son sus testimonios.
-        </p>
-        <ul class="padrino-cards" role="list">
+    <section class="section bg-surface comunidad" aria-labelledby="testimonios-heading">
+      <div class="container comunidad__inner">
+        <div class="comunidad__copy">
+          <span class="comunidad__eyebrow">Testimonio</span>
+          <h2 id="testimonios-heading" class="padrino-h2">Una comunidad que ayuda a <span class="comunidad__acento">otra comunidad</span></h2>
+          <p>
+            El Plan Padrino existe gracias a personas que creen que la diferencia es una posibilidad de transformar debilidades en oportunidades.
+          </p>
+          <p class="comunidad__destacado">Tú también puedes ser parte de esta comunidad.</p>
+          <a href={padrinoHref} class="btn btn-primary">Quiero ser padrino</a>
+        </div>
+        <ul class="comunidad__videos" role="list">
           {testimonios.map((t) => (
-            <li class="padrino-card">
+            <li class="comunidad__marco">
               {t.video && (
                 <video
                   src={`${withBase(t.video)}#t=0.5`}
@@ -124,7 +114,7 @@ const donarHref = withBase('/donaciones');
                   preload="metadata"
                   playsinline
                   aria-label={`Testimonio: ${t.nombre}`}
-                  class="padrino-card__video"
+                  class="comunidad__video"
                 ></video>
               )}
               {t.texto && <blockquote>{t.texto}</blockquote>}
@@ -132,35 +122,9 @@ const donarHref = withBase('/donaciones');
           ))}
         </ul>
       </div>
+      <Ola />
     </section>
   )}
-
-  <section class="section bg-primary padrino-cta" aria-labelledby="cta-heading">
-    <div class="container padrino-narrow padrino-cta__inner">
-      <h2 id="cta-heading">¿Quieres ser parte de esta historia?</h2>
-      <p>
-        Puedes convertirte en padrino de un estudiante y contribuir directamente a que continúe su educación y su formación para la vida, ayudando no solo a un niño o joven en condiciones vulnerables, sino también impactando a toda una familia. Tu apoyo les cambiará la vida.
-      </p>
-      <a href={padrinoHref} class="btn btn-accent">Quiero ser padrino</a>
-      <p>
-        Si deseas conocer el programa, resolver tus inquietudes o conocer el proceso para realizar el apadrinamiento, <a href={padrinoHref}>comunícate con nosotros</a>.
-      </p>
-      <p>
-        También puedes apoyar nuestra labor mediante una <strong>donación</strong>, destinada a fortalecer el programa y ampliar nuestro alcance a otras acciones enfocadas en mejorar la calidad de vida de las personas con discapacidad o neurodivergencia y de sus familias.
-      </p>
-      <a href={donarHref} class="btn btn-outline">Quiero donar</a>
-    </div>
-
-    <!-- Ola hacia la sección siguiente (¿Cuánto cuesta apadrinar?) -->
-    <div class="padrino-wave" aria-hidden="true">
-      <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path
-          d="M0,40 C240,64 480,16 720,40 C960,64 1200,20 1440,40 L1440,64 L0,64 Z"
-          fill="var(--color-bg)"
-        />
-      </svg>
-    </div>
-  </section>
 
   <section class="section" aria-labelledby="costo-heading">
     <div class="container padrino-narrow padrino-costo">
@@ -178,8 +142,50 @@ const donarHref = withBase('/donaciones');
         Los valores corresponden a las tarifas de 2026. Sus incrementos estarán sujetos a las tarifas que la Secretaría de Educación de Bogotá establezca cada año, con el fin de cubrir los gastos educativos contemplados en el Plan Padrino.
       </p>
       <p>Si deseas hacerlo posible, puedes convertirte en padrino y ayudarnos a mantener abierta esta oportunidad educativa.</p>
+      <p>Puedes hacer tu aporte por transferencia a esta cuenta:</p>
+      <div class="padrino-costo__cuenta"><CuentaBancaria /></div>
     </div>
+    <Ola color="var(--color-surface)" />
   </section>
+
+  <section class="section bg-surface puerta" aria-labelledby="puerta-heading">
+    <div class="container">
+      <header class="puerta__head">
+        <span class="comunidad__eyebrow">Lo que abre tu aporte</span>
+        <h2 id="puerta-heading" class="padrino-h2">Apadrinar es abrir <span class="comunidad__acento">una puerta</span></h2>
+        <p class="padrino-sub">Tu aporte no representa solamente el pago de una colegiatura. Representa:</p>
+      </header>
+      <ol class="puerta__lista">
+        {puerta.map((p) => (
+          <li class="puerta__item">
+            <p class="puerta__para">{p.para}</p>
+            <h3>{p.title}</h3>
+            <p class="puerta__desc">{p.desc}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <Ola color="var(--color-primary)" />
+  </section>
+
+  <section class="section bg-primary padrino-cta" aria-labelledby="cta-heading">
+    <div class="container padrino-narrow padrino-cta__inner">
+      <h2 id="cta-heading">¿Quieres ser parte de esta historia?</h2>
+      <p>
+        Puedes convertirte en padrino de un estudiante y contribuir directamente a que continúe su educación y su formación para la vida, ayudando no solo a un niño o joven en condiciones vulnerables, sino también impactando a toda una familia. Tu apoyo les cambiará la vida.
+      </p>
+      <a href={padrinoHref} class="btn btn-accent">Quiero ser padrino</a>
+      <p>
+        Si deseas conocer el programa, resolver tus inquietudes o conocer el proceso para realizar el apadrinamiento, <a href={padrinoHref}>comunícate con nosotros</a>.
+      </p>
+      <p>
+        También puedes apoyar nuestra labor mediante una <strong>donación</strong>, destinada a fortalecer el programa y ampliar nuestro alcance a otras acciones enfocadas en mejorar la calidad de vida de las personas con discapacidad o neurodivergencia y de sus familias.
+      </p>
+      <a href={donarHref} class="btn btn-outline">Quiero donar</a>
+    </div>
+    <Ola color="var(--color-ink)" />
+  </section>
+
 </BaseLayout>
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.27/dist/dotlottie-wc.js"></script>
@@ -264,85 +270,164 @@ const donarHref = withBase('/donaciones');
 }
 
 /* ── Impacto: recorrido estudiante → familia → futuro ── */
-.padrino-impacto {
+/* ── Puerta: tarjetas con forma de puerta en arco ── */
+.puerta { overflow: hidden; }
+.puerta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("/decor/heart.svg");
+  background-size: 70px 70px;
+  opacity: 0.05;
+  pointer-events: none;
+}
+.puerta .container { position: relative; }
+.puerta__head { text-align: center; }
+.puerta__head .padrino-sub { margin-inline: auto; }
+.puerta__lista {
   list-style: none;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-8);
-  margin-top: var(--space-4);
-  padding: 0;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: stretch;
+  max-width: 1080px;
+  margin: var(--space-12) auto 0;
 }
-.padrino-impacto__item { position: relative; padding-top: var(--space-8); }
-/* Línea que une los puntos: cada ítem dibuja su tramo hasta el siguiente */
-.padrino-impacto__item::before {
-  content: '';
-  position: absolute;
-  top: 7px;
-  left: 0;
-  width: calc(100% + var(--space-8));
-  height: 2px;
-  background-color: oklch(0.41 0.138 143 / 0.25);
+.puerta__item {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(3rem, 6vw, 4.5rem) clamp(1.25rem, 3vw, 2rem) clamp(2rem, 4vw, 2.75rem);
+  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: 0 20px 40px -24px oklch(0.26 0.035 145 / 0.35), inset 0 0 0 1px oklch(0.41 0.138 143 / 0.12);
+  transition: transform 320ms var(--ease-expo), box-shadow 320ms var(--ease-expo);
 }
-.padrino-impacto__item:last-child::before { width: 100%; background: linear-gradient(to right, oklch(0.41 0.138 143 / 0.25), transparent); }
-.padrino-impacto__item::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-  box-shadow: 0 0 0 5px var(--color-surface), 0 0 0 7px oklch(0.41 0.138 143 / 0.25);
+.puerta__item:hover { transform: translateY(-6px); box-shadow: 0 28px 48px -24px oklch(0.26 0.035 145 / 0.45), inset 0 0 0 1px oklch(0.41 0.138 143 / 0.2); }
+/* la del centro, más alta y en verde: la puerta abierta */
+.puerta__item:nth-child(2) {
+  transform: translateY(-1.5rem);
+  background: linear-gradient(160deg, var(--color-primary), var(--color-accent));
+  color: var(--color-white);
 }
-.padrino-impacto__para {
+.puerta__para {
   font-family: var(--font-display);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-primary);
   margin-bottom: var(--space-2);
 }
-.padrino-impacto__item h3 {
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+.puerta__item h3 {
+  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+  line-height: 1.15;
   color: var(--color-accent);
   margin-bottom: var(--space-3);
   text-wrap: balance;
 }
-.padrino-impacto__item p:last-child { line-height: 1.6; color: var(--color-ink-muted); max-width: 32ch; }
-
-/* Móvil: el recorrido se vuelve vertical */
+.puerta__desc { position: relative; line-height: 1.6; color: var(--color-ink-muted); max-width: 30ch; }
+.puerta__item:nth-child(2) :is(.puerta__para, h3, .puerta__desc) { color: var(--color-white); }
 @media (max-width: 767px) {
-  .padrino-impacto { grid-template-columns: 1fr; gap: var(--space-8); }
-  .padrino-impacto__item { padding-top: 0; padding-left: var(--space-10); }
-  .padrino-impacto__item::before { top: 0; left: 7px; width: 2px; height: calc(100% + var(--space-8)); }
-  .padrino-impacto__item:last-child::before { width: 2px; height: 100%; background: linear-gradient(to bottom, oklch(0.41 0.138 143 / 0.25), transparent); }
-  .padrino-impacto__item::after { top: 4px; }
+  .puerta__lista { grid-template-columns: 1fr; max-width: 380px; }
+  .puerta__item:nth-child(2) { transform: none; }
 }
+@media (prefers-reduced-motion: reduce) { .puerta__item { transition: none; } }
 
-/* ── Cards ── */
-.padrino-cards {
-  list-style: none;
+/* ── Comunidad (testimonio del padrino) ── */
+.comunidad { overflow: hidden; }
+.comunidad::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("/decor/heart.svg");
+  background-size: 70px 70px;
+  opacity: 0.05;
+  pointer-events: none;
+}
+.comunidad__inner {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--space-6);
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
 }
-.padrino-cards:has(> :only-child) { max-width: 820px; margin-inline: auto; }
-.padrino-card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-6);
+.comunidad__copy { position: relative; padding-top: clamp(3.5rem, 6vw, 5rem); }
+.comunidad__acento { color: var(--color-primary); }
+.comunidad__copy::before {
+  content: '“';
+  position: absolute;
+  top: -0.2em;
+  left: -0.08em;
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 14vw, 12rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-primary-light);
+  opacity: 0.35;
+  pointer-events: none;
 }
-.padrino-card h3 { font-size: 1.25rem; margin-bottom: var(--space-2); color: var(--color-accent); }
-.padrino-card p { line-height: 1.6; }
-.padrino-card__video { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--color-ink); border: 0; border-radius: var(--radius-sm); margin-bottom: var(--space-4); }
-.padrino-card__video:last-child { margin-bottom: 0; }
-.padrino-card blockquote { font-style: italic; line-height: 1.7; margin-bottom: var(--space-4); }
-.padrino-card__autor { font-family: var(--font-display); font-weight: 600; }
+.comunidad__copy > * { position: relative; }
+.comunidad__eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.comunidad__copy p { font-size: 1.0625rem; line-height: 1.75; color: var(--color-ink-muted); margin-bottom: var(--space-4); }
+.comunidad__copy .comunidad__destacado {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  margin-bottom: var(--space-6);
+}
+.comunidad__videos { display: grid; gap: var(--space-8); }
+/* marco: bloque verde desplazado detrás del video + punto lima */
+.comunidad__marco { position: relative; isolation: isolate; }
+.comunidad__marco::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate(18px, 18px) rotate(1.5deg);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  z-index: -1;
+}
+.comunidad__marco::after {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  width: 56px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-lime);
+  z-index: -1;
+}
+.comunidad__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-ink);
+  border: 6px solid var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 48px -20px oklch(0.26 0.035 145 / 0.45);
+}
+.comunidad__marco blockquote { margin-top: var(--space-6); font-style: italic; line-height: 1.7; }
+@media (max-width: 900px) {
+  .comunidad__inner { grid-template-columns: 1fr; }
+  .comunidad__marco { margin-right: 18px; }
+}
 
 /* ── Costo ── */
 .padrino-costo { text-align: center; }
@@ -373,6 +458,7 @@ const donarHref = withBase('/donaciones');
   border-radius: var(--radius-sm);
 }
 .padrino-costo__partes strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--color-accent); }
+.padrino-costo__cuenta { display: flex; justify-content: center; }
 .padrino-costo__nota { font-size: 0.875rem; color: var(--color-ink-muted); }
 
 /* ── CTA ── */
@@ -382,7 +468,7 @@ const donarHref = withBase('/donaciones');
   position: relative;
   overflow: hidden;
   padding-top: clamp(3rem, 5vw, 4.5rem);
-  padding-bottom: calc(clamp(3rem, 5vw, 4.5rem) + 40px);
+  padding-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 .padrino-cta::before {
   content: '';
@@ -415,16 +501,6 @@ const donarHref = withBase('/donaciones');
   color: var(--color-white);
 }
 
-.padrino-wave {
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 64px;
-  pointer-events: none;
-  z-index: 1;
-}
-.padrino-wave svg { display: block; width: 100%; height: 100%; }
 
 @media (prefers-reduced-motion: reduce) {
   .padrino-accordion summary::after { transition: none; }

@@ -1,9 +1,9 @@
 ---
-import { pillars } from '../data/index';
+import { pillars } from '../_data/index';
 ---
 <section class="section about" aria-labelledby="about-heading">
   <div class="container about__inner">
-    <div class="about__visual" aria-hidden="true">
+    <div class="about__visual marco-foto" aria-hidden="true">
       <div class="about__img-wrap">
         <img
           src={`${import.meta.env.BASE_URL}images/fotos/jovenes-parque.jpeg`}
@@ -17,7 +17,10 @@ import { pillars } from '../data/index';
     </div>
 
     <div class="about__copy">
-      <h2 id="about-heading" class="reveal">Somos Horizontes de Sabiduría</h2>
+      <div class="reveal">
+        <span class="eyebrow">Quiénes somos</span>
+        <h2 id="about-heading">Somos <span class="acento">Horizontes de Sabiduría</span></h2>
+      </div>
       <p class="about__text reveal reveal-delay-1">
         En la Fundación Horizontes de Sabiduría creemos que cada persona, sin importar su condición, tiene el derecho de aprender, crecer y participar plenamente en su comunidad.
       </p>

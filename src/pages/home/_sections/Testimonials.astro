@@ -1,10 +1,12 @@
 ---
-import { testimonials } from '../data/index';
+import { testimonials } from '../_data/index';
+import Ola from '@/components/Ola.astro';
 ---
 <section class="section testimonials" aria-labelledby="testimonials-heading">
   <div class="container testimonials__inner">
     <div class="testimonials__header reveal">
-      <h2 id="testimonials-heading">Horizontes que hemos construido juntos</h2>
+      <span class="testimonials__eyebrow">Testimonios de las familias</span>
+      <h2 id="testimonials-heading">Horizontes que hemos construido <span class="testimonials__acento">juntos</span></h2>
       <p class="testimonials__note">Las familias que acompañamos cuentan su experiencia.</p>
     </div>
 
@@ -17,4 +19,5 @@ import { testimonials } from '../data/index';
       ))}
     </div>
   </div>
+  <Ola color="var(--color-primary)" />
 </section>

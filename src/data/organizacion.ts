@@ -37,3 +37,13 @@ export const EQUIPO_MINIMO = 4;
 export const ALIADOS_MINIMO = 0;
 
 export const huecos = (n: number, minimo: number) => Array.from({ length: Math.max(0, minimo - n) });
+
+// Cuenta para donaciones y Plan Padrino (por ahora solo transferencia).
+export const cuentaBancaria = {
+  banco: 'Banco Caja Social',
+  logoBanco: '/images/bancos/banco-caja-social.webp',
+  tipo: 'Cuenta de ahorros',
+  numero: '24159787089',
+  titular: 'Fundación Horizontes de Sabiduría',
+  nit: '902.040.005-1',
+};
