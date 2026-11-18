@@ -31,6 +31,8 @@ const { title, description, image, type } = Astro.props;
     />
 
     <slot name="head" />
+    {/* ponytail: Vercel Web Analytics sin paquete npm; sin cookies. Solo existe en Vercel. */}
+    {process.env.VERCEL && <script defer src="/_vercel/insights/script.js"></script>}
   </head>
   <body>
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
