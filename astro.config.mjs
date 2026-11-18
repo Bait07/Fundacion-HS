@@ -8,7 +8,8 @@ const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const base = vercel ? '' : '/Fundacion-HS';
 
 export default defineConfig({
-  site: vercel ? `https://${vercel}` : 'https://bait07.github.io',
+  // ponytail: dominio fijo; VERCEL_PROJECT_PRODUCTION_URL daría el apex, que redirige a www
+  site: vercel ? 'https://www.fundhorizontesdesabiduria.org' : 'https://bait07.github.io',
   base: `${base}/`,
   redirects: {
     '/home': `${base}/`,
