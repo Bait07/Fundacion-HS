@@ -11,7 +11,7 @@ export const GET: APIRoute = ({ site }) => {
 
 > Fundación sin ánimo de lucro de Bogotá, Colombia (NIT ${c.nit}) que acompaña a niños, jóvenes y adultos con discapacidad cognitiva e intelectual, y a sus familias, con programas de inclusión educativa y social, atención interdisciplinaria y el Plan Padrino.
 
-- Ciudad: Bogotá D.C., Colombia
+- Dirección: Calle 43B Sur # 72U-08, Bogotá D.C., Colombia
 - Correo: contacto@fundhorizontesdesabiduria.org
 - WhatsApp: +57 317 375 9920
 - Aliado educativo: Colegio Gimnasio Colombo Andino

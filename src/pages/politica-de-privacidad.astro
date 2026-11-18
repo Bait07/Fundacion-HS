@@ -12,8 +12,8 @@ const VIGENCIA = '18 de noviembre de 2026';
 const responsable = {
   nombre: 'Fundación Horizontes de Sabiduría',
   nit: '902.040.005-1',
-  // ponytail: falta la dirección física exacta; agregarla aquí cuando la confirmen.
   domicilio: 'Bogotá D.C., Colombia',
+  direccion: 'Calle 43B Sur # 72U-08, Bogotá D.C.',
   correo: 'contacto@fundhorizontesdesabiduria.org',
   telefono: '+57 317 375 9920',
   web: 'https://www.fundhorizontesdesabiduria.org',
@@ -72,6 +72,7 @@ const responsable = {
           <li><strong>Razón social:</strong> {responsable.nombre}</li>
           <li><strong>NIT:</strong> {responsable.nit}</li>
           <li><strong>Domicilio:</strong> {responsable.domicilio}</li>
+          <li><strong>Dirección:</strong> {responsable.direccion}</li>
           <li><strong>Correo electrónico:</strong> <a href={`mailto:${responsable.correo}`}>{responsable.correo}</a></li>
           <li><strong>Teléfono y WhatsApp:</strong> <a href="tel:+573173759920">{responsable.telefono}</a></li>
           <li><strong>Sitio web:</strong> <a href={responsable.web}>{responsable.web.replace('https://', '')}</a></li>
