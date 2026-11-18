@@ -1,6 +1,6 @@
 export const seo = {
   title: 'Quiénes Somos | Fundación Horizontes de Sabiduría — Bogotá',
-  description: 'Conoce la misión, visión y equipo de la Fundación Horizontes de Sabiduría, entidad sin ánimo de lucro dedicada a la inclusión de personas con discapacidad cognitiva en Bogotá.',
+  description: 'Misión, visión y equipo de la Fundación Horizontes de Sabiduría, entidad sin ánimo de lucro por la inclusión de personas con discapacidad cognitiva en Bogotá.',
 };
 
 // Actualiza estos números con los datos reales de la fundación

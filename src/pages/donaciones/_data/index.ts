@@ -1,6 +1,6 @@
 export const seo = {
-  title: 'Haz una Donación | Apoya la Inclusión de Personas con Discapacidad en Bogotá',
-  description: 'Tu donación a la Fundación Horizontes de Sabiduría permite que más personas con discapacidad cognitiva en Bogotá accedan a programas de inclusión educativa y social.',
+  title: 'Haz una donación | Apoya la inclusión en Bogotá',
+  description: 'Tu donación permite que más personas con discapacidad cognitiva en Bogotá accedan a programas de inclusión educativa y social. Así puedes ayudar.',
 };
 
 export const destinos = [
