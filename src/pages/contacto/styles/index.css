@@ -252,3 +252,6 @@
 
 /* Sin aviso no ocupa espacio entre el mensaje y el botón */
 .form-status:empty { display: none; }
+
+.form-legal { grid-column: 1 / -1; font-size: 0.8125rem; line-height: 1.5; color: var(--color-ink-muted); max-width: none; margin: 0; }
+.form-legal a { color: var(--color-accent); text-underline-offset: 3px; }

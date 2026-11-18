@@ -94,6 +94,7 @@ const programLinks = [
       </p>
       <p class="footer__copyright">
         &copy; 2026 Fundación Horizontes de Sabiduría. Todos los derechos reservados.
+        · <a href={withBase('/politica-de-privacidad/')} class="footer__policy">Política de privacidad</a>
       </p>
     </div>
   </div>
@@ -241,6 +242,9 @@ const programLinks = [
 }
 
 .footer__legal,
+.footer__policy { color: inherit; text-underline-offset: 3px; }
+.footer__policy:hover { color: oklch(1 0 0 / 0.8); }
+
 .footer__copyright {
   font-size: 0.8rem;
   color: oklch(1 0 0 / 0.4);

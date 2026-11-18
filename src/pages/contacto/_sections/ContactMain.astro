@@ -10,6 +10,8 @@ import { motivos } from '../_data/index';
         <input type="hidden" name="access_key" value="b566757a-dc84-40ac-9ca6-4fd4e30fe5a6" />
         <input type="hidden" name="subject" value="Nuevo mensaje desde el sitio web - Fundación HS" />
         <input type="hidden" name="from_name" value="Sitio web Fundación HS" />
+        <!-- Prueba de la autorización (Decreto 1074/2015): llega en cada correo de Web3Forms -->
+        <input type="hidden" name="autorizacion_datos" value="Aceptó la Política de tratamiento de datos personales (vigente desde el 18/11/2026) al enviar el formulario" />
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
         <fieldset class="form-group form-group--full form-motivos" id="motivo" aria-describedby="motivo-error">
           <legend class="form-label">¿En qué podemos ayudarte? <span aria-hidden="true">*</span></legend>
@@ -46,6 +48,10 @@ import { motivos } from '../_data/index';
           <textarea id="mensaje" name="mensaje" class="form-input form-textarea" placeholder="Cuéntanos cómo podemos ayudarte..." rows="3" required aria-required="true"></textarea>
           <span class="form-error" id="mensaje-error" role="alert" aria-live="polite"></span>
         </div>
+
+        <p class="form-legal">
+          Al hacer clic en «Enviar mensaje» aceptas la <a href={`${import.meta.env.BASE_URL}politica-de-privacidad/`} target="_blank" rel="noopener">política de privacidad</a> y autorizas a la Fundación a usar tus datos para responderte. Si nos compartes información sensible, como datos de salud o discapacidad, autorizas su uso solo para ese fin.
+        </p>
 
         <div id="form-status" class="form-status" role="status" aria-live="polite" aria-atomic="true"></div>
 

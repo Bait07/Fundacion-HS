@@ -1,0 +1,296 @@
+---
+// Política de Tratamiento de Datos Personales — Ley 1581 de 2012 y Decreto 1074 de 2015
+// (contenido mínimo: art. 2.2.2.25.3.1, antes art. 13 del Decreto 1377 de 2013).
+// Si cambia algo sustancial (finalidades, responsable, canales), actualiza VIGENCIA
+// y la versión que se envía con el formulario (contacto/_sections/ContactMain.astro).
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import { withBase } from '@/utils/url';
+
+const VIGENCIA = '18 de noviembre de 2026';
+
+const responsable = {
+  nombre: 'Fundación Horizontes de Sabiduría',
+  nit: '902.040.005-1',
+  // ponytail: falta la dirección física exacta; agregarla aquí cuando la confirmen.
+  domicilio: 'Bogotá D.C., Colombia',
+  correo: 'contacto@fundhorizontesdesabiduria.org',
+  telefono: '+57 317 375 9920',
+  web: 'https://www.fundhorizontesdesabiduria.org',
+};
+---
+
+<BaseLayout
+  title="Política de privacidad y tratamiento de datos"
+  description="Cómo la Fundación Horizontes de Sabiduría recoge, usa y protege tus datos personales, y cómo ejercer tus derechos según la Ley 1581 de 2012."
+>
+  <PageHeader crumb="Política de privacidad" lead={`Política de Tratamiento de Datos Personales. Vigente desde el ${VIGENCIA}.`}>
+    Política de <mark>privacidad</mark>
+  </PageHeader>
+
+  <section class="section">
+    <div class="container politica">
+      <div class="politica__membrete">
+        <img src={withBase('/logo.png')} alt="Logo de la Fundación Horizontes de Sabiduría" width="2400" height="857" />
+        <div>
+          <p class="politica__org">{responsable.nombre}</p>
+          <p class="politica__nit">NIT {responsable.nit} · Entidad sin ánimo de lucro</p>
+        </div>
+      </div>
+
+      <article class="politica__texto">
+        <nav class="politica__indice" aria-label="Contenido de la política">
+          <p><strong>Contenido</strong></p>
+          <ol>
+            <li><a href="#responsable">Responsable del tratamiento</a></li>
+            <li><a href="#marco">Marco legal y definiciones</a></li>
+            <li><a href="#principios">Principios</a></li>
+            <li><a href="#datos">Datos que recogemos</a></li>
+            <li><a href="#finalidades">Tratamiento y finalidades</a></li>
+            <li><a href="#sensibles">Datos sensibles</a></li>
+            <li><a href="#menores">Datos de niñas, niños y adolescentes</a></li>
+            <li><a href="#autorizacion">Autorización</a></li>
+            <li><a href="#derechos">Derechos de los titulares</a></li>
+            <li><a href="#atencion">Área responsable de atender solicitudes</a></li>
+            <li><a href="#procedimiento">Procedimiento para consultas y reclamos</a></li>
+            <li><a href="#terceros">Proveedores y transmisión internacional</a></li>
+            <li><a href="#seguridad">Seguridad de la información</a></li>
+            <li><a href="#sitio">Sitio web, cookies y almacenamiento local</a></li>
+            <li><a href="#vigencia">Vigencia</a></li>
+          </ol>
+        </nav>
+
+        <p>
+          La {responsable.nombre} (en adelante, «la Fundación») respeta la privacidad de las personas con las que trabaja.
+          Esta política explica qué datos personales recogemos, para qué los usamos, cómo los protegemos y cómo puedes
+          ejercer tus derechos. Aplica a todos los datos que la Fundación trata, ya sea a través de este sitio web,
+          de WhatsApp, del correo electrónico, de formularios físicos o de manera presencial.
+        </p>
+
+        <h2 id="responsable">1. Responsable del tratamiento</h2>
+        <ul>
+          <li><strong>Razón social:</strong> {responsable.nombre}</li>
+          <li><strong>NIT:</strong> {responsable.nit}</li>
+          <li><strong>Domicilio:</strong> {responsable.domicilio}</li>
+          <li><strong>Correo electrónico:</strong> <a href={`mailto:${responsable.correo}`}>{responsable.correo}</a></li>
+          <li><strong>Teléfono y WhatsApp:</strong> <a href="tel:+573173759920">{responsable.telefono}</a></li>
+          <li><strong>Sitio web:</strong> <a href={responsable.web}>{responsable.web.replace('https://', '')}</a></li>
+        </ul>
+
+        <h2 id="marco">2. Marco legal y definiciones</h2>
+        <p>
+          Esta política se rige por el artículo 15 de la Constitución Política, la Ley Estatutaria 1581 de 2012,
+          el Decreto 1074 de 2015 (que compila el Decreto 1377 de 2013) y las demás normas que los modifiquen o complementen.
+          Para efectos de esta política:
+        </p>
+        <ul>
+          <li><strong>Dato personal:</strong> cualquier información que identifique o pueda identificar a una persona natural.</li>
+          <li><strong>Dato sensible:</strong> el que afecta la intimidad de la persona o cuyo uso indebido puede generar discriminación, como los datos de salud, discapacidad, origen étnico, orientación sexual o datos biométricos (por ejemplo, fotografías y videos).</li>
+          <li><strong>Titular:</strong> la persona a la que se refieren los datos.</li>
+          <li><strong>Tratamiento:</strong> cualquier operación sobre los datos, como recogerlos, guardarlos, usarlos, enviarlos o eliminarlos.</li>
+          <li><strong>Autorización:</strong> el consentimiento previo, expreso e informado del titular para que sus datos sean tratados.</li>
+          <li><strong>Responsable:</strong> quien decide sobre el tratamiento; en este caso, la Fundación.</li>
+          <li><strong>Encargado:</strong> quien trata datos por cuenta del responsable, como un proveedor tecnológico.</li>
+          <li><strong>Transferencia y transmisión:</strong> envío de datos a otro responsable (transferencia) o a un encargado (transmisión), dentro o fuera de Colombia.</li>
+        </ul>
+
+        <h2 id="principios">3. Principios</h2>
+        <p>
+          La Fundación aplica los principios de legalidad, finalidad, libertad, veracidad o calidad, transparencia,
+          acceso y circulación restringida, seguridad y confidencialidad establecidos en el artículo 4 de la Ley 1581 de 2012.
+          En la práctica, esto significa que solo pedimos los datos que necesitamos, los usamos únicamente para las finalidades
+          informadas, no los vendemos ni los cedemos con fines comerciales y los protegemos con medidas razonables.
+        </p>
+
+        <h2 id="datos">4. Datos que recogemos</h2>
+        <p>Según la relación que tengas con la Fundación, podemos tratar los siguientes datos:</p>
+        <ul>
+          <li><strong>Personas que nos contactan</strong> (formulario web, correo, WhatsApp o teléfono): nombre, correo electrónico, teléfono, motivo del contacto y el contenido del mensaje.</li>
+          <li><strong>Beneficiarios y sus familias:</strong> datos de identificación y contacto, datos del acudiente o representante legal, información educativa, y datos de salud y discapacidad necesarios para la atención.</li>
+          <li><strong>Padrinos, donantes y aliados:</strong> nombre o razón social, documento de identidad o NIT, datos de contacto, y la información de los aportes realizados.</li>
+          <li><strong>Voluntarios, trabajadores, contratistas y aspirantes:</strong> datos de identificación, contacto, formación, experiencia y los demás exigidos por la ley laboral y de seguridad social.</li>
+          <li><strong>Imágenes y testimonios:</strong> fotografías, videos y relatos de actividades, solo con la autorización correspondiente.</li>
+        </ul>
+
+        <h2 id="finalidades">5. Tratamiento y finalidades</h2>
+        <p>
+          Los datos se recogen, almacenan, consultan, usan, actualizan y, cuando corresponde, se eliminan,
+          con las siguientes finalidades:
+        </p>
+        <ul>
+          <li>Responder solicitudes, preguntas y mensajes enviados por cualquier canal.</li>
+          <li>Evaluar, prestar y hacer seguimiento a los programas de inclusión educativa y social, terapias y acompañamiento a familias.</li>
+          <li>Gestionar el Plan Padrino, las donaciones y la relación con aliados, incluyendo la emisión de certificados de donación y los reportes que exige la ley.</li>
+          <li>Enviar información sobre las actividades, programas, eventos y campañas de la Fundación, cuando el titular lo haya autorizado. Siempre puedes pedir que dejemos de enviarte estas comunicaciones.</li>
+          <li>Cumplir obligaciones legales, contables, tributarias y de rendición de cuentas propias de una entidad sin ánimo de lucro.</li>
+          <li>Gestionar procesos de vinculación de voluntarios, trabajadores y contratistas.</li>
+          <li>Publicar fotografías, videos o testimonios en el sitio web, redes sociales y material institucional, únicamente con la autorización expresa del titular o de su representante legal.</li>
+          <li>Elaborar estadísticas e informes de impacto con datos anonimizados, de forma que no permitan identificar a nadie.</li>
+          <li>Atender requerimientos de autoridades competentes.</li>
+        </ul>
+
+        <h2 id="sensibles">6. Datos sensibles</h2>
+        <p>
+          Por la naturaleza de su labor, la Fundación puede tratar datos sensibles, en especial información de salud y discapacidad
+          de los beneficiarios, así como imágenes. Sobre estos datos:
+        </p>
+        <ul>
+          <li>Ningún titular está obligado a entregar datos sensibles. Responder preguntas sobre ellos es <strong>facultativo</strong>.</li>
+          <li>Solo los tratamos con autorización explícita del titular o de su representante legal, salvo las excepciones del artículo 6 de la Ley 1581 de 2012.</li>
+          <li>Se usan únicamente para prestar una atención adecuada y para las finalidades informadas, y se restringe su acceso al personal que los necesita.</li>
+          <li>Si decides contarnos información sensible en un mensaje (por ejemplo, el diagnóstico de un familiar), la usaremos solo para responderte y orientarte.</li>
+        </ul>
+
+        <h2 id="menores">7. Datos de niñas, niños y adolescentes</h2>
+        <p>
+          El tratamiento de datos de menores de edad se hace respetando su interés superior y sus derechos fundamentales,
+          como lo exigen el artículo 7 de la Ley 1581 de 2012 y el Decreto 1074 de 2015. La autorización la otorga su
+          representante legal, y se tiene en cuenta la opinión del menor según su madurez y capacidad de entendimiento.
+          Las imágenes de menores solo se publican con autorización escrita de su representante legal y nunca junto con
+          datos que permitan ubicarlos.
+        </p>
+
+        <h2 id="autorizacion">8. Autorización</h2>
+        <p>
+          La Fundación solicita la autorización del titular a más tardar en el momento de recoger sus datos, por escrito,
+          de forma oral, por medios electrónicos o mediante conductas inequívocas que permitan concluir que la otorgó.
+          Por ejemplo, al enviar el formulario de contacto del sitio web, el titular declara que leyó esta política y autoriza
+          el tratamiento de sus datos para responder su solicitud. La Fundación conserva prueba de estas autorizaciones.
+        </p>
+        <p>
+          No se requiere autorización en los casos del artículo 10 de la Ley 1581 de 2012, como los datos de naturaleza pública,
+          los requeridos por una autoridad en ejercicio de sus funciones o los casos de urgencia médica o sanitaria.
+        </p>
+
+        <h2 id="derechos">9. Derechos de los titulares</h2>
+        <p>Como titular de los datos tienes derecho a:</p>
+        <ul>
+          <li>Conocer, actualizar y rectificar tus datos personales.</li>
+          <li>Solicitar prueba de la autorización que otorgaste, salvo cuando no se requiera.</li>
+          <li>Ser informado, previa solicitud, sobre el uso que se ha dado a tus datos.</li>
+          <li>Presentar quejas ante la Superintendencia de Industria y Comercio por infracciones a la ley, después de haber agotado el trámite de consulta o reclamo ante la Fundación.</li>
+          <li>Revocar la autorización o pedir la supresión de tus datos cuando no se respeten los principios, derechos y garantías legales. Esto no procede cuando exista un deber legal o contractual de conservarlos.</li>
+          <li>Acceder de forma gratuita a tus datos personales.</li>
+        </ul>
+        <p>
+          Estos derechos los puede ejercer el titular, sus causahabientes, su representante o apoderado, o quien actúe por
+          estipulación a favor de otro, acreditando su identidad o calidad.
+        </p>
+
+        <h2 id="atencion">10. Área responsable de atender solicitudes</h2>
+        <p>
+          La Dirección de la Fundación es el área encargada de atender las peticiones, consultas y reclamos sobre datos personales,
+          a través de los siguientes canales:
+        </p>
+        <ul>
+          <li><strong>Correo electrónico:</strong> <a href={`mailto:${responsable.correo}`}>{responsable.correo}</a> (canal principal; indica en el asunto «Datos personales»).</li>
+          <li><strong>Teléfono y WhatsApp:</strong> {responsable.telefono}.</li>
+        </ul>
+
+        <h2 id="procedimiento">11. Procedimiento para consultas y reclamos</h2>
+        <p>Toda solicitud debe incluir el nombre del titular, su documento de identidad, la descripción de lo que pide y un dato de contacto para la respuesta.</p>
+        <h3>Consultas</h3>
+        <p>
+          Si quieres saber qué datos tuyos tenemos o cómo los usamos, la Fundación responderá en un máximo de
+          <strong>diez (10) días hábiles</strong> desde que recibe la solicitud. Si no es posible responder en ese plazo, te
+          informaremos el motivo y la fecha de respuesta, que no superará otros <strong>cinco (5) días hábiles</strong>.
+        </p>
+        <h3>Reclamos</h3>
+        <p>
+          Si consideras que tus datos deben corregirse, actualizarse o suprimirse, o que la Fundación incumplió la ley,
+          puedes presentar un reclamo. Si está incompleto, te pediremos completarlo dentro de los <strong>cinco (5) días</strong>
+          siguientes; si pasan <strong>dos (2) meses</strong> sin respuesta, se entenderá que desististe. Una vez completo, el
+          reclamo se marcará como «reclamo en trámite» y se resolverá en un máximo de <strong>quince (15) días hábiles</strong>,
+          prorrogables por <strong>ocho (8) días hábiles</strong> más, informándote el motivo de la demora.
+        </p>
+        <p>
+          Antes de acudir a la Superintendencia de Industria y Comercio, el titular debe agotar este trámite ante la Fundación,
+          como lo establece el artículo 16 de la Ley 1581 de 2012.
+        </p>
+
+        <h2 id="terceros">12. Proveedores y transmisión internacional</h2>
+        <p>
+          La Fundación no vende, alquila ni cede tus datos personales. Para operar, se apoya en proveedores tecnológicos que actúan
+          como encargados y tratan los datos solo para prestar su servicio:
+        </p>
+        <ul>
+          <li><strong>Vercel</strong> (Estados Unidos): alojamiento del sitio web.</li>
+          <li><strong>Web3Forms</strong>: envío de los mensajes del formulario de contacto al correo de la Fundación.</li>
+          <li><strong>Google</strong> (Estados Unidos): correo electrónico (Gmail).</li>
+          <li><strong>Cloudflare</strong> (Estados Unidos): administración del dominio y reenvío del correo institucional.</li>
+          <li><strong>Brevo</strong> (Unión Europea): envío de correos desde la dirección institucional.</li>
+          <li><strong>WhatsApp, de Meta</strong> (Estados Unidos): mensajería, cuando el titular decide escribirnos por ese medio.</li>
+        </ul>
+        <p>
+          Algunos de estos proveedores almacenan datos fuera de Colombia. Estos países están reconocidos por la Superintendencia
+          de Industria y Comercio como destinos con un nivel adecuado de protección de datos (Circular Externa 005 de 2017).
+          Al autorizar el tratamiento, el titular acepta también esta transmisión internacional.
+        </p>
+
+        <h2 id="seguridad">13. Seguridad de la información</h2>
+        <p>
+          La Fundación adopta medidas técnicas, humanas y administrativas razonables para evitar la pérdida, consulta, uso o acceso
+          no autorizado de los datos. Entre ellas: conexión cifrada (HTTPS) en todo el sitio web, cuentas protegidas con acceso
+          restringido, y acceso a la información sensible limitado al personal que la necesita para su labor. Si ocurre un incidente
+          de seguridad, la Fundación lo informará a la Superintendencia de Industria y Comercio como lo exige la ley.
+        </p>
+
+        <h2 id="sitio">14. Sitio web, cookies y almacenamiento local</h2>
+        <p>
+          Este sitio no usa cookies de publicidad ni herramientas de rastreo de terceros. Solo guarda en tu navegador, de forma temporal,
+          información técnica necesaria para su funcionamiento, por ejemplo, para recordar durante unas horas que ya enviaste el formulario.
+          Como en cualquier sitio web, los proveedores de alojamiento pueden registrar datos técnicos de la conexión, como la dirección IP,
+          por motivos de seguridad. El sitio puede incluir enlaces a otros sitios (como WhatsApp), que tienen sus propias políticas de privacidad.
+        </p>
+
+        <h2 id="vigencia">15. Vigencia</h2>
+        <p>
+          Esta política rige desde el <strong>{VIGENCIA}</strong>. Los datos personales se conservarán mientras sean necesarios para
+          cumplir las finalidades descritas y durante los plazos que exijan las normas legales, contables y tributarias, o mientras
+          el titular no solicite su supresión, cuando esta proceda.
+        </p>
+        <p>
+          Cualquier cambio sustancial a esta política se publicará en esta misma página y se comunicará a los titulares por los
+          medios habituales antes de aplicarse, indicando la nueva fecha de vigencia.
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.politica { max-width: 760px; }
+
+.politica__membrete {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid oklch(0.22 0.04 150 / 0.12);
+}
+.politica__membrete img { width: 160px; height: auto; flex-shrink: 0; }
+.politica__org { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; color: var(--color-ink); margin: 0; }
+.politica__nit { font-size: 0.875rem; color: var(--color-ink-muted); margin: 0; }
+
+.politica__indice {
+  background: oklch(0.67 0.065 155 / 0.08);
+  border-radius: 12px;
+  padding: var(--space-5) var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.politica__indice ol { margin: var(--space-2) 0 0; padding-left: 1.25rem; columns: 2 16rem; column-gap: var(--space-6); }
+.politica__indice li { margin-bottom: var(--space-1); break-inside: avoid; }
+
+.politica__texto { color: var(--color-ink); line-height: 1.7; }
+.politica__texto h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  margin: var(--space-10) 0 var(--space-4);
+  scroll-margin-top: 6rem;
+}
+.politica__texto h3 { font-size: 1.0625rem; margin: var(--space-6) 0 var(--space-2); }
+.politica__texto p { margin-bottom: var(--space-4); max-width: none; }
+.politica__texto ul { padding-left: 1.25rem; margin-bottom: var(--space-4); }
+.politica__texto li { margin-bottom: var(--space-2); }
+.politica__texto a { color: var(--color-accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+</style>
